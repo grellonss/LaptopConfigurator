@@ -3,6 +3,12 @@ package org.example;
 public class USB extends Port{
     private String USBVersion;
 
+    public USB(String portName, double price, String USBVersion) {
+        super(portName, price);
+        this.USBVersion = USBVersion;
+    }
+
+
     public String getUSBVersion() {
         return USBVersion;
     }
