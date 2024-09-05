@@ -1,11 +1,12 @@
-package org.example;
+package org.example.configurator;
 
 public class CPU extends Component {
 
     private String cpuSpeed;
     private double price;
 
-    public CPU(String cpuSpeed, double price) {
+    public CPU(Laptop laptop, String cpuSpeed, double price) {
+        super(laptop);
         this.cpuSpeed = cpuSpeed;
         this.price = price;
     }

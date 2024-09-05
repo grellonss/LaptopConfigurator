@@ -1,15 +1,18 @@
-package org.example;
+package org.example.configurator;
+
+import org.example.configurator.Component;
+import org.example.configurator.Laptop;
 
 public class Storage extends Component {
 
     private String storageCapacity;
     private double price;
 
-    public Storage(String storageCapacity, double price) {
+    public Storage(Laptop laptopOfComponents, String storageCapacity, double price) {
+        super(laptopOfComponents);
         this.storageCapacity = storageCapacity;
         this.price = price;
     }
-
 
     public String getStorageCapacity() {
         return storageCapacity;

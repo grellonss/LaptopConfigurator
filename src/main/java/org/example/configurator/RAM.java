@@ -1,10 +1,14 @@
-package org.example;
+package org.example.configurator;
+
+import org.example.configurator.Component;
+import org.example.configurator.Laptop;
 
 public class RAM extends Component {
     private String ramSize;
     private double price;
 
-    public RAM(String ramSize, double price) {
+    public RAM(Laptop laptop, String ramSize, double price) {
+        super(laptop);
         this.ramSize = ramSize;
         this.price = price;
     }

@@ -1,13 +1,14 @@
-package org.example;
+package org.example.configurator;
 
 public class Ethernet extends Port {
 
     private String ethernetSpeed;
 
-    public Ethernet(double price, String ethernetSpeed) {
-        super(price);
+    public Ethernet(String portName, double price, String ethernetSpeed) {
+        super(portName, price);
         this.ethernetSpeed = ethernetSpeed;
     }
+
 
     public String getEthernetSpeed() {
         return ethernetSpeed;

@@ -1,12 +1,13 @@
-package org.example;
+package org.example.configurator;
 
 public class Antivirus extends Security {
 private String antivirusVersion;
 
-    public Antivirus(double price, String securityPacket, String antivirusVersion) {
-        super(price, securityPacket);
+    public Antivirus(Laptop laptopOfSecurity, String securityPacket, double price, String antivirusVersion) {
+        super(laptopOfSecurity, securityPacket, price);
         this.antivirusVersion = antivirusVersion;
     }
+
     public String getAntivirusVersion() {
         return antivirusVersion;
     }

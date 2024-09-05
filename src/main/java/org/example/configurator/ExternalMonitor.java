@@ -1,13 +1,12 @@
-package org.example;
+package org.example.configurator;
 
 public class ExternalMonitor extends Peripheral {
     private String externalDisplayResolution;
 
-    public ExternalMonitor(double price, String externalDisplayResolution) {
-        super(price);
+    public ExternalMonitor(String connectionType, double price, String externalDisplayResolution) {
+        super(connectionType, price);
         this.externalDisplayResolution = externalDisplayResolution;
     }
-
 
     public String getExternalDisplayResolution() {
         return externalDisplayResolution;

@@ -1,4 +1,6 @@
-package org.example;
+package org.example.configurator;
+
+import org.example.configurator.Laptop;
 
 public class Security {
     private Laptop laptopOfSecurity;
@@ -11,6 +13,8 @@ public class Security {
         this.securityPacket = securityPacket;
         this.price = price;
     }
+
+
 
     // Costruttore che accetta il prezzo
 

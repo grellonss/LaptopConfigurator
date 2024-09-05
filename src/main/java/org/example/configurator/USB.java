@@ -1,13 +1,14 @@
-package org.example;
+package org.example.configurator;
 
-public class USB extends Port{
+import org.example.configurator.Port;
+
+public class USB extends Port {
     private String USBVersion;
 
     public USB(String portName, double price, String USBVersion) {
         super(portName, price);
         this.USBVersion = USBVersion;
     }
-
 
     public String getUSBVersion() {
         return USBVersion;

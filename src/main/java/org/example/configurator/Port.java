@@ -1,4 +1,4 @@
-package org.example;
+package org.example.configurator;
 
 public class Port {
     //nome della porta tipo (porta 1, porta 2)

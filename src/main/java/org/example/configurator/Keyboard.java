@@ -1,13 +1,14 @@
-package org.example;
+package org.example.configurator;
 
 public class Keyboard extends Peripheral {
 
     private String keyboardLayout;
 
-    public Keyboard(double price, String keyboardLayout) {
-        super(price);
+    public Keyboard(String connectionType, double price, String keyboardLayout) {
+        super(connectionType, price);
         this.keyboardLayout = keyboardLayout;
     }
+
     public String getKeyboardLayout() {
         return keyboardLayout;
     }

@@ -1,4 +1,6 @@
-package org.example;
+package org.example.configurator;
+
+import org.example.configurator.Peripheral;
 
 public class Webcam extends Peripheral {
     private String webcamResolution;

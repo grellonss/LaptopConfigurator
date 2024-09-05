@@ -1,4 +1,4 @@
-package org.example;
+package org.example.configurator;
 
 public class Peripheral {
     private String connectionType; //Bluetooth, USB, Wireless

@@ -1,13 +1,12 @@
-package org.example;
+package org.example.configurator;
 
 public class ExternalSpeaker extends Peripheral {
     private String externalAudioSystemType;
 
-    public ExternalSpeaker(double price, String externalAudioSystemType) {
-        super(price);
+    public ExternalSpeaker(String connectionType, double price, String externalAudioSystemType) {
+        super(connectionType, price);
         this.externalAudioSystemType = externalAudioSystemType;
     }
-
 
     public String getExternalAudioSystemType() {
         return externalAudioSystemType;

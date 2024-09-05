@@ -1,0 +1,1392 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione/"
+     xml:base="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione/"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:LaptopConfigModellazione="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#">
+    <owl:Ontology rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione">
+        <rdfs:comment xml:lang="en">The intention is to design an ontology related to a laptop configurator. This tool guides users in selecting various components and features of the laptop, so that the final product fully reflects their needs and preferences.</rdfs:comment>
+        <rdfs:label xml:lang="en">Laptop Configurator</rdfs:label>
+        <owl:versionInfo xml:lang="en">v1.0</owl:versionInfo>
+    </owl:Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#hasAudioSystem -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#hasAudioSystem">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Laptop"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#AudioSystem"/>
+        <rdfs:comment xml:lang="en">This property links a Laptop to its AudioSystem. It specifies the type of audio system the laptop is equipped with, such as built-in speakers</rdfs:comment>
+        <rdfs:label xml:lang="en">Has Audio System</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#hasColour -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#hasColour">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Laptop"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Colour"/>
+        <rdfs:comment xml:lang="en">This property associates a Laptop with its Colour. It defines the color that the user has chosen for the laptop, influencing the aesthetic and visual appeal of the device.</rdfs:comment>
+        <rdfs:label xml:lang="en">Has Colour</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#hasComponent -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#hasComponent">
+        <owl:inverseOf rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#isComponentOf"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Laptop"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Component"/>
+        <rdfs:comment xml:lang="en">This property connects a Laptop to one or more Components. It specifies the internal components, such as the CPU, RAM, and Storage, that are part of the laptop&apos;s hardware configuration.</rdfs:comment>
+        <rdfs:label xml:lang="en">Has Component</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#hasPeripheral -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#hasPeripheral">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Laptop"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Peripheral"/>
+        <rdfs:comment xml:lang="en">This property links a Laptop to its Peripherals. It defines the external devices that can be connected to the laptop, such as an external monitor, keyboard, mouse, or other accessories.</rdfs:comment>
+        <rdfs:label xml:lang="en">Has Peripheral</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#hasPort -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#hasPort">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Laptop"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Port"/>
+        <rdfs:comment xml:lang="en">This property associates a Laptop with its Ports. It specifies the types of input/output ports available on the laptop, such as USB, HDMI, or Ethernet ports, which allow for connectivity with other devices.</rdfs:comment>
+        <rdfs:label xml:lang="en">Has Port</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#hasSecurity -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#hasSecurity">
+        <owl:inverseOf rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#isSecurityOf"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Laptop"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Security"/>
+        <rdfs:comment xml:lang="en">This property links a Laptop to its Security. It defines the security-related components or features integrated into the laptop, such as biometric sensors, antivirus software, or physical locks and Antivirus</rdfs:comment>
+        <rdfs:label xml:lang="en">Has Security</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#hasWarranty -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#hasWarranty">
+        <owl:inverseOf rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#isWarrantyOf"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Laptop"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Warranty"/>
+        <rdfs:comment xml:lang="en">This property connects a Laptop to its Warranty. It specifies the type and duration of warranty that comes with the laptop, providing information on coverage and service support.</rdfs:comment>
+        <rdfs:label xml:lang="en">Has Warranty</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#isComponentOf -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#isComponentOf">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Component"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Laptop"/>
+        <rdfs:comment xml:lang="en">This is the inverse property of &quot;hasComponent&quot;. It links a Component to the Laptop it is part of, indicating that the component is an integral part of the laptop&apos;s hardware configuration.</rdfs:comment>
+        <rdfs:label xml:lang="en">Is Component Of</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#isCooledBy -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#isCooledBy">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Laptop"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#CoolingSystem"/>
+        <rdfs:comment xml:lang="en">This property associates a Laptop with its Cooling System. It defines the cooling mechanism that is used to manage the laptop&apos;s temperature, such as fans or liquid cooling systems.</rdfs:comment>
+        <rdfs:label xml:lang="en">Is Cooled By</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#isPoweredBy -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#isPoweredBy">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Laptop"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Battery"/>
+        <rdfs:comment xml:lang="en">This property links a Laptop to its power source, such as a Battery or external power supply. It specifies the means by which the laptop receives power.</rdfs:comment>
+        <rdfs:label xml:lang="en">Is Powered By</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#isSecurityOf -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#isSecurityOf">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Security"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Laptop"/>
+        <rdfs:comment xml:lang="en">This is the inverse property of &quot;hasSecurity&quot;. It links a Security to the Laptop it secures, indicating that the security is implemented on the laptop to protect it from threats.</rdfs:comment>
+        <rdfs:label xml:lang="en">Is Security Of</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#isWarrantyOf -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#isWarrantyOf">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Warranty"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Laptop"/>
+        <rdfs:comment xml:lang="en">This is the inverse property of &quot;hasWarranty&quot;. It associates a Warranty with the Laptop it covers, specifying that the warranty is applicable to the laptop for a certain period and under specific conditions.</rdfs:comment>
+        <rdfs:label xml:lang="en">Is Warranty Of</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#hasAntivirusVersion -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#hasAntivirusVersion">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Antivirus"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment xml:lang="en">This data property defines the version of the antivirus software installed on the laptop.</rdfs:comment>
+        <rdfs:label xml:lang="en">Has Antivirus Version</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#hasAudioSystemType -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#hasAudioSystemType">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#AudioSystem"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment xml:lang="en">This data property indicates the type of audio system integrated or used with the laptop (e.g., stereo, surround sound).</rdfs:comment>
+        <rdfs:label xml:lang="en">Has Audio System Type</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#hasBatteryCapacity -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#hasBatteryCapacity">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Battery"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+        <rdfs:comment xml:lang="en">This data property indicates the battery capacity of the laptop, typically measured in milliampere-hours (mAh) or watt-hours (Wh). It reflects the amount of charge the battery can hold, which affects the device&apos;s runtime.</rdfs:comment>
+        <rdfs:label xml:lang="en">Has Battery Capacity</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#hasCPUSpeed -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#hasCPUSpeed">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#CPU"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment xml:lang="en">This data property specifies the clock speed of the CPU, usually measured in gigahertz (GHz).</rdfs:comment>
+        <rdfs:label xml:lang="en">Has CPU Speed</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#hasColourName -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#hasColourName">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Colour"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment xml:lang="en">This data property represents the color name of the laptop or its components. It specifies the aesthetic appearance by identifying the color used in the design (e.g., &quot;Black&quot;, &quot;Silver&quot;, &quot;Blue&quot;).</rdfs:comment>
+        <rdfs:label xml:lang="en">Has Colour Name</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#hasCoolingSystemType -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#hasCoolingSystemType">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#CoolingSystem"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment xml:lang="en">This data property specifies the type of cooling system used in the laptop (e.g., air cooling, liquid cooling).</rdfs:comment>
+        <rdfs:label xml:lang="en">Has Cooling System Type</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#hasDisplayResolution -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#hasDisplayResolution">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Display"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment xml:lang="en">This data property denotes the screen resolution of the laptop&apos;s display. It is typically defined as the number of horizontal and vertical pixels (e.g., 1920x1080), indicating the clarity and detail of the visual output.</rdfs:comment>
+        <rdfs:label xml:lang="en">Has Display Resolution</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#hasEthernetSpeed -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#hasEthernetSpeed">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Ethernet"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment xml:lang="en">This data property defines the speed of the Ethernet connection, typically measured in megabits per second (Mbps) or gigabits per second (Gbps).</rdfs:comment>
+        <rdfs:label xml:lang="en">Has Ethernet Speed</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#hasGraphicsMemory -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#hasGraphicsMemory">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#GraphicsCard"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment xml:lang="en">This data property represents the amount of dedicated video memory on the graphics card, typically measured in megabytes (MB) or gigabytes (GB).</rdfs:comment>
+        <rdfs:label xml:lang="en">Has Graphics Memory</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#hasHDMIVersion -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#hasHDMIVersion">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#HDMI"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment xml:lang="en">This data property specifies the version of the HDMI port, which determines the supported features and capabilities (e.g., HDMI 2.0, HDMI 2.1).</rdfs:comment>
+        <rdfs:label xml:lang="en">Has HDMI Version</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#hasKeyboardLayout -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#hasKeyboardLayout">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Keyboard"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment xml:lang="en">This data property defines the layout of the keyboard (e.g., QWERTY, AZERTY).</rdfs:comment>
+        <rdfs:label xml:lang="en">Has Keyboard Layout</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#hasMouseType -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#hasMouseType">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Mouse"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment xml:lang="en">This data property specifies the type of mouse (e.g., wired, wireless, Bluetooth) used with the laptop.</rdfs:comment>
+        <rdfs:label xml:lang="en">Has Mouse Type</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#hasOperatingSystemVersion -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#hasOperatingSystemVersion">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#OperatingSystem"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment xml:lang="en">This data property defines the version of the operating system installed on the laptop (e.g., Windows 11, macOS Monterey).</rdfs:comment>
+        <rdfs:label xml:lang="en">Has Operating System Version</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#hasProtectionFeatureType -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#hasProtectionFeatureType">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#ProtectionFeature"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment xml:lang="en">This data property represents the type of protection feature included in the laptop&apos;s security system. It could be related to some protective measure designed to secure the laptop from various threats.</rdfs:comment>
+        <rdfs:label xml:lang="en">Has Protection Feature Type</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#hasRAMSize -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#hasRAMSize">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#RAM"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment xml:lang="en">This data property specifies the amount of RAM (Random Access Memory) installed in the laptop, usually measured in gigabytes (GB). It is crucial for determining the device&apos;s performance in handling multiple applications simultaneously.</rdfs:comment>
+        <rdfs:label xml:lang="en">Has RAM Size</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#hasStorageCapacity -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#hasStorageCapacity">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Storage"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment xml:lang="en">This data property specifies the storage capacity of the laptop&apos;s hard drive or SSD, measured in gigabytes (GB) or terabytes (TB).</rdfs:comment>
+        <rdfs:label xml:lang="en">Has Storage Capacity</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#hasUSBType -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#hasUSBType">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#USB"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment xml:lang="en">This data property indicates the type of USB port available on the laptop, such as USB Type-A, Type-B, or Type-C. It specifies the physical and technical standards of the USB port, relevant for connecting peripheral devices.</rdfs:comment>
+        <rdfs:label xml:lang="en">Has USB Type</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#hasWarrantyPeriod -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#hasWarrantyPeriod">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Warranty"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+        <rdfs:comment xml:lang="en">This data property defines the duration of the warranty period provided with the laptop. The value usually represents time (e.g., number of years or months) during which the product is covered for repairs or replacement under warranty.</rdfs:comment>
+        <rdfs:label xml:lang="en">Has Warranty Period</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#hasWebcamResolution -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#hasWebcamResolution">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Webcam"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment xml:lang="en">This data property specifies the resolution of the laptop&apos;s integrated webcam. The resolution is typically measured in megapixels or as a combination of width and height in pixels (e.g., 1920x1080).</rdfs:comment>
+        <rdfs:label xml:lang="en">Has Webcam Resolution</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Antivirus -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Antivirus">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Security"/>
+        <rdfs:comment xml:lang="en">Represents software applications designed to detect and remove malicious software from the laptop.</rdfs:comment>
+        <rdfs:label xml:lang="en">Antivirus</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#AudioSystem -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#AudioSystem">
+        <rdfs:comment xml:lang="en">Represents the audio output system of the laptop, which may include built-in speakers, sound cards, and other audio components.</rdfs:comment>
+        <rdfs:label xml:lang="en">Audio System</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Battery -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Battery">
+        <rdfs:comment xml:lang="en">Represents the power storage unit of the laptop, determining the device&apos;s operational time without external power.</rdfs:comment>
+        <rdfs:label xml:lang="en">Battery</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#CPU -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#CPU">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Component"/>
+        <rdfs:comment xml:lang="en">Represents the Central Processing Unit, the primary processor responsible for executing instructions and processing data in the laptop.</rdfs:comment>
+        <rdfs:label xml:lang="en">CPU (Central Processing Unit)</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Colour -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Colour">
+        <rdfs:comment xml:lang="en">Represents the color options available for the laptop&apos;s external casing.</rdfs:comment>
+        <rdfs:label xml:lang="en">Colour</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Component -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Component">
+        <rdfs:comment xml:lang="en">An abstract class representing all primary hardware components of the laptop, essential for its functionality. This class has no direct instances but serves as a parent class for specific components.</rdfs:comment>
+        <rdfs:label xml:lang="en">Component</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#CoolingSystem -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#CoolingSystem">
+        <rdfs:comment xml:lang="en">Represents the components responsible for maintaining optimal operating temperatures, including fans, heat sinks, and other cooling mechanisms.</rdfs:comment>
+        <rdfs:label xml:lang="en">Cooling System</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Display -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Display">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Component"/>
+        <rdfs:comment xml:lang="en">Represents the laptop&apos;s screen, including details such as size, resolution, and display technology.</rdfs:comment>
+        <rdfs:label xml:lang="en">Display</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Ethernet -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Ethernet">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Port"/>
+        <rdfs:comment xml:lang="en">Represents the port used to connect the laptop to wired network connections.</rdfs:comment>
+        <rdfs:label xml:lang="en">Ethernet</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#ExternalMonitor -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#ExternalMonitor">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Peripheral"/>
+        <rdfs:comment xml:lang="en">Represents an additional monitor that can be connected to the laptop for a dual-screen setup.</rdfs:comment>
+        <rdfs:label xml:lang="en">External Monitor</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#ExternalSpeaker -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#ExternalSpeaker">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Peripheral"/>
+        <rdfs:comment xml:lang="en">Represents external audio output devices that can be connected to the laptop to enhance sound quality.</rdfs:comment>
+        <rdfs:label xml:lang="en">External Speaker</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#GraphicsCard -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#GraphicsCard">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Component"/>
+        <rdfs:comment xml:lang="en">Represents the GPU or dedicated graphics card, responsible for rendering images, video, and animations on the laptop.</rdfs:comment>
+        <rdfs:label xml:lang="en">Graphics Card</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#HDMI -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#HDMI">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Port"/>
+        <rdfs:comment xml:lang="en">Represents the port used for transmitting audio and video data to external monitors or TVs.</rdfs:comment>
+        <rdfs:label xml:lang="en">HDMI (High-Definition Multimedia Interface)</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Keyboard -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Keyboard">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Peripheral"/>
+        <rdfs:comment xml:lang="en">Represents external or built-in keyboards, detailing their layout, type, and other relevant features.</rdfs:comment>
+        <rdfs:label xml:lang="en">Keyboard</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Laptop -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Laptop">
+        <rdfs:comment xml:lang="en">Represents the entire configurable laptop system, which integrates various components, peripherals, and features.</rdfs:comment>
+        <rdfs:label xml:lang="en">Laptop</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Mouse -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Mouse">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Peripheral"/>
+        <rdfs:comment xml:lang="en">Represents external pointing devices, such as a mouse or trackball, used for navigating the laptop&apos;s interface.</rdfs:comment>
+        <rdfs:label xml:lang="en">Mouse</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#OperatingSystem -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#OperatingSystem">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Component"/>
+        <rdfs:comment xml:lang="en">Represents the software that manages hardware and software resources, providing services for computer programs.</rdfs:comment>
+        <rdfs:label xml:lang="en">Operating System</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Peripheral -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Peripheral">
+        <rdfs:comment xml:lang="en">Represents external devices or accessories that can be connected to the laptop to extend its functionality.</rdfs:comment>
+        <rdfs:label xml:lang="en">Peripheral</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Port -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Port">
+        <rdfs:comment xml:lang="en">Represents the various physical connectors on the laptop that allow it to interface with external devices or networks.</rdfs:comment>
+        <rdfs:label xml:lang="en">Port</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#ProtectionFeature -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#ProtectionFeature">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Security"/>
+        <rdfs:comment xml:lang="en">Represents additional security features such as biometric authentication systems.</rdfs:comment>
+        <rdfs:label xml:lang="en">Protection Feature</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#RAM -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#RAM">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Component"/>
+        <rdfs:comment xml:lang="en">Represents the laptop&apos;s Random Access Memory, which is used for temporarily storing and accessing data by the CPU.</rdfs:comment>
+        <rdfs:label xml:lang="en">RAM(random-access memory)</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Security -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Security">
+        <rdfs:comment xml:lang="en">Represents the various features and mechanisms implemented to ensure the security of the laptop&apos;s data and access.</rdfs:comment>
+        <rdfs:label xml:lang="en">Security</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Storage -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Storage">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Component"/>
+        <rdfs:comment xml:lang="en">Represents the laptop&apos;s storage solutions, including SSDs, HDDs, and any other data storage technologies.</rdfs:comment>
+        <rdfs:label xml:lang="en">Storage</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#USB -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#USB">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Port"/>
+        <rdfs:comment xml:lang="en">Represents the Universal Serial Bus ports, used for connecting a wide range of peripherals.</rdfs:comment>
+        <rdfs:label xml:lang="en">USB(universal serial bus)</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Warranty -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Warranty">
+        <rdfs:comment xml:lang="en">Represents the protection plan provided with the laptop, covering repairs and replacements under certain conditions.</rdfs:comment>
+        <rdfs:label xml:lang="en">Warranty</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Webcam -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Webcam">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Peripheral"/>
+        <rdfs:comment xml:lang="en">Represents an integrated or external camera used for video conferencing or capturing images.</rdfs:comment>
+        <rdfs:label xml:lang="en">Webcam</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#AMDGraphicsCard -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#AMDGraphicsCard">
+        <rdf:type rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#GraphicsCard"/>
+        <LaptopConfigModellazione:isComponentOf rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#MacBookPro"/>
+        <LaptopConfigModellazione:hasGraphicsMemory>8192MB</LaptopConfigModellazione:hasGraphicsMemory>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#AMDRyzen7 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#AMDRyzen7">
+        <rdf:type rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#CPU"/>
+        <LaptopConfigModellazione:isComponentOf rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#HPEnvy"/>
+        <LaptopConfigModellazione:hasCPUSpeed>3.8 GHz</LaptopConfigModellazione:hasCPUSpeed>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#ASUSBattery5000 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#ASUSBattery5000">
+        <rdf:type rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Battery"/>
+        <LaptopConfigModellazione:hasBatteryCapacity rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">50.0</LaptopConfigModellazione:hasBatteryCapacity>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#AcerPredatorHelios500 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#AcerPredatorHelios500">
+        <rdf:type rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Laptop"/>
+        <LaptopConfigModellazione:hasAudioSystem rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#BangOlufsenAudioSystem"/>
+        <LaptopConfigModellazione:hasColour rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Green"/>
+        <LaptopConfigModellazione:hasComponent rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#HyperXImpact16GB"/>
+        <LaptopConfigModellazione:hasComponent rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#IntelCorei9"/>
+        <LaptopConfigModellazione:hasComponent rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#LGUltraFine5K"/>
+        <LaptopConfigModellazione:hasComponent rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#NVIDIAGeForceRTX3070"/>
+        <LaptopConfigModellazione:hasComponent rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#WesternDigital2TBSSD"/>
+        <LaptopConfigModellazione:hasComponent rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Windows11"/>
+        <LaptopConfigModellazione:hasPeripheral rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#AcerPredatorXB273K"/>
+        <LaptopConfigModellazione:hasPeripheral rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#CorsairK95RGBPlatinum"/>
+        <LaptopConfigModellazione:hasPeripheral rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#QHDWebcam"/>
+        <LaptopConfigModellazione:hasPeripheral rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#SonyExternalSpeaker"/>
+        <LaptopConfigModellazione:hasPeripheral rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#SteelSeriesRival600"/>
+        <LaptopConfigModellazione:hasPort rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Ethernet5Gbps"/>
+        <LaptopConfigModellazione:hasPort rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#HDMI1_4"/>
+        <LaptopConfigModellazione:hasPort rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#USBTypeB"/>
+        <LaptopConfigModellazione:hasSecurity rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Norton"/>
+        <LaptopConfigModellazione:hasSecurity rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#TPMSecurityModule"/>
+        <LaptopConfigModellazione:hasWarranty rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#TwoYearWarranty"/>
+        <LaptopConfigModellazione:isCooledBy rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#NZXTKrakenX63"/>
+        <LaptopConfigModellazione:isPoweredBy rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#ASUSBattery5000"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#AcerPredatorXB273K -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#AcerPredatorXB273K">
+        <rdf:type rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#ExternalMonitor"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#AsusProArt27 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#AsusProArt27">
+        <rdf:type rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#ExternalMonitor"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#BangOlufsenAudioSystem -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#BangOlufsenAudioSystem">
+        <rdf:type rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#AudioSystem"/>
+        <LaptopConfigModellazione:hasAudioSystemType>30.0 W</LaptopConfigModellazione:hasAudioSystemType>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Bitdefender -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Bitdefender">
+        <rdf:type rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Antivirus"/>
+        <LaptopConfigModellazione:hasAntivirusVersion>2024.1v</LaptopConfigModellazione:hasAntivirusVersion>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Blue -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Blue">
+        <rdf:type rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Colour"/>
+        <LaptopConfigModellazione:hasColourName>Blue</LaptopConfigModellazione:hasColourName>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#BoseCompanion2 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#BoseCompanion2">
+        <rdf:type rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#ExternalSpeaker"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#CoolerMasterHyper212EVO -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#CoolerMasterHyper212EVO">
+        <rdf:type rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#CoolingSystem"/>
+        <LaptopConfigModellazione:hasCoolingSystemType>Air Cooling</LaptopConfigModellazione:hasCoolingSystemType>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#CorsairK95RGBPlatinum -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#CorsairK95RGBPlatinum">
+        <rdf:type rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Keyboard"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#CorsairVengeance16GB -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#CorsairVengeance16GB">
+        <rdf:type rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#RAM"/>
+        <LaptopConfigModellazione:isComponentOf rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#MacBookPro"/>
+        <LaptopConfigModellazione:hasRAMSize rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">16</LaptopConfigModellazione:hasRAMSize>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#CrucialP5Plus1TBSSD -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#CrucialP5Plus1TBSSD">
+        <rdf:type rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Storage"/>
+        <LaptopConfigModellazione:isComponentOf rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#HPEnvy"/>
+        <LaptopConfigModellazione:hasStorageCapacity>1024 GB</LaptopConfigModellazione:hasStorageCapacity>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#DellUltraSharp27 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#DellUltraSharp27">
+        <rdf:type rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#ExternalMonitor"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#DellXPS13Battery -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#DellXPS13Battery">
+        <rdf:type rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Battery"/>
+        <LaptopConfigModellazione:hasBatteryCapacity rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">58.2</LaptopConfigModellazione:hasBatteryCapacity>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#DolbyAtmosAudioSystem -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#DolbyAtmosAudioSystem">
+        <rdf:type rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#AudioSystem"/>
+        <LaptopConfigModellazione:hasAudioSystemType>20.0 W</LaptopConfigModellazione:hasAudioSystemType>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Ethernet10Gbps -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Ethernet10Gbps">
+        <rdf:type rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Ethernet"/>
+        <LaptopConfigModellazione:hasEthernetSpeed>10000 Mbps</LaptopConfigModellazione:hasEthernetSpeed>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Ethernet1Gbps -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Ethernet1Gbps">
+        <rdf:type rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Ethernet"/>
+        <LaptopConfigModellazione:hasEthernetSpeed>1000 Mbps</LaptopConfigModellazione:hasEthernetSpeed>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Ethernet5Gbps -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Ethernet5Gbps">
+        <rdf:type rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Ethernet"/>
+        <LaptopConfigModellazione:hasEthernetSpeed>2500 Mbps</LaptopConfigModellazione:hasEthernetSpeed>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#FaceRecognitionScanner -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#FaceRecognitionScanner">
+        <rdf:type rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#ProtectionFeature"/>
+        <LaptopConfigModellazione:isSecurityOf rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#HPEnvy"/>
+        <LaptopConfigModellazione:hasProtectionFeatureType>Biometric Face Recognition</LaptopConfigModellazione:hasProtectionFeatureType>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#FingerprintScanner -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#FingerprintScanner">
+        <rdf:type rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#ProtectionFeature"/>
+        <LaptopConfigModellazione:isSecurityOf rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#MacBookPro"/>
+        <LaptopConfigModellazione:hasProtectionFeatureType>Biometric Fingerprint Scanner</LaptopConfigModellazione:hasProtectionFeatureType>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#GSkillRipjaws8GB -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#GSkillRipjaws8GB">
+        <rdf:type rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#RAM"/>
+        <LaptopConfigModellazione:isComponentOf rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#HPEnvy"/>
+        <LaptopConfigModellazione:hasRAMSize rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">8</LaptopConfigModellazione:hasRAMSize>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Green -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Green">
+        <rdf:type rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Colour"/>
+        <LaptopConfigModellazione:hasColourName>Green</LaptopConfigModellazione:hasColourName>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#HDMI1_4 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#HDMI1_4">
+        <rdf:type rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#HDMI"/>
+        <LaptopConfigModellazione:hasHDMIVersion>1.4v</LaptopConfigModellazione:hasHDMIVersion>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#HDMI2_0 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#HDMI2_0">
+        <rdf:type rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#HDMI"/>
+        <LaptopConfigModellazione:hasHDMIVersion>2.0v</LaptopConfigModellazione:hasHDMIVersion>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#HDMI2_1 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#HDMI2_1">
+        <rdf:type rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#HDMI"/>
+        <LaptopConfigModellazione:hasHDMIVersion>2.1v</LaptopConfigModellazione:hasHDMIVersion>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#HDWebcam -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#HDWebcam">
+        <rdf:type rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Webcam"/>
+        <LaptopConfigModellazione:hasWebcamResolution>720p</LaptopConfigModellazione:hasWebcamResolution>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#HPEnvy -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#HPEnvy">
+        <rdf:type rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Laptop"/>
+        <LaptopConfigModellazione:hasAudioSystem rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#SonyAudioSystem"/>
+        <LaptopConfigModellazione:hasColour rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Red"/>
+        <LaptopConfigModellazione:hasComponent rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#AMDRyzen7"/>
+        <LaptopConfigModellazione:hasComponent rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#CrucialP5Plus1TBSSD"/>
+        <LaptopConfigModellazione:hasComponent rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#GSkillRipjaws8GB"/>
+        <LaptopConfigModellazione:hasComponent rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#NvidiaGraphicsCard"/>
+        <LaptopConfigModellazione:hasComponent rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#SamsungOdysseyG9"/>
+        <LaptopConfigModellazione:hasComponent rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Windows10"/>
+        <LaptopConfigModellazione:hasPeripheral rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#AsusProArt27"/>
+        <LaptopConfigModellazione:hasPeripheral rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#BoseCompanion2"/>
+        <LaptopConfigModellazione:hasPeripheral rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#RazerBlackWidowV3"/>
+        <LaptopConfigModellazione:hasPeripheral rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#RazerDeathAdderElite"/>
+        <LaptopConfigModellazione:hasPeripheral rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#4KWebcam"/>
+        <LaptopConfigModellazione:hasPort rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Ethernet10Gbps"/>
+        <LaptopConfigModellazione:hasPort rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#HDMI2_0"/>
+        <LaptopConfigModellazione:hasPort rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#USBTypeA"/>
+        <LaptopConfigModellazione:hasSecurity rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#FaceRecognitionScanner"/>
+        <LaptopConfigModellazione:hasSecurity rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#McAfeeAntivirus"/>
+        <LaptopConfigModellazione:hasWarranty rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#ThreeYearWarranty"/>
+        <LaptopConfigModellazione:isCooledBy rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#NoctuaNH-D15"/>
+        <LaptopConfigModellazione:isPoweredBy rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#RazerBladeBattery"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#HyperXImpact16GB -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#HyperXImpact16GB">
+        <rdf:type rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#RAM"/>
+        <LaptopConfigModellazione:isComponentOf rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#AcerPredatorHelios500"/>
+        <LaptopConfigModellazione:hasRAMSize rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">16</LaptopConfigModellazione:hasRAMSize>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#IntelCorei7 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#IntelCorei7">
+        <rdf:type rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#CPU"/>
+        <LaptopConfigModellazione:isComponentOf rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#MacBookPro"/>
+        <LaptopConfigModellazione:hasCPUSpeed>3.6 GHz</LaptopConfigModellazione:hasCPUSpeed>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#IntelCorei9 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#IntelCorei9">
+        <rdf:type rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#CPU"/>
+        <LaptopConfigModellazione:isComponentOf rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#AcerPredatorHelios500"/>
+        <LaptopConfigModellazione:hasCPUSpeed>5.3 GHz</LaptopConfigModellazione:hasCPUSpeed>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#LGUltraFine5K -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#LGUltraFine5K">
+        <rdf:type rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Display"/>
+        <LaptopConfigModellazione:isComponentOf rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#AcerPredatorHelios500"/>
+        <LaptopConfigModellazione:hasDisplayResolution>5120x2880p</LaptopConfigModellazione:hasDisplayResolution>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#LogitechG915 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#LogitechG915">
+        <rdf:type rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Keyboard"/>
+        <LaptopConfigModellazione:hasKeyboardLayout>QWERTY</LaptopConfigModellazione:hasKeyboardLayout>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#LogitechMXMaster3 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#LogitechMXMaster3">
+        <rdf:type rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Mouse"/>
+        <LaptopConfigModellazione:hasMouseType>4000 DPI</LaptopConfigModellazione:hasMouseType>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#LogitechZ623 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#LogitechZ623">
+        <rdf:type rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#ExternalSpeaker"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#MacBookPro -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#MacBookPro">
+        <rdf:type rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Laptop"/>
+        <LaptopConfigModellazione:hasAudioSystem rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#DolbyAtmosAudioSystem"/>
+        <LaptopConfigModellazione:hasColour rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Blue"/>
+        <LaptopConfigModellazione:hasComponent rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#AMDGraphicsCard"/>
+        <LaptopConfigModellazione:hasComponent rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#CorsairVengeance16GB"/>
+        <LaptopConfigModellazione:hasComponent rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#IntelCorei7"/>
+        <LaptopConfigModellazione:hasComponent rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#RetinaDisplay13Inch"/>
+        <LaptopConfigModellazione:hasComponent rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Samsung1TBSSD"/>
+        <LaptopConfigModellazione:hasComponent rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#macOS"/>
+        <LaptopConfigModellazione:hasPeripheral rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#BoseCompanion2"/>
+        <LaptopConfigModellazione:hasPeripheral rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#DellUltraSharp27"/>
+        <LaptopConfigModellazione:hasPeripheral rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#HDWebcam"/>
+        <LaptopConfigModellazione:hasPeripheral rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#LogitechG915"/>
+        <LaptopConfigModellazione:hasPeripheral rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#LogitechMXMaster3"/>
+        <LaptopConfigModellazione:hasPort rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Ethernet1Gbps"/>
+        <LaptopConfigModellazione:hasPort rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#HDMI2_1"/>
+        <LaptopConfigModellazione:hasPort rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#USBTypeC"/>
+        <LaptopConfigModellazione:hasSecurity rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Bitdefender"/>
+        <LaptopConfigModellazione:hasSecurity rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#FingerprintScanner"/>
+        <LaptopConfigModellazione:hasWarranty rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#OneYearWarranty"/>
+        <LaptopConfigModellazione:isCooledBy rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#CoolerMasterHyper212EVO"/>
+        <LaptopConfigModellazione:isPoweredBy rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#DellXPS13Battery"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#McAfeeAntivirus -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#McAfeeAntivirus">
+        <rdf:type rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Antivirus"/>
+        <LaptopConfigModellazione:hasAntivirusVersion>2024.3v</LaptopConfigModellazione:hasAntivirusVersion>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#NVIDIAGeForceRTX3070 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#NVIDIAGeForceRTX3070">
+        <rdf:type rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#GraphicsCard"/>
+        <LaptopConfigModellazione:isComponentOf rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#AcerPredatorHelios500"/>
+        <LaptopConfigModellazione:hasGraphicsMemory>8192MB</LaptopConfigModellazione:hasGraphicsMemory>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#NZXTKrakenX63 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#NZXTKrakenX63">
+        <rdf:type rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#CoolingSystem"/>
+        <LaptopConfigModellazione:hasCoolingSystemType>Liquid Cooling</LaptopConfigModellazione:hasCoolingSystemType>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#NoctuaNH-D15 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#NoctuaNH-D15">
+        <rdf:type rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#CoolingSystem"/>
+        <LaptopConfigModellazione:hasCoolingSystemType>Air Cooling</LaptopConfigModellazione:hasCoolingSystemType>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Norton -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Norton">
+        <rdf:type rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Antivirus"/>
+        <LaptopConfigModellazione:hasAntivirusVersion>2024.2v</LaptopConfigModellazione:hasAntivirusVersion>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#NvidiaGraphicsCard -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#NvidiaGraphicsCard">
+        <rdf:type rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#GraphicsCard"/>
+        <LaptopConfigModellazione:isComponentOf rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#HPEnvy"/>
+        <LaptopConfigModellazione:hasGraphicsMemory>6144MB</LaptopConfigModellazione:hasGraphicsMemory>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#OneYearWarranty -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#OneYearWarranty">
+        <rdf:type rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Warranty"/>
+        <LaptopConfigModellazione:isWarrantyOf rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#MacBookPro"/>
+        <LaptopConfigModellazione:hasWarrantyPeriod rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1</LaptopConfigModellazione:hasWarrantyPeriod>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#QHDWebcam -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#QHDWebcam">
+        <rdf:type rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Webcam"/>
+        <LaptopConfigModellazione:hasWebcamResolution>1440p</LaptopConfigModellazione:hasWebcamResolution>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#RazerBlackWidowV3 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#RazerBlackWidowV3">
+        <rdf:type rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Keyboard"/>
+        <LaptopConfigModellazione:hasKeyboardLayout>AZERTY</LaptopConfigModellazione:hasKeyboardLayout>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#RazerBladeBattery -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#RazerBladeBattery">
+        <rdf:type rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Battery"/>
+        <LaptopConfigModellazione:hasBatteryCapacity rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">70.5</LaptopConfigModellazione:hasBatteryCapacity>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#RazerDeathAdderElite -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#RazerDeathAdderElite">
+        <rdf:type rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Mouse"/>
+        <LaptopConfigModellazione:hasMouseType>16000 DPI</LaptopConfigModellazione:hasMouseType>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Red -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Red">
+        <rdf:type rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Colour"/>
+        <LaptopConfigModellazione:hasColourName>Red</LaptopConfigModellazione:hasColourName>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#RetinaDisplay13Inch -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#RetinaDisplay13Inch">
+        <rdf:type rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Display"/>
+        <LaptopConfigModellazione:isComponentOf rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#MacBookPro"/>
+        <LaptopConfigModellazione:hasDisplayResolution>2560x1600</LaptopConfigModellazione:hasDisplayResolution>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Samsung1TBSSD -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Samsung1TBSSD">
+        <rdf:type rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Storage"/>
+        <LaptopConfigModellazione:isComponentOf rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#MacBookPro"/>
+        <LaptopConfigModellazione:hasStorageCapacity>1024 GB</LaptopConfigModellazione:hasStorageCapacity>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#SamsungOdysseyG9 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#SamsungOdysseyG9">
+        <rdf:type rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Display"/>
+        <LaptopConfigModellazione:isComponentOf rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#HPEnvy"/>
+        <LaptopConfigModellazione:hasDisplayResolution>5120x1440p</LaptopConfigModellazione:hasDisplayResolution>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#SonyAudioSystem -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#SonyAudioSystem">
+        <rdf:type rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#AudioSystem"/>
+        <LaptopConfigModellazione:hasAudioSystemType>25.0 W</LaptopConfigModellazione:hasAudioSystemType>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#SonyExternalSpeaker -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#SonyExternalSpeaker">
+        <rdf:type rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#ExternalSpeaker"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#SteelSeriesRival600 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#SteelSeriesRival600">
+        <rdf:type rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Mouse"/>
+        <LaptopConfigModellazione:hasMouseType>12000 DPI</LaptopConfigModellazione:hasMouseType>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#TPMSecurityModule -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#TPMSecurityModule">
+        <rdf:type rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#ProtectionFeature"/>
+        <LaptopConfigModellazione:isWarrantyOf rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#AcerPredatorHelios500"/>
+        <LaptopConfigModellazione:hasProtectionFeatureType>TPM 2.0</LaptopConfigModellazione:hasProtectionFeatureType>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#ThreeYearWarranty -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#ThreeYearWarranty">
+        <rdf:type rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Warranty"/>
+        <LaptopConfigModellazione:isWarrantyOf rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#HPEnvy"/>
+        <LaptopConfigModellazione:hasWarrantyPeriod rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">3</LaptopConfigModellazione:hasWarrantyPeriod>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#TwoYearWarranty -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#TwoYearWarranty">
+        <rdf:type rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Warranty"/>
+        <LaptopConfigModellazione:isWarrantyOf rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#AcerPredatorHelios500"/>
+        <LaptopConfigModellazione:hasWarrantyPeriod rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">2</LaptopConfigModellazione:hasWarrantyPeriod>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#USBTypeA -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#USBTypeA">
+        <rdf:type rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#USB"/>
+        <LaptopConfigModellazione:hasUSBType>USB-A</LaptopConfigModellazione:hasUSBType>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#USBTypeB -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#USBTypeB">
+        <rdf:type rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#USB"/>
+        <LaptopConfigModellazione:hasUSBType>USB-B</LaptopConfigModellazione:hasUSBType>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#USBTypeC -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#USBTypeC">
+        <rdf:type rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#USB"/>
+        <LaptopConfigModellazione:hasUSBType>USB-C</LaptopConfigModellazione:hasUSBType>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#WesternDigital2TBSSD -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#WesternDigital2TBSSD">
+        <rdf:type rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Storage"/>
+        <LaptopConfigModellazione:isComponentOf rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#AcerPredatorHelios500"/>
+        <LaptopConfigModellazione:hasStorageCapacity>2048 GB</LaptopConfigModellazione:hasStorageCapacity>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Windows10 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Windows10">
+        <rdf:type rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#OperatingSystem"/>
+        <LaptopConfigModellazione:isComponentOf rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#HPEnvy"/>
+        <LaptopConfigModellazione:hasOperatingSystemVersion>21H1</LaptopConfigModellazione:hasOperatingSystemVersion>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Windows11 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Windows11">
+        <rdf:type rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#OperatingSystem"/>
+        <LaptopConfigModellazione:isComponentOf rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#AcerPredatorHelios500"/>
+        <LaptopConfigModellazione:hasOperatingSystemVersion>10.0.22000</LaptopConfigModellazione:hasOperatingSystemVersion>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#macOS -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#macOS">
+        <rdf:type rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#OperatingSystem"/>
+        <LaptopConfigModellazione:isComponentOf rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#MacBookPro"/>
+        <LaptopConfigModellazione:hasOperatingSystemVersion>21H2</LaptopConfigModellazione:hasOperatingSystemVersion>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#4KWebcam -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#4KWebcam">
+        <rdf:type rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Webcam"/>
+        <LaptopConfigModellazione:hasWebcamResolution>2160p</LaptopConfigModellazione:hasWebcamResolution>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // General axioms
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#CPU"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Display"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#GraphicsCard"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#OperatingSystem"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#RAM"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Storage"/>
+        </owl:members>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Component"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Peripheral"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Port"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Security"/>
+        </owl:members>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#ExternalMonitor"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#ExternalSpeaker"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Keyboard"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Mouse"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Webcam"/>
+        </owl:members>
+    </rdf:Description>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi -->
+

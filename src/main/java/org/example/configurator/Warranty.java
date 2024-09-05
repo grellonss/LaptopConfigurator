@@ -1,4 +1,6 @@
-package org.example;
+package org.example.configurator;
+
+import org.example.configurator.Laptop;
 
 public class Warranty {
 
