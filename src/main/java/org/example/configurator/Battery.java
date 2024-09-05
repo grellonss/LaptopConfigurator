@@ -3,11 +3,9 @@ package org.example.configurator;
 public class Battery {
 
     private double batteryCapacity;
-    private double price;
 
-    public Battery(double batteryCapacity, double price) {
+    public Battery(double batteryCapacity) {
         this.batteryCapacity = batteryCapacity;
-        this.price = price;
     }
 
     public double getBatteryCapacity() {
@@ -18,11 +16,4 @@ public class Battery {
         this.batteryCapacity = batteryCapacity;
     }
 
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
 }

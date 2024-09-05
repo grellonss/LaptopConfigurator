@@ -127,34 +127,6 @@ public class Laptop {
         this.securities.remove(security);
     }
 
-    public double calculateTotalPrice() {
-        double totalPrice = 0;
-        for (Component component : components) {
-            totalPrice += component.getPrice();
-        }
-        for (Peripheral peripheral : peripherals) {
-            totalPrice += peripheral.getPrice();
-        }
-        for (Port port : ports) {
-            totalPrice += port.getPrice();
-        }
-        for (Security security : securities) {
-            totalPrice += security.getPrice();
-        }
-        if (audioSystem != null) {
-            totalPrice += audioSystem.getPrice();
-        }
-        if (coolingSystem != null) {
-            totalPrice += coolingSystem.getPrice();
-        }
-        if (battery != null) {
-            totalPrice += battery.getPrice();
-        }
-        if (warranty != null) {
-            totalPrice += warranty.getPrice();
-        }
-        return totalPrice;
-    }
 
     public boolean isValidConfiguration() {
         // Logica per validare la configurazione del laptop

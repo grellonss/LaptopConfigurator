@@ -2,14 +2,11 @@ package org.example.configurator;
 
 public class Display extends Component {
     private String displayResolution;
-    private double price;
 
-    public Display(Laptop laptopOfComponents, String displayResolution, double price) {
+    public Display(Laptop laptopOfComponents, String displayResolution) {
         super(laptopOfComponents);
         this.displayResolution = displayResolution;
-        this.price = price;
     }
-
 
     public String getDisplayResolution() {
         return displayResolution;
@@ -19,8 +16,4 @@ public class Display extends Component {
         this.displayResolution = displayResolution;
     }
 
-    @Override
-    public double getPrice() {
-        return price;
-    }
 }

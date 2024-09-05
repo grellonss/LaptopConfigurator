@@ -5,8 +5,8 @@ import org.example.configurator.Port;
 public class USB extends Port {
     private String USBVersion;
 
-    public USB(String portName, double price, String USBVersion) {
-        super(portName, price);
+    public USB(String portName, String USBVersion) {
+        super(portName);
         this.USBVersion = USBVersion;
     }
 

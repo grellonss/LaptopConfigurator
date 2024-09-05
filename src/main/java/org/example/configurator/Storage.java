@@ -6,12 +6,10 @@ import org.example.configurator.Laptop;
 public class Storage extends Component {
 
     private String storageCapacity;
-    private double price;
 
-    public Storage(Laptop laptopOfComponents, String storageCapacity, double price) {
+    public Storage(Laptop laptopOfComponents, String storageCapacity) {
         super(laptopOfComponents);
         this.storageCapacity = storageCapacity;
-        this.price = price;
     }
 
     public String getStorageCapacity() {
@@ -22,8 +20,4 @@ public class Storage extends Component {
         this.storageCapacity = storageCapacity;
     }
 
-    @Override
-    public double getPrice() {
-        return price;
-    }
 }

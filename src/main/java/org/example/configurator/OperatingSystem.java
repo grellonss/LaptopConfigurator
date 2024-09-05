@@ -5,12 +5,10 @@ import org.example.configurator.Laptop;
 
 public class OperatingSystem extends Component {
     private String operatingSystemVersion;
-    private double price;
 
-    public OperatingSystem(Laptop laptopOfComponents, String operatingSystemVersion, double price) {
+    public OperatingSystem(Laptop laptopOfComponents, String operatingSystemVersion) {
         super(laptopOfComponents);
         this.operatingSystemVersion = operatingSystemVersion;
-        this.price = price;
     }
 
     public String getOperatingSystemVersion() {
@@ -21,8 +19,4 @@ public class OperatingSystem extends Component {
         this.operatingSystemVersion = operatingSystemVersion;
     }
 
-    @Override
-    public double getPrice() {
-        return price;
-    }
 }

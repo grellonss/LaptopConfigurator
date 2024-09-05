@@ -3,8 +3,8 @@ package org.example.configurator;
 public class ExternalSpeaker extends Peripheral {
     private String externalAudioSystemType;
 
-    public ExternalSpeaker(String connectionType, double price, String externalAudioSystemType) {
-        super(connectionType, price);
+    public ExternalSpeaker(String connectionType, String externalAudioSystemType) {
+        super(connectionType);
         this.externalAudioSystemType = externalAudioSystemType;
     }
 

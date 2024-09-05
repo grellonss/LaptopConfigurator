@@ -2,12 +2,10 @@ package org.example.configurator;
 
 public class GraphicsCard extends Component {
     private String graphicsMemory;
-    private double price;
 
-    public GraphicsCard(Laptop laptopOfComponents, String graphicsMemory, double price) {
+    public GraphicsCard(Laptop laptopOfComponents, String graphicsMemory) {
         super(laptopOfComponents);
         this.graphicsMemory = graphicsMemory;
-        this.price = price;
     }
 
     public String getGraphicsMemory() {
@@ -18,8 +16,4 @@ public class GraphicsCard extends Component {
         this.graphicsMemory = graphicsMemory;
     }
 
-    @Override
-    public double getPrice() {
-        return price;
-    }
 }

@@ -4,8 +4,8 @@ public class HDMI extends Port {
 
     private String HDMIVersion;
 
-    public HDMI(String portName, double price, String HDMIVersion) {
-        super(portName, price);
+    public HDMI(String portName, String HDMIVersion) {
+        super(portName);
         this.HDMIVersion = HDMIVersion;
     }
 

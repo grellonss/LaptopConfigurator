@@ -3,8 +3,8 @@ package org.example.configurator;
 public class Mouse extends Peripheral {
     private String mouseType;
 
-    public Mouse(String connectionType, double price, String mouseType) {
-        super(connectionType, price);
+    public Mouse(String connectionType, String mouseType) {
+        super(connectionType);
         this.mouseType = mouseType;
     }
 

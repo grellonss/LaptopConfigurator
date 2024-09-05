@@ -4,8 +4,8 @@ public class Ethernet extends Port {
 
     private String ethernetSpeed;
 
-    public Ethernet(String portName, double price, String ethernetSpeed) {
-        super(portName, price);
+    public Ethernet(String portName,  String ethernetSpeed) {
+        super(portName);
         this.ethernetSpeed = ethernetSpeed;
     }
 

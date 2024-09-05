@@ -3,11 +3,9 @@ package org.example.configurator;
 public class CoolingSystem {
 
     private String coolingSystemType;
-    private double price;
 
-    public CoolingSystem(String coolingSystemType, double price) {
+    public CoolingSystem(String coolingSystemType) {
         this.coolingSystemType = coolingSystemType;
-        this.price = price;
     }
     public String getCoolingSystemType() {
         return coolingSystemType;
@@ -17,12 +15,4 @@ public class CoolingSystem {
         this.coolingSystemType = coolingSystemType;
     }
 
-
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
 }

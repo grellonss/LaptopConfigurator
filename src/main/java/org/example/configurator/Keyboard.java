@@ -4,8 +4,8 @@ public class Keyboard extends Peripheral {
 
     private String keyboardLayout;
 
-    public Keyboard(String connectionType, double price, String keyboardLayout) {
-        super(connectionType, price);
+    public Keyboard(String connectionType, String keyboardLayout) {
+        super(connectionType);
         this.keyboardLayout = keyboardLayout;
     }
 

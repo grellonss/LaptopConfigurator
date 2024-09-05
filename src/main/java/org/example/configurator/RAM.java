@@ -4,13 +4,17 @@ import org.example.configurator.Component;
 import org.example.configurator.Laptop;
 
 public class RAM extends Component {
+    private String ramName;
     private String ramSize;
-    private double price;
 
-    public RAM(Laptop laptop, String ramSize, double price) {
+    public RAM(Laptop laptop, String ramName, String ramSize) {
         super(laptop);
+        this.ramName = ramName;
         this.ramSize = ramSize;
-        this.price = price;
+    }
+    public RAM(String ramName, String ramSize){
+        this.ramName = ramName;
+        this.ramSize = ramSize;
     }
     public String getRamSize() {
         return ramSize;
@@ -20,8 +24,11 @@ public class RAM extends Component {
         this.ramSize = ramSize;
     }
 
-    @Override
-    public double getPrice() {
-        return price;
+    public String getRamName() {
+        return ramName;
+    }
+
+    public void setRamName(String ramName) {
+        this.ramName = ramName;
     }
 }

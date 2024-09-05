@@ -2,7 +2,10 @@ package org.example.app;
 
 import org.apache.jena.ontology.OntModel;
 import org.example.configurator.Laptop;
+import org.example.configurator.RAM;
 import org.example.ontology.OntologyLoader;
+
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
@@ -15,22 +18,18 @@ public class Main {
         if (model != null) {
             System.out.println("Ontologia caricata con successo!");
 
-            // Step 2: Eventuale logica per la configurazione del laptop
-            // Puoi qui iniziare a costruire la logica per ottenere informazioni
-            // dall'ontologia, interagire con le classi Laptop, Component, ecc.
+            // Step 2: Recupera i componenti RAM dall'ontologia
+            List<RAM> ramComponents = ontologyLoader.getRAMComponents();
 
-            // Per esempio, visualizza le classi definite nell'ontologia
-            model.listClasses().forEachRemaining(ontClass -> {
-                System.out.println("Classe nell'ontologia: " + ontClass.getLocalName());
-            });
-
-            // Step 3: Implementa la logica del configuratore di laptop
-            // Potresti iniziare a creare un oggetto Laptop, aggiungere componenti, ecc.
-
-            // Esempio:
-            Laptop laptop = new Laptop();
-            // Configurazione del laptop qui...
-
+            // Step 3: Visualizza le RAM recuperate dall'ontologia
+            if (!ramComponents.isEmpty()) {
+                System.out.println("Componenti RAM trovati:");
+                for (RAM ram : ramComponents) {
+                    System.out.println("RAM trovata: " + ram.getRamName() + " - Size: " + ram.getRamSize() + "GB");
+                }
+            } else {
+                System.out.println("Nessun componente RAM trovato.");
+            }
         } else {
             System.out.println("Errore nel caricamento dell'ontologia.");
         }
