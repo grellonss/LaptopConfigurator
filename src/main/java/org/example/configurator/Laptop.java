@@ -133,6 +133,7 @@ public class Laptop {
         return components.stream().anyMatch(c -> c instanceof CPU) &&
                 components.stream().anyMatch(c -> c instanceof RAM) &&
                 components.stream().anyMatch(c -> c instanceof Storage) &&
+                components.stream().anyMatch(c -> c instanceof GraphicsCard) &&
                 components.stream().anyMatch(c -> c instanceof OperatingSystem);
     }
 

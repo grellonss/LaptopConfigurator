@@ -1,10 +1,12 @@
 package org.example.configurator;
 
 public class Antivirus extends Security {
-private String antivirusVersion;
+    private String antivirusName;
+    private String antivirusVersion;
 
-    public Antivirus(Laptop laptopOfSecurity, String antivirusVersion) {
+    public Antivirus(Laptop laptopOfSecurity,String antivirusName, String antivirusVersion) {
         super(laptopOfSecurity);
+        this.antivirusName = antivirusName;
         this.antivirusVersion = antivirusVersion;
     }
 
@@ -14,5 +16,18 @@ private String antivirusVersion;
 
     public void setAntivirusVersion(String antivirusVersion) {
         this.antivirusVersion = antivirusVersion;
+    }
+
+    public String getAntivirusName() {
+        return antivirusName;
+    }
+
+    public void setAntivirusName(String antivirusName) {
+        this.antivirusName = antivirusName;
+    }
+
+    @Override
+    public Antivirus clone(Laptop laptop) {
+        return new Antivirus(getLaptopOfSecurity(), this.antivirusName, this.antivirusName);
     }
 }

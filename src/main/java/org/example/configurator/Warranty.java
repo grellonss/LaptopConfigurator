@@ -5,12 +5,17 @@ import org.example.configurator.Laptop;
 public class Warranty {
 
     private Laptop laptopOfWarranty;
+    private String warrantyName;
 
     private int warrantyPeriod; // Durata della garanzia in anni
 
-    public Warranty(Laptop laptopOfWarranty, int warrantyPeriod) {
+    public Warranty(Laptop laptopOfWarranty, String warrantyName, int warrantyPeriod) {
         this.laptopOfWarranty = laptopOfWarranty;
+        this.warrantyName = warrantyName;
         this.warrantyPeriod = warrantyPeriod;
+    }
+    public Warranty clone(Laptop laptop) {
+        return new Warranty(laptopOfWarranty, this.warrantyName, this.warrantyPeriod);
     }
 
     public int getWarrantyPeriod() {
@@ -29,5 +34,12 @@ public class Warranty {
         this.laptopOfWarranty = laptopOfWarranty;
     }
 
+    public String getWarrantyName() {
+        return warrantyName;
+    }
+
+    public void setWarrantyName(String warrantyName) {
+        this.warrantyName = warrantyName;
+    }
 }
 

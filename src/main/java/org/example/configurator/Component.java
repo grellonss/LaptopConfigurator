@@ -14,4 +14,7 @@ public abstract class Component {
         this.laptopOfComponents = laptopOfComponents;
     }
 
+    // Metodo clone astratto per forzare le sottoclassi a implementarlo
+    @Override
+    public abstract Component clone();  // Metodo astratto clone
 }

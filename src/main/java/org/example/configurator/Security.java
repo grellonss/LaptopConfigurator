@@ -8,6 +8,9 @@ public class Security {
     public Security(Laptop laptopOfSecurity) {
         this.laptopOfSecurity = laptopOfSecurity;
     }
+    public Security clone(Laptop laptop) {
+        return new Security(laptopOfSecurity);
+    }
     public Laptop getLaptopOfSecurity() {
         return laptopOfSecurity;
     }
@@ -15,6 +18,5 @@ public class Security {
     public void setLaptopOfSecurity(Laptop laptopOfSecurity) {
         this.laptopOfSecurity = laptopOfSecurity;
     }
-
 
 }
