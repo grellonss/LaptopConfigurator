@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Laptop {
+    private String laptopName;  // Nome del laptop
     private AudioSystem audioSystem;
     private Colour colour;
     private List<Component> components; // Una lista di componenti
@@ -14,11 +15,21 @@ public class Laptop {
     private CoolingSystem coolingSystem;
     private Battery battery;
 
-    public Laptop() {
+    // Costruttore con il nome del laptop
+    public Laptop(String laptopName) {
+        this.laptopName = laptopName;
         this.components = new ArrayList<>();
         this.peripherals = new ArrayList<>();
         this.ports = new ArrayList<>();
         this.securities = new ArrayList<>();
+    }
+
+    public String getLaptopName() {
+        return laptopName;
+    }
+
+    public void setLaptopName(String laptopName) {
+        this.laptopName = laptopName;
     }
 
     public AudioSystem getAudioSystem() {
@@ -94,7 +105,6 @@ public class Laptop {
     }
 
     // Metodi per aggiungere e rimuovere componenti, periferiche, porte, ecc.
-
     public void addComponent(Component component) {
         this.components.add(component);
     }
@@ -127,6 +137,50 @@ public class Laptop {
         this.securities.remove(security);
     }
 
+    // Metodo per clonare la configurazione del laptop
+    public Laptop cloneConfiguration() {
+        Laptop clonedLaptop = new Laptop(this.laptopName + " - Clone");
+
+        for (Component component : this.components) {
+            clonedLaptop.addComponent(component.clone());
+        }
+
+        for (Peripheral peripheral : this.peripherals) {
+            clonedLaptop.addPeripheral(peripheral.clone(clonedLaptop));
+        }
+
+        for (Port port : this.ports) {
+            clonedLaptop.addPort(port.clone(clonedLaptop));
+        }
+
+        for (Security security : this.securities) {
+            clonedLaptop.addSecurity(security.clone(clonedLaptop));
+        }
+
+        clonedLaptop.setAudioSystem(this.audioSystem); // Considera di aggiungere il clone anche qui
+        clonedLaptop.setColour(this.colour);           // Considera di aggiungere il clone anche qui
+        clonedLaptop.setCoolingSystem(this.coolingSystem);
+        clonedLaptop.setBattery(this.battery);
+        clonedLaptop.setWarranty(this.warranty);
+
+        return clonedLaptop;
+    }
+
+    // Metodo per visualizzare la configurazione del laptop
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Laptop: ").append(laptopName).append("\n");
+        sb.append("Components:\n");
+        for (Component component : components) {
+            sb.append(" - ").append(component.toString()).append("\n");
+        }
+        sb.append("Peripherals:\n");
+        for (Peripheral peripheral : peripherals) {
+            sb.append(" - ").append(peripheral.toString()).append("\n");
+        }
+        return sb.toString();
+    }
 
     public boolean isValidConfiguration() {
         // Logica per validare la configurazione del laptop
@@ -147,19 +201,5 @@ public class Laptop {
         coolingSystem = null;
         battery = null;
         warranty = null;
-    }
-
-    public Laptop cloneConfiguration() {
-        Laptop clonedLaptop = new Laptop();
-        clonedLaptop.components.addAll(this.components);
-        clonedLaptop.peripherals.addAll(this.peripherals);
-        clonedLaptop.ports.addAll(this.ports);
-        clonedLaptop.securities.addAll(this.securities);
-        clonedLaptop.audioSystem = this.audioSystem;
-        clonedLaptop.colour = this.colour;
-        clonedLaptop.coolingSystem = this.coolingSystem;
-        clonedLaptop.battery = this.battery;
-        clonedLaptop.warranty = this.warranty;
-        return clonedLaptop;
     }
 }

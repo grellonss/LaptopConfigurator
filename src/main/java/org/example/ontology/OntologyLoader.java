@@ -5,7 +5,9 @@ import org.apache.jena.ontology.OntModelSpec;
 import org.apache.jena.query.*;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.rdf.model.Resource;
+import org.example.configurator.CPU;
 import org.example.configurator.Component;
+import org.example.configurator.Laptop;
 import org.example.configurator.RAM;
 
 import java.io.InputStream;
@@ -46,16 +48,17 @@ public class OntologyLoader {
 
     // Metodo che esegue la query SPARQL per ottenere i componenti e le loro proprietà
     // Metodo che esegue la query SPARQL per ottenere i componenti e le loro proprietà
-    public List<RAM> getRAMComponents() {
+    public List<RAM> getRAMComponents(Laptop laptop) {
         List<RAM> ramList = new ArrayList<>();
 
         // Query per selezionare le istanze di RAM, i loro nomi e le loro proprietà (es: ramSize)
         String sparqlQuery =
                 "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> " +
                         "PREFIX laptop: <http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#> " +
-                        "SELECT ?ram ?size WHERE { " +
+                        "SELECT ?ram ?size ?laptop  WHERE { " +
                         "?ram rdf:type laptop:RAM . " +
                         "?ram laptop:hasRAMSize ?size . " +
+                        "?ram laptop:isComponentOf ?laptop . " +
                         "}";
 
         Query query = QueryFactory.create(sparqlQuery);
@@ -71,7 +74,7 @@ public class OntologyLoader {
                 String ramSize = solution.getLiteral("size").getString();  // Ottieni la dimensione della RAM
 
                 // Crea un oggetto RAM con le proprietà estratte dall'ontologia
-                RAM ram = new RAM(ramName,ramSize);
+                RAM ram = new RAM(laptop, ramName,ramSize);
                 ramList.add(ram);
             }
         } catch (Exception e) {
@@ -88,5 +91,41 @@ public class OntologyLoader {
     public OntModel getOntologyModel() {
         return ontologyModel;
     }
+
+    // Metodo per ottenere le CPU dall'ontologia
+    public List<CPU> getCPUComponents(Laptop laptop) {
+        List<CPU> cpuList = new ArrayList<>();
+
+        String sparqlQuery =
+                "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> " +
+                        "PREFIX laptop: <http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#> " +
+                        "SELECT ?cpu ?speed ?laptop WHERE { " +
+                        "?cpu rdf:type laptop:CPU . " +
+                        "?cpu laptop:hasCPUSpeed ?speed . " +
+                        "?cpu laptop:isComponentOf ?laptop . " +
+                        "}";
+
+
+        Query query = QueryFactory.create(sparqlQuery);
+        QueryExecution qe = QueryExecutionFactory.create(query, ontologyModel);
+
+        try {
+            ResultSet results = qe.execSelect();
+            while (results.hasNext()) {
+                QuerySolution solution = results.nextSolution();
+                Resource cpuResource = solution.getResource("cpu");
+                String name = cpuResource.getLocalName();
+                String speed = solution.getLiteral("speed").getString();
+
+                CPU cpu = new CPU(laptop,name, speed);
+                cpuList.add(cpu);
+            }
+        } finally {
+            qe.close();
+        }
+
+        return cpuList;
+    }
+
 }
 

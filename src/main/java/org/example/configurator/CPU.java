@@ -22,7 +22,7 @@ public class CPU extends Component {
     @Override
     public CPU clone() {
         // Crea una nuova istanza di RAM clonando le proprietà e associando il nuovo laptop
-        return new CPU(getLaptopOfComponents(), this.CPUName, this.cpuSpeed);
+        return new CPU(getLaptopOfComponents(), this.CPUName,this.cpuSpeed);
     }
 
     public String getCPUName() {

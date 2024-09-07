@@ -12,10 +12,6 @@ public class RAM extends Component {
         this.ramName = ramName;
         this.ramSize = ramSize;
     }
-    public RAM(String ramName, String ramSize){
-        this.ramName = ramName;
-        this.ramSize = ramSize;
-    }
     public String getRamSize() {
         return ramSize;
     }
