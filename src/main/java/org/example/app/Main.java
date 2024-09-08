@@ -68,15 +68,19 @@ public class Main {
                                     configureCPU(laptop, ontologyLoader, scanner);
                                     break;
                                 case 2:
+                                    configureDisplay(laptop, ontologyLoader, scanner);
                                     break;
                                 case 3:
+                                    configureGraphicsCard(laptop, ontologyLoader, scanner);
                                     break;
                                 case 4:
+                                    configureOperatingSystem(laptop, ontologyLoader, scanner);
                                     break;
                                 case 5:
                                     configureRAM(laptop, ontologyLoader, scanner);
                                     break;
                                 case 6:
+                                    configureStorage(laptop, ontologyLoader, scanner);
                                     break;
                                 case 0:
                                     componentMenuActive = false;
@@ -217,12 +221,13 @@ public class Main {
             // Clona la RAM scelta e assegnala al laptop
             RAM selectedRAM = ramComponents.get(ramChoice - 1).clone();
             selectedRAM.setLaptopOfComponents(laptop);
-            laptop.addComponent(selectedRAM);
+            laptop.addOrReplaceComponent(selectedRAM);
 
             System.out.println("Hai aggiunto " + selectedRAM.getRamName() + " al tuo laptop.");
         }
 
-    private static void configureCPU(Laptop laptop, OntologyLoader ontologyLoader, Scanner scanner) {
+        // Metodo per configurare la CPU
+        private static void configureCPU(Laptop laptop, OntologyLoader ontologyLoader, Scanner scanner) {
         List<CPU> cpuComponents = ontologyLoader.getCPUComponents(laptop); // Devi implementare il metodo getCPUComponents()
         if (cpuComponents.isEmpty()) {
             System.out.println("Nessuna CPU trovata.");
@@ -232,7 +237,7 @@ public class Main {
         System.out.println("Seleziona una CPU dalla lista:");
         for (int i = 0; i < cpuComponents.size(); i++) {
             CPU cpu = cpuComponents.get(i);
-            System.out.println((i + 1) + ". " + cpu.getCPUName() + " - " + cpu.getCpuSpeed() + "GHz");
+            System.out.println((i + 1) + ". " + cpu.getCPUName() + " - " + cpu.getCpuSpeed());
         }
 
         int cpuChoice = scanner.nextInt();
@@ -246,13 +251,141 @@ public class Main {
         // Clona la CPU scelta e assegnala al laptop
         CPU selectedCPU = cpuComponents.get(cpuChoice - 1).clone();
         selectedCPU.setLaptopOfComponents(laptop);
-        laptop.addComponent(selectedCPU);
+            laptop.addOrReplaceComponent(selectedCPU);
 
         System.out.println("Hai aggiunto " + selectedCPU.getCPUName() + " al tuo laptop.");
     }
 
+        // Metodo per configurare il Display
+        private static void configureDisplay(Laptop laptop, OntologyLoader ontologyLoader, Scanner scanner) {
+            List<Display> displayComponents = ontologyLoader.getDisplayComponents(laptop);
+            if (displayComponents.isEmpty()) {
+                System.out.println("Nessun display trovato.");
+                return;
+            }
 
-    // Metodo per mostrare la configurazione finale del laptop
+            // Mostra la lista dei display
+            System.out.println("Seleziona un Display dalla lista:");
+            for (int i = 0; i < displayComponents.size(); i++) {
+                Display display = displayComponents.get(i);
+                System.out.println((i + 1) + ". Display: " + display.getDisplayName() + " - Risoluzione: " + display.getDisplayResolution());
+            }
+
+            int displayChoice = scanner.nextInt();
+            scanner.nextLine(); // Consuma newline
+
+            if (displayChoice < 1 || displayChoice > displayComponents.size()) {
+                System.out.println("Scelta non valida. Riprova.");
+                return;
+            }
+
+            // Clona il display scelto e assegnalo al laptop
+            Display selectedDisplay = displayComponents.get(displayChoice - 1).clone();
+            selectedDisplay.setLaptopOfComponents(laptop);  // Imposta il laptop associato
+            laptop.addOrReplaceComponent(selectedDisplay);
+
+            System.out.println("Hai aggiunto il display: " + selectedDisplay.getDisplayName() + " - " + selectedDisplay.getDisplayResolution());
+        }
+
+        // Metodo per configurare la Graphics Card
+        private static void configureGraphicsCard(Laptop laptop, OntologyLoader ontologyLoader, Scanner scanner) {
+            List<GraphicsCard> graphicsCards = ontologyLoader.getGraphicsCardComponents(laptop);
+            if (graphicsCards.isEmpty()) {
+                System.out.println("Nessuna scheda grafica trovata.");
+                return;
+            }
+
+            // Mostra la lista delle schede grafiche
+            System.out.println("Seleziona una Scheda Grafica dalla lista:");
+            for (int i = 0; i < graphicsCards.size(); i++) {
+                GraphicsCard graphicsCard = graphicsCards.get(i);
+                System.out.println((i + 1) + ". " + graphicsCard.getGraphicCardName() + " - Memoria: " + graphicsCard.getGraphicsMemory());
+            }
+
+            int graphicsChoice = scanner.nextInt();
+            scanner.nextLine(); // Consuma newline
+
+            if (graphicsChoice < 1 || graphicsChoice > graphicsCards.size()) {
+                System.out.println("Scelta non valida. Riprova.");
+                return;
+            }
+
+            // Clona la scheda grafica scelta e assegnala al laptop
+            GraphicsCard selectedGraphicsCard = graphicsCards.get(graphicsChoice - 1).clone();
+            selectedGraphicsCard.setLaptopOfComponents(laptop);  // Imposta il laptop associato
+            laptop.addOrReplaceComponent(selectedGraphicsCard);
+
+            System.out.println("Hai aggiunto la scheda grafica: " + selectedGraphicsCard.getGraphicCardName() + " con " + selectedGraphicsCard.getGraphicsMemory() + " di memoria.");
+        }
+
+        // Metodo per configurare il sistema operativo (OperatingSystem)
+        private static void configureOperatingSystem(Laptop laptop, OntologyLoader ontologyLoader, Scanner scanner) {
+            List<OperatingSystem> operatingSystemComponents = ontologyLoader.getOperatingSystemComponents(laptop);
+
+            if (operatingSystemComponents.isEmpty()) {
+                System.out.println("Nessun sistema operativo trovato.");
+                return;
+            }
+
+            System.out.println("Seleziona un sistema operativo dalla lista:");
+            for (int i = 0; i < operatingSystemComponents.size(); i++) {
+                OperatingSystem os = operatingSystemComponents.get(i);
+                System.out.println((i + 1) + ". " + os.getOSName() + " - Versione: " + os.getOperatingSystemVersion());
+            }
+
+            int osChoice = scanner.nextInt();
+            scanner.nextLine(); // Consuma newline
+
+            if (osChoice < 1 || osChoice > operatingSystemComponents.size()) {
+                System.out.println("Scelta non valida. Riprova.");
+                return;
+            }
+
+            // Clona il sistema operativo scelto e assegnalo al laptop
+            OperatingSystem selectedOS = operatingSystemComponents.get(osChoice - 1).clone();
+            selectedOS.setLaptopOfComponents(laptop);
+            laptop.addOrReplaceComponent(selectedOS);
+
+            System.out.println("Hai aggiunto " + selectedOS.getOSName() + " al tuo laptop.");
+        }
+
+        // Metodo per configurare lo storage (Storage)
+        private static void configureStorage(Laptop laptop, OntologyLoader ontologyLoader, Scanner scanner) {
+            List<Storage> storageComponents = ontologyLoader.getStorageComponents(laptop);
+
+            if (storageComponents.isEmpty()) {
+                System.out.println("Nessun componente di storage trovato.");
+                return;
+            }
+
+            System.out.println("Seleziona uno storage dalla lista:");
+            for (int i = 0; i < storageComponents.size(); i++) {
+                Storage storage = storageComponents.get(i);
+                System.out.println((i + 1) + ". " + storage.getStorageName() + " - Capacità: " + storage.getStorageCapacity() + "GB");
+            }
+
+            int storageChoice = scanner.nextInt();
+            scanner.nextLine(); // Consuma newline
+
+            if (storageChoice < 1 || storageChoice > storageComponents.size()) {
+                System.out.println("Scelta non valida. Riprova.");
+                return;
+            }
+
+            // Clona lo storage scelto e assegnalo al laptop
+            Storage selectedStorage = storageComponents.get(storageChoice - 1).clone();
+            selectedStorage.setLaptopOfComponents(laptop);
+            laptop.addOrReplaceComponent(selectedStorage);
+
+            System.out.println("Hai aggiunto " + selectedStorage.getStorageName() + " al tuo laptop.");
+        }
+
+
+
+
+
+
+        // Metodo per mostrare la configurazione finale del laptop
         private static void displayFinalConfiguration (Laptop laptop){
             System.out.println("Configurazione finale del laptop " + laptop.getLaptopName() + ":");
             for (Component component : laptop.getComponents()) {
@@ -261,8 +394,21 @@ public class Main {
                     System.out.println("RAM: " + ram.getRamName() + " - Size: " + ram.getRamSize() + "GB");
                 }else if (component instanceof CPU) {
                     CPU cpu = (CPU) component;
-                    System.out.println("CPU: " + cpu.getCPUName() + " - Speed: " + cpu.getCpuSpeed() + "GHz");
-                }
+                    System.out.println("CPU: " + cpu.getCPUName() + " - Speed: " + cpu.getCpuSpeed());
+                }else if (component instanceof Display) {
+                    Display display = (Display) component;
+                    System.out.println("Schermo: " + display.getDisplayName() + " - Risoluzione: " + display.getDisplayResolution());
+                }else if (component instanceof GraphicsCard) {
+                    GraphicsCard graphicsCard = (GraphicsCard) component;
+                    System.out.println("Scheda Grafica: " + graphicsCard.getGraphicCardName() + " - Memoria: " + graphicsCard.getGraphicsMemory());
+                } else if (component instanceof OperatingSystem) {
+                OperatingSystem os = (OperatingSystem) component;
+                System.out.println("Sistema Operativo: " + os.getOSName() + " - Versione: " + os.getOperatingSystemVersion());
+                } else if (component instanceof Storage) {
+                Storage storage = (Storage) component;
+                System.out.println("Memoria: " + storage.getStorageName() + " - Capacità: " + storage.getStorageCapacity() + "GB");
+
             }
         }
+    }
     }

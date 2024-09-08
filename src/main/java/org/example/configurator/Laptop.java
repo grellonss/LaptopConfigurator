@@ -202,4 +202,21 @@ public class Laptop {
         battery = null;
         warranty = null;
     }
+
+    public void addOrReplaceComponent(Component newComponent) {
+        // Controlla se esiste già un componente dello stesso tipo
+        for (int i = 0; i < this.components.size(); i++) {
+            Component existingComponent = this.components.get(i);
+            if (existingComponent.getClass() == newComponent.getClass()) {
+                // Sostituisci il componente esistente con quello nuovo
+                this.components.set(i, newComponent);
+                System.out.println("Componente " + newComponent.getClass().getSimpleName() + " sostituito.");
+                return;
+            }
+        }
+        // Se non esiste già un componente di questo tipo, aggiungilo
+        this.components.add(newComponent);
+        System.out.println("Componente " + newComponent.getClass().getSimpleName() + " aggiunto.");
+    }
+
 }

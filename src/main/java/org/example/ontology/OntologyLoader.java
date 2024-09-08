@@ -5,10 +5,7 @@ import org.apache.jena.ontology.OntModelSpec;
 import org.apache.jena.query.*;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.rdf.model.Resource;
-import org.example.configurator.CPU;
-import org.example.configurator.Component;
-import org.example.configurator.Laptop;
-import org.example.configurator.RAM;
+import org.example.configurator.*;
 
 import java.io.InputStream;
 import java.io.FileNotFoundException;
@@ -46,7 +43,11 @@ public class OntologyLoader {
         }
     }
 
-    // Metodo che esegue la query SPARQL per ottenere i componenti e le loro proprietà
+    // Restituisce il modello Jena caricato
+    public OntModel getOntologyModel() {
+        return ontologyModel;
+    }
+
     // Metodo che esegue la query SPARQL per ottenere i componenti e le loro proprietà
     public List<RAM> getRAMComponents(Laptop laptop) {
         List<RAM> ramList = new ArrayList<>();
@@ -86,12 +87,6 @@ public class OntologyLoader {
         return ramList;
     }
 
-
-    // Restituisce il modello Jena caricato
-    public OntModel getOntologyModel() {
-        return ontologyModel;
-    }
-
     // Metodo per ottenere le CPU dall'ontologia
     public List<CPU> getCPUComponents(Laptop laptop) {
         List<CPU> cpuList = new ArrayList<>();
@@ -126,6 +121,153 @@ public class OntologyLoader {
 
         return cpuList;
     }
+
+    public List<Display> getDisplayComponents(Laptop laptop) {
+        List<Display> displayList = new ArrayList<>();
+
+        String sparqlQuery =
+                "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> " +
+                        "PREFIX laptop: <http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#> " +
+                        "SELECT ?display ?laptop ?resolution WHERE { " +
+                        "?display rdf:type laptop:Display . " +
+                        "?display laptop:hasDisplayResolution ?resolution . " +
+                        "?display laptop:isComponentOf ?laptop . " +
+                        "}";
+
+        Query query = QueryFactory.create(sparqlQuery);
+        QueryExecution qe = QueryExecutionFactory.create(query, ontologyModel);
+
+        try {
+            ResultSet results = qe.execSelect();
+            while (results.hasNext()) {
+                QuerySolution solution = results.nextSolution();
+                Resource displayResource = solution.getResource("display");
+                String name = displayResource.getLocalName();
+                String resolution = solution.getLiteral("resolution").getString();
+
+                Display display = new Display(laptop, name, resolution);
+                displayList.add(display);
+            }
+        } finally {
+            qe.close();
+        }
+
+        return displayList;
+    }
+
+    public List<GraphicsCard> getGraphicsCardComponents(Laptop laptop) {
+        List<GraphicsCard> graphicsCardList = new ArrayList<>();
+
+        // Query per selezionare le istanze di Graphics Card e le loro proprietà (solo memoria, il nome lo otteniamo dal LocalName)
+        String sparqlQuery =
+                "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> " +
+                        "PREFIX laptop: <http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#> " +
+                        "SELECT ?graphicsCard ?memory WHERE { " +
+                        "?graphicsCard rdf:type laptop:GraphicsCard . " +
+                        "?graphicsCard laptop:hasGraphicsMemory ?memory . " +
+                        "}";
+
+        Query query = QueryFactory.create(sparqlQuery);
+        QueryExecution qe = QueryExecutionFactory.create(query, ontologyModel);
+
+        try {
+            ResultSet results = qe.execSelect();
+
+            while (results.hasNext()) {
+                QuerySolution solution = results.nextSolution();
+                Resource graphicsCardResource = solution.getResource("graphicsCard");  // Ottieni l'URI dell'individuo Graphics Card
+                String localName = graphicsCardResource.getLocalName();  // Ottieni il local name dall'URI (che rappresenta il nome della Graphics Card)
+                String memory = solution.getLiteral("memory").getString();  // Ottieni la memoria della Graphics Card
+
+                // Crea un oggetto GraphicsCard con le proprietà estratte dall'ontologia
+                GraphicsCard graphicsCard = new GraphicsCard(laptop, localName, memory);
+                graphicsCardList.add(graphicsCard);
+            }
+        } catch (Exception e) {
+            System.err.println("Errore durante l'esecuzione della query SPARQL: " + e.getMessage());
+        } finally {
+            // Chiude la query execution
+            qe.close();
+        }
+        return graphicsCardList;
+    }
+
+    public List<OperatingSystem> getOperatingSystemComponents(Laptop laptop) {
+        List<OperatingSystem> operatingSystemList = new ArrayList<>();
+
+        // Query per selezionare le istanze di Operating System e le loro proprietà
+        String sparqlQuery =
+                "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> " +
+                        "PREFIX laptop: <http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#> " +
+                        "SELECT ?operatingSystem ?version WHERE { " +
+                        "?operatingSystem rdf:type laptop:OperatingSystem . " +
+                        "?operatingSystem laptop:hasOperatingSystemVersion ?version . " +
+                        "}";
+
+        Query query = QueryFactory.create(sparqlQuery);
+        QueryExecution qe = QueryExecutionFactory.create(query, ontologyModel);
+
+        try {
+            ResultSet results = qe.execSelect();
+
+            while (results.hasNext()) {
+                QuerySolution solution = results.nextSolution();
+                Resource operatingSystemResource = solution.getResource("operatingSystem");  // Ottieni l'URI dell'individuo OS
+                String localName = operatingSystemResource.getLocalName();  // Ottieni il local name dall'URI (che rappresenta il nome del sistema operativo)
+                String version = solution.getLiteral("version").getString();  // Ottieni la versione del sistema operativo
+
+                // Crea un oggetto OperatingSystem con le proprietà estratte dall'ontologia
+                OperatingSystem os = new OperatingSystem(laptop, localName, version);
+                operatingSystemList.add(os);
+            }
+        } catch (Exception e) {
+            System.err.println("Errore durante l'esecuzione della query SPARQL: " + e.getMessage());
+        } finally {
+            // Chiude la query execution
+            qe.close();
+        }
+        return operatingSystemList;
+    }
+
+    public List<Storage> getStorageComponents(Laptop laptop) {
+        List<Storage> storageList = new ArrayList<>();
+
+        // Query per selezionare le istanze di Storage e le loro proprietà
+        String sparqlQuery =
+                "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> " +
+                        "PREFIX laptop: <http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#> " +
+                        "SELECT ?storage ?capacity WHERE { " +
+                        "?storage rdf:type laptop:Storage . " +
+                        "?storage laptop:hasStorageCapacity ?capacity . " +
+                        "}";
+
+        Query query = QueryFactory.create(sparqlQuery);
+        QueryExecution qe = QueryExecutionFactory.create(query, ontologyModel);
+
+        try {
+            ResultSet results = qe.execSelect();
+
+            while (results.hasNext()) {
+                QuerySolution solution = results.nextSolution();
+                Resource storageResource = solution.getResource("storage");  // Ottieni l'URI dell'individuo Storage
+                String localName = storageResource.getLocalName();  // Ottieni il local name dall'URI (che rappresenta il nome dello storage)
+                String capacity = solution.getLiteral("capacity").getString();  // Ottieni la capacità di storage
+
+                // Crea un oggetto Storage con le proprietà estratte dall'ontologia
+                Storage storage = new Storage(laptop, localName, capacity);
+                storageList.add(storage);
+            }
+        } catch (Exception e) {
+            System.err.println("Errore durante l'esecuzione della query SPARQL: " + e.getMessage());
+        } finally {
+            // Chiude la query execution
+            qe.close();
+        }
+        return storageList;
+    }
+
+
+
 
 }
 
