@@ -130,6 +130,15 @@
     
 
 
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#isPeripheralOf -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#isPeripheralOf">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Peripheral"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Laptop"/>
+    </owl:ObjectProperty>
+    
+
+
     <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#isPoweredBy -->
 
     <owl:ObjectProperty rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#isPoweredBy">
@@ -236,6 +245,17 @@
     
 
 
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#hasConnectionType -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#hasConnectionType">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Peripheral"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>This data property represents the connection type of a peripheral device. It specifies the method by which the device connects to the system, such as Bluetooth, USB, or Wireless.</rdfs:comment>
+        <rdfs:label>Has Connection Type</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
     <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#hasCoolingSystemType -->
 
     <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#hasCoolingSystemType">
@@ -328,6 +348,15 @@
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
         <rdfs:comment xml:lang="en">This data property defines the version of the operating system installed on the laptop (e.g., Windows 11, macOS Monterey).</rdfs:comment>
         <rdfs:label xml:lang="en">Has Operating System Version</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#hasPortName -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#hasPortName">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Port"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
     </owl:DatatypeProperty>
     
 
@@ -737,6 +766,8 @@
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#AcerPredatorXB273K">
         <rdf:type rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#ExternalMonitor"/>
+        <LaptopConfigModellazione:isPeripheralOf rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#AcerPredatorHelios500"/>
+        <LaptopConfigModellazione:hasConnectionType>USB</LaptopConfigModellazione:hasConnectionType>
     </owl:NamedIndividual>
     
 
@@ -745,6 +776,8 @@
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#AsusProArt27">
         <rdf:type rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#ExternalMonitor"/>
+        <LaptopConfigModellazione:isPeripheralOf rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#HPEnvy"/>
+        <LaptopConfigModellazione:hasConnectionType>USB</LaptopConfigModellazione:hasConnectionType>
     </owl:NamedIndividual>
     
 
@@ -780,6 +813,9 @@
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#BoseCompanion2">
         <rdf:type rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#ExternalSpeaker"/>
+        <LaptopConfigModellazione:isPeripheralOf rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#HPEnvy"/>
+        <LaptopConfigModellazione:isPeripheralOf rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#MacBookPro"/>
+        <LaptopConfigModellazione:hasConnectionType>USB</LaptopConfigModellazione:hasConnectionType>
     </owl:NamedIndividual>
     
 
@@ -797,6 +833,9 @@
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#CorsairK95RGBPlatinum">
         <rdf:type rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Keyboard"/>
+        <LaptopConfigModellazione:isPeripheralOf rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#AcerPredatorHelios500"/>
+        <LaptopConfigModellazione:hasConnectionType>Bluetooth</LaptopConfigModellazione:hasConnectionType>
+        <LaptopConfigModellazione:hasKeyboardLayout>QWERTY standard</LaptopConfigModellazione:hasKeyboardLayout>
     </owl:NamedIndividual>
     
 
@@ -825,6 +864,8 @@
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#DellUltraSharp27">
         <rdf:type rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#ExternalMonitor"/>
+        <LaptopConfigModellazione:isPeripheralOf rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#MacBookPro"/>
+        <LaptopConfigModellazione:hasConnectionType>USB</LaptopConfigModellazione:hasConnectionType>
     </owl:NamedIndividual>
     
 
@@ -852,6 +893,7 @@
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Ethernet10Gbps">
         <rdf:type rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Ethernet"/>
         <LaptopConfigModellazione:hasEthernetSpeed>10000 Mbps</LaptopConfigModellazione:hasEthernetSpeed>
+        <LaptopConfigModellazione:hasPortName rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1</LaptopConfigModellazione:hasPortName>
     </owl:NamedIndividual>
     
 
@@ -861,6 +903,7 @@
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Ethernet1Gbps">
         <rdf:type rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Ethernet"/>
         <LaptopConfigModellazione:hasEthernetSpeed>1000 Mbps</LaptopConfigModellazione:hasEthernetSpeed>
+        <LaptopConfigModellazione:hasPortName rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1</LaptopConfigModellazione:hasPortName>
     </owl:NamedIndividual>
     
 
@@ -870,6 +913,7 @@
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Ethernet5Gbps">
         <rdf:type rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Ethernet"/>
         <LaptopConfigModellazione:hasEthernetSpeed>2500 Mbps</LaptopConfigModellazione:hasEthernetSpeed>
+        <LaptopConfigModellazione:hasPortName rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1</LaptopConfigModellazione:hasPortName>
     </owl:NamedIndividual>
     
 
@@ -918,6 +962,7 @@
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#HDMI1_4">
         <rdf:type rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#HDMI"/>
         <LaptopConfigModellazione:hasHDMIVersion>1.4v</LaptopConfigModellazione:hasHDMIVersion>
+        <LaptopConfigModellazione:hasPortName rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</LaptopConfigModellazione:hasPortName>
     </owl:NamedIndividual>
     
 
@@ -927,6 +972,7 @@
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#HDMI2_0">
         <rdf:type rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#HDMI"/>
         <LaptopConfigModellazione:hasHDMIVersion>2.0v</LaptopConfigModellazione:hasHDMIVersion>
+        <LaptopConfigModellazione:hasPortName rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</LaptopConfigModellazione:hasPortName>
     </owl:NamedIndividual>
     
 
@@ -936,6 +982,7 @@
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#HDMI2_1">
         <rdf:type rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#HDMI"/>
         <LaptopConfigModellazione:hasHDMIVersion>2.1v</LaptopConfigModellazione:hasHDMIVersion>
+        <LaptopConfigModellazione:hasPortName rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</LaptopConfigModellazione:hasPortName>
     </owl:NamedIndividual>
     
 
@@ -944,6 +991,8 @@
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#HDWebcam">
         <rdf:type rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Webcam"/>
+        <LaptopConfigModellazione:isPeripheralOf rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#MacBookPro"/>
+        <LaptopConfigModellazione:hasConnectionType>Wireless</LaptopConfigModellazione:hasConnectionType>
         <LaptopConfigModellazione:hasWebcamResolution>720p</LaptopConfigModellazione:hasWebcamResolution>
     </owl:NamedIndividual>
     
@@ -1022,6 +1071,8 @@
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#LogitechG915">
         <rdf:type rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Keyboard"/>
+        <LaptopConfigModellazione:isPeripheralOf rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#MacBookPro"/>
+        <LaptopConfigModellazione:hasConnectionType>USB</LaptopConfigModellazione:hasConnectionType>
         <LaptopConfigModellazione:hasKeyboardLayout>QWERTY</LaptopConfigModellazione:hasKeyboardLayout>
     </owl:NamedIndividual>
     
@@ -1031,6 +1082,8 @@
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#LogitechMXMaster3">
         <rdf:type rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Mouse"/>
+        <LaptopConfigModellazione:isPeripheralOf rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#MacBookPro"/>
+        <LaptopConfigModellazione:hasConnectionType>USB</LaptopConfigModellazione:hasConnectionType>
         <LaptopConfigModellazione:hasMouseType>4000 DPI</LaptopConfigModellazione:hasMouseType>
     </owl:NamedIndividual>
     
@@ -1040,6 +1093,7 @@
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#LogitechZ623">
         <rdf:type rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#ExternalSpeaker"/>
+        <LaptopConfigModellazione:hasConnectionType>Wireless</LaptopConfigModellazione:hasConnectionType>
     </owl:NamedIndividual>
     
 
@@ -1143,6 +1197,8 @@
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#QHDWebcam">
         <rdf:type rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Webcam"/>
+        <LaptopConfigModellazione:isPeripheralOf rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#AcerPredatorHelios500"/>
+        <LaptopConfigModellazione:hasConnectionType>Wireless</LaptopConfigModellazione:hasConnectionType>
         <LaptopConfigModellazione:hasWebcamResolution>1440p</LaptopConfigModellazione:hasWebcamResolution>
     </owl:NamedIndividual>
     
@@ -1152,6 +1208,8 @@
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#RazerBlackWidowV3">
         <rdf:type rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Keyboard"/>
+        <LaptopConfigModellazione:isPeripheralOf rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#HPEnvy"/>
+        <LaptopConfigModellazione:hasConnectionType>Wireless</LaptopConfigModellazione:hasConnectionType>
         <LaptopConfigModellazione:hasKeyboardLayout>AZERTY</LaptopConfigModellazione:hasKeyboardLayout>
     </owl:NamedIndividual>
     
@@ -1170,6 +1228,8 @@
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#RazerDeathAdderElite">
         <rdf:type rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Mouse"/>
+        <LaptopConfigModellazione:isPeripheralOf rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#HPEnvy"/>
+        <LaptopConfigModellazione:hasConnectionType>Bluetooth</LaptopConfigModellazione:hasConnectionType>
         <LaptopConfigModellazione:hasMouseType>16000 DPI</LaptopConfigModellazione:hasMouseType>
     </owl:NamedIndividual>
     
@@ -1227,6 +1287,8 @@
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#SonyExternalSpeaker">
         <rdf:type rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#ExternalSpeaker"/>
+        <LaptopConfigModellazione:isPeripheralOf rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#AcerPredatorHelios500"/>
+        <LaptopConfigModellazione:hasConnectionType>Bluetooth</LaptopConfigModellazione:hasConnectionType>
     </owl:NamedIndividual>
     
 
@@ -1235,6 +1297,8 @@
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#SteelSeriesRival600">
         <rdf:type rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Mouse"/>
+        <LaptopConfigModellazione:isPeripheralOf rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#AcerPredatorHelios500"/>
+        <LaptopConfigModellazione:hasConnectionType>Wireless</LaptopConfigModellazione:hasConnectionType>
         <LaptopConfigModellazione:hasMouseType>12000 DPI</LaptopConfigModellazione:hasMouseType>
     </owl:NamedIndividual>
     
@@ -1274,6 +1338,7 @@
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#USBTypeA">
         <rdf:type rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#USB"/>
+        <LaptopConfigModellazione:hasPortName rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">3</LaptopConfigModellazione:hasPortName>
         <LaptopConfigModellazione:hasUSBType>USB-A</LaptopConfigModellazione:hasUSBType>
     </owl:NamedIndividual>
     
@@ -1283,6 +1348,7 @@
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#USBTypeB">
         <rdf:type rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#USB"/>
+        <LaptopConfigModellazione:hasPortName rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">3</LaptopConfigModellazione:hasPortName>
         <LaptopConfigModellazione:hasUSBType>USB-B</LaptopConfigModellazione:hasUSBType>
     </owl:NamedIndividual>
     
@@ -1292,6 +1358,7 @@
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#USBTypeC">
         <rdf:type rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#USB"/>
+        <LaptopConfigModellazione:hasPortName rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">3</LaptopConfigModellazione:hasPortName>
         <LaptopConfigModellazione:hasUSBType>USB-C</LaptopConfigModellazione:hasUSBType>
     </owl:NamedIndividual>
     
@@ -1341,6 +1408,8 @@
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#4KWebcam">
         <rdf:type rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Webcam"/>
+        <LaptopConfigModellazione:isPeripheralOf rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#HPEnvy"/>
+        <LaptopConfigModellazione:hasConnectionType>USB</LaptopConfigModellazione:hasConnectionType>
         <LaptopConfigModellazione:hasWebcamResolution>2160p</LaptopConfigModellazione:hasWebcamResolution>
     </owl:NamedIndividual>
     

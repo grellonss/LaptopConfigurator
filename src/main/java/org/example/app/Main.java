@@ -43,10 +43,13 @@ public class Main {
 
                 switch (choice) {
                     case 1:
+                        configureAudioSystem(laptop, ontologyLoader, scanner);
                         break;
                     case 2:
+                        configureBattery(laptop, ontologyLoader, scanner);
                         break;
                     case 3:
+                        configureColour(laptop, ontologyLoader, scanner);
                         break;
                     case 4:
                         boolean componentMenuActive = true;
@@ -92,7 +95,7 @@ public class Main {
                         }
                         break;
                     case 5:
-                        // Aggiungi qui logica per configurare Peripherals
+                        configureCoolingSystem(laptop, ontologyLoader, scanner);
                         break;
                     case 6:
                         boolean componentMenuActive1 = true;
@@ -110,14 +113,19 @@ public class Main {
 
                             switch (choice2) {
                                 case 1:
+                                    configureExternalMonitor(laptop, ontologyLoader, scanner);
                                     break;
                                 case 2:
+                                    configureExternalSpeaker(laptop, ontologyLoader, scanner);
                                     break;
                                 case 3:
+                                    configureKeyboard(laptop, ontologyLoader, scanner);
                                     break;
                                 case 4:
+                                    configureMouse(laptop, ontologyLoader, scanner);
                                     break;
                                 case 5:
+                                    configureWebcam(laptop, ontologyLoader, scanner);
                                     break;
                                 case 0:
                                     componentMenuActive1 = false;
@@ -182,6 +190,7 @@ public class Main {
                         }
                         break;
                     case 9:
+                        configureWarranty(laptop, ontologyLoader, scanner);
                         break;
                     case 0:
                         System.out.println("Configurazione completata.");
@@ -380,35 +389,413 @@ public class Main {
             System.out.println("Hai aggiunto " + selectedStorage.getStorageName() + " al tuo laptop.");
         }
 
+        private static void configureBattery(Laptop laptop, OntologyLoader ontologyLoader, Scanner scanner) {
+        List<Battery> batteryComponents = ontologyLoader.getBatteryComponents(laptop);
+        if (batteryComponents.isEmpty()) {
+            System.out.println("Nessuna batteria trovata.");
+            return;
+        }
+
+        System.out.println("Seleziona una batteria dalla lista:");
+        for (int i = 0; i < batteryComponents.size(); i++) {
+            Battery battery = batteryComponents.get(i);
+            System.out.println((i + 1) + ". " + battery.getBatteryName() + " - Capacity: " + battery.getBatteryCapacity() + "mAh");
+        }
+
+        int batteryChoice = scanner.nextInt();
+        scanner.nextLine(); // Consuma newline
+
+        if (batteryChoice < 1 || batteryChoice > batteryComponents.size()) {
+            System.out.println("Scelta non valida. Riprova.");
+            return;
+        }
+
+        // Clona la batteria scelta e assegnala al laptop
+        Battery selectedBattery = batteryComponents.get(batteryChoice - 1).clone(laptop);
+        selectedBattery.setBatteryOfLaptop(laptop);
+        laptop.setBattery(selectedBattery);
+
+        System.out.println("Hai aggiunto la batteria " + selectedBattery.getBatteryName() + " al tuo laptop.");
+    }
+
+    private static void configureColour(Laptop laptop, OntologyLoader ontologyLoader, Scanner scanner) {
+        List<Colour> colourOptions = ontologyLoader.getColourComponents(laptop);
+        if (colourOptions.isEmpty()) {
+            System.out.println("Nessun colore disponibile.");
+            return;
+        }
+
+        System.out.println("Seleziona un colore dalla lista:");
+        for (int i = 0; i < colourOptions.size(); i++) {
+            Colour colour = colourOptions.get(i);
+            System.out.println((i + 1) + ". " + colour.getColourName());
+        }
+
+        int colourChoice = scanner.nextInt();
+        scanner.nextLine(); // Consuma newline
+
+        if (colourChoice < 1 || colourChoice > colourOptions.size()) {
+            System.out.println("Scelta non valida. Riprova.");
+            return;
+        }
+
+        // Clona il colore scelto e assegnalo al laptop
+        Colour selectedColour = colourOptions.get(colourChoice - 1).clone(laptop);
+        selectedColour.setColourOfLaptop(laptop);
+        laptop.setColour(selectedColour);
+
+        System.out.println("Hai scelto il colore " + selectedColour.getColourName() + " per il tuo laptop.");
+    }
+
+    private static void configureCoolingSystem(Laptop laptop, OntologyLoader ontologyLoader, Scanner scanner) {
+        List<CoolingSystem> coolingSystems = ontologyLoader.getCoolingSystemComponents(laptop);
+        if (coolingSystems.isEmpty()) {
+            System.out.println("Nessun sistema di raffreddamento disponibile.");
+            return;
+        }
+
+        System.out.println("Seleziona un sistema di raffreddamento dalla lista:");
+        for (int i = 0; i < coolingSystems.size(); i++) {
+            CoolingSystem coolingSystem = coolingSystems.get(i);
+            System.out.println((i + 1) + ". " + coolingSystem.getCoolingSystemName() + " - Tipo: " + coolingSystem.getCoolingSystemType());
+        }
+
+        int coolingSystemChoice = scanner.nextInt();
+        scanner.nextLine(); // Consuma newline
+
+        if (coolingSystemChoice < 1 || coolingSystemChoice > coolingSystems.size()) {
+            System.out.println("Scelta non valida. Riprova.");
+            return;
+        }
+
+        // Clona il sistema di raffreddamento scelto e assegnalo al laptop
+        CoolingSystem selectedCoolingSystem = coolingSystems.get(coolingSystemChoice - 1).clone(laptop);
+        selectedCoolingSystem.setCoolingSystemOfLaptop(laptop);
+        laptop.setCoolingSystem(selectedCoolingSystem);
+
+        System.out.println("Hai aggiunto il sistema di raffreddamento " + selectedCoolingSystem.getCoolingSystemName() + " al tuo laptop.");
+    }
+
+    private static void configureWarranty(Laptop laptop, OntologyLoader ontologyLoader, Scanner scanner) {
+        List<Warranty> warrantyOptions = ontologyLoader.getWarrantyComponents(laptop);
+        if (warrantyOptions.isEmpty()) {
+            System.out.println("Nessuna garanzia disponibile.");
+            return;
+        }
+
+        System.out.println("Seleziona una garanzia dalla lista:");
+        for (int i = 0; i < warrantyOptions.size(); i++) {
+            Warranty warranty = warrantyOptions.get(i);
+            System.out.println((i + 1) + ". " + warranty.getWarrantyName() + " - Periodo: " + warranty.getWarrantyPeriod() + " anni");
+        }
+
+        int warrantyChoice = scanner.nextInt();
+        scanner.nextLine(); // Consuma newline
+
+        if (warrantyChoice < 1 || warrantyChoice > warrantyOptions.size()) {
+            System.out.println("Scelta non valida. Riprova.");
+            return;
+        }
+
+        // Clona la garanzia scelta e assegnala al laptop
+        Warranty selectedWarranty = warrantyOptions.get(warrantyChoice - 1).clone(laptop);
+        selectedWarranty.setLaptopOfWarranty(laptop);
+        laptop.setWarranty(selectedWarranty);
+
+        System.out.println("Hai scelto la garanzia " + selectedWarranty.getWarrantyName() + " per il tuo laptop.");
+    }
+
+    private static void configureAudioSystem(Laptop laptop, OntologyLoader ontologyLoader, Scanner scanner) {
+        List<AudioSystem> audioSystemComponents = ontologyLoader.getAudioSystemComponents(laptop);
+        if (audioSystemComponents.isEmpty()) {
+            System.out.println("Nessun sistema audio trovato.");
+            return;
+        }
+
+        System.out.println("Seleziona un sistema audio dalla lista:");
+        for (int i = 0; i < audioSystemComponents.size(); i++) {
+            AudioSystem audioSystem = audioSystemComponents.get(i);
+            System.out.println((i + 1) + ". " + audioSystem.getAudioSystemName() + " - Tipo: " + audioSystem.getAudioSystemType());
+        }
+
+        int audioChoice = scanner.nextInt();
+        scanner.nextLine(); // Consuma newline
+
+        if (audioChoice < 1 || audioChoice > audioSystemComponents.size()) {
+            System.out.println("Scelta non valida. Riprova.");
+            return;
+        }
+
+        // Clona il sistema audio scelto e assegnalo al laptop
+        AudioSystem selectedAudioSystem = audioSystemComponents.get(audioChoice - 1).clone(laptop);
+        selectedAudioSystem.setAudioSystemOfLaptop(laptop);
+        laptop.setAudioSystem(selectedAudioSystem);
+
+        System.out.println("Hai aggiunto il sistema audio " + selectedAudioSystem.getAudioSystemName() + " al tuo laptop.");
+    }
+
+    // Metodo per configurare i monitor esterni
+    private static void configureExternalMonitor(Laptop laptop, OntologyLoader ontologyLoader, Scanner scanner) {
+        List<ExternalMonitor> monitorComponents = ontologyLoader.getExternalMonitorComponents(laptop);
+        if (monitorComponents.isEmpty()) {
+            System.out.println("Nessun monitor esterno trovato.");
+            return;
+        }
+
+        System.out.println("Seleziona un monitor esterno dalla lista:");
+        for (int i = 0; i < monitorComponents.size(); i++) {
+            ExternalMonitor monitor = monitorComponents.get(i);
+            System.out.println((i + 1) + ". " + monitor.getExMonitorName() + " - Risoluzione: " + monitor.getExternalDisplayResolution());
+        }
+
+        int choice = scanner.nextInt();
+        scanner.nextLine();
+
+        if (choice < 1 || choice > monitorComponents.size()) {
+            System.out.println("Scelta non valida. Riprova.");
+            return;
+        }
+
+        ExternalMonitor selectedMonitor = monitorComponents.get(choice - 1).clone(laptop);
+        laptop.addPeripheral(selectedMonitor);
+        System.out.println("Hai aggiunto " + selectedMonitor.getExMonitorName() + " al tuo laptop.");
+    }
+
+    // Metodo per configurare gli altoparlanti esterni
+    private static void configureExternalSpeaker(Laptop laptop, OntologyLoader ontologyLoader, Scanner scanner) {
+        List<ExternalSpeaker> speakerComponents = ontologyLoader.getExternalSpeakerComponents(laptop);
+        if (speakerComponents.isEmpty()) {
+            System.out.println("Nessun altoparlante esterno trovato.");
+            return;
+        }
+
+        System.out.println("Seleziona un altoparlante esterno dalla lista:");
+        for (int i = 0; i < speakerComponents.size(); i++) {
+            ExternalSpeaker speaker = speakerComponents.get(i);
+            System.out.println((i + 1) + ". " + speaker.getExSpeakerName() + " - Tipo: " + speaker.getExternalAudioSystemType());
+        }
+
+        int choice = scanner.nextInt();
+        scanner.nextLine();
+
+        if (choice < 1 || choice > speakerComponents.size()) {
+            System.out.println("Scelta non valida. Riprova.");
+            return;
+        }
+
+        ExternalSpeaker selectedSpeaker = speakerComponents.get(choice - 1).clone(laptop);
+        laptop.addPeripheral(selectedSpeaker);
+        System.out.println("Hai aggiunto " + selectedSpeaker.getExSpeakerName() + " al tuo laptop.");
+    }
+
+    // Metodo per configurare le tastiere
+    private static void configureKeyboard(Laptop laptop, OntologyLoader ontologyLoader, Scanner scanner) {
+        List<Keyboard> keyboardComponents = ontologyLoader.getKeyboardComponents(laptop);
+        if (keyboardComponents.isEmpty()) {
+            System.out.println("Nessuna tastiera trovata.");
+            return;
+        }
+
+        System.out.println("Seleziona una tastiera dalla lista:");
+        for (int i = 0; i < keyboardComponents.size(); i++) {
+            Keyboard keyboard = keyboardComponents.get(i);
+            System.out.println((i + 1) + ". " + keyboard.getKeyboardName() + " - Layout: " + keyboard.getKeyboardLayout());
+        }
+
+        int choice = scanner.nextInt();
+        scanner.nextLine();
+
+        if (choice < 1 || choice > keyboardComponents.size()) {
+            System.out.println("Scelta non valida. Riprova.");
+            return;
+        }
+
+        Keyboard selectedKeyboard = keyboardComponents.get(choice - 1).clone(laptop);
+        laptop.addPeripheral(selectedKeyboard);
+        System.out.println("Hai aggiunto " + selectedKeyboard.getKeyboardName() + " al tuo laptop.");
+    }
+
+    // Metodo per configurare i mouse
+    private static void configureMouse(Laptop laptop, OntologyLoader ontologyLoader, Scanner scanner) {
+        List<Mouse> mouseComponents = ontologyLoader.getMouseComponents(laptop);
+        if (mouseComponents.isEmpty()) {
+            System.out.println("Nessun mouse trovato.");
+            return;
+        }
+
+        System.out.println("Seleziona un mouse dalla lista:");
+        for (int i = 0; i < mouseComponents.size(); i++) {
+            Mouse mouse = mouseComponents.get(i);
+            System.out.println((i + 1) + ". " + mouse.getMouseName() + " - Tipo: " + mouse.getMouseType());
+        }
+
+        int choice = scanner.nextInt();
+        scanner.nextLine();
+
+        if (choice < 1 || choice > mouseComponents.size()) {
+            System.out.println("Scelta non valida. Riprova.");
+            return;
+        }
+
+        Mouse selectedMouse = mouseComponents.get(choice - 1).clone(laptop);
+        laptop.addPeripheral(selectedMouse);
+        System.out.println("Hai aggiunto " + selectedMouse.getMouseName() + " al tuo laptop.");
+    }
+
+    // Metodo per configurare le webcam
+    private static void configureWebcam(Laptop laptop, OntologyLoader ontologyLoader, Scanner scanner) {
+        List<Webcam> webcamComponents = ontologyLoader.getWebcamComponents(laptop);
+        if (webcamComponents.isEmpty()) {
+            System.out.println("Nessuna webcam trovata.");
+            return;
+        }
+
+        System.out.println("Seleziona una webcam dalla lista:");
+        for (int i = 0; i < webcamComponents.size(); i++) {
+            Webcam webcam = webcamComponents.get(i);
+            System.out.println((i + 1) + ". " + webcam.getWebcamName() + " - Risoluzione: " + webcam.getWebcamResolution());
+        }
+
+        int choice = scanner.nextInt();
+        scanner.nextLine();
+
+        if (choice < 1 || choice > webcamComponents.size()) {
+            System.out.println("Scelta non valida. Riprova.");
+            return;
+        }
+
+        Webcam selectedWebcam = webcamComponents.get(choice - 1).clone(laptop);
+        laptop.addPeripheral(selectedWebcam);
+        System.out.println("Hai aggiunto " + selectedWebcam.getWebcamName() + " al tuo laptop.");
+    }
 
 
 
 
 
-        // Metodo per mostrare la configurazione finale del laptop
-        private static void displayFinalConfiguration (Laptop laptop){
-            System.out.println("Configurazione finale del laptop " + laptop.getLaptopName() + ":");
-            for (Component component : laptop.getComponents()) {
-                if (component instanceof RAM) {
-                    RAM ram = (RAM) component;
-                    System.out.println("RAM: " + ram.getRamName() + " - Size: " + ram.getRamSize() + "GB");
-                }else if (component instanceof CPU) {
-                    CPU cpu = (CPU) component;
-                    System.out.println("CPU: " + cpu.getCPUName() + " - Speed: " + cpu.getCpuSpeed());
-                }else if (component instanceof Display) {
-                    Display display = (Display) component;
-                    System.out.println("Schermo: " + display.getDisplayName() + " - Risoluzione: " + display.getDisplayResolution());
-                }else if (component instanceof GraphicsCard) {
-                    GraphicsCard graphicsCard = (GraphicsCard) component;
-                    System.out.println("Scheda Grafica: " + graphicsCard.getGraphicCardName() + " - Memoria: " + graphicsCard.getGraphicsMemory());
-                } else if (component instanceof OperatingSystem) {
+
+
+
+
+
+
+
+
+
+
+
+    private static void displayFinalConfiguration(Laptop laptop) {
+        System.out.println("Configurazione finale del laptop " + laptop.getLaptopName() + ":");
+
+
+        // Sistema Audio
+        if (laptop.getAudioSystem() != null) {
+            AudioSystem audioSystem = laptop.getAudioSystem();
+            System.out.println("Sistema Audio:");
+            System.out.println("  Nome: " + audioSystem.getAudioSystemName() + " - Tipo: " + audioSystem.getAudioSystemType());
+        }
+
+        // Batteria
+        if (laptop.getBattery() != null) {
+            Battery battery = laptop.getBattery();
+            System.out.println("Batteria:");
+            System.out.println("  Nome: " + battery.getBatteryName() + " - Capacità: " + battery.getBatteryCapacity() + "mAh");
+        }
+
+        // Colore
+        if (laptop.getColour() != null) {
+            Colour colour = laptop.getColour();
+            System.out.println("Colore:");
+            System.out.println("  Nome: " + colour.getColourName());
+        }
+
+        // Componenti
+        System.out.println("Componenti:");
+        for (Component component : laptop.getComponents()) {
+            if (component instanceof RAM) {
+                RAM ram = (RAM) component;
+                System.out.println("  RAM: " + ram.getRamName() + " - Size: " + ram.getRamSize() + "GB");
+            } else if (component instanceof CPU) {
+                CPU cpu = (CPU) component;
+                System.out.println("  CPU: " + cpu.getCPUName() + " - Speed: " + cpu.getCpuSpeed());
+            } else if (component instanceof Display) {
+                Display display = (Display) component;
+                System.out.println("  Schermo: " + display.getDisplayName() + " - Risoluzione: " + display.getDisplayResolution());
+            } else if (component instanceof GraphicsCard) {
+                GraphicsCard graphicsCard = (GraphicsCard) component;
+                System.out.println("  Scheda Grafica: " + graphicsCard.getGraphicCardName() + " - Memoria: " + graphicsCard.getGraphicsMemory());
+            } else if (component instanceof OperatingSystem) {
                 OperatingSystem os = (OperatingSystem) component;
-                System.out.println("Sistema Operativo: " + os.getOSName() + " - Versione: " + os.getOperatingSystemVersion());
-                } else if (component instanceof Storage) {
+                System.out.println("  Sistema Operativo: " + os.getOSName() + " - Versione: " + os.getOperatingSystemVersion());
+            } else if (component instanceof Storage) {
                 Storage storage = (Storage) component;
-                System.out.println("Memoria: " + storage.getStorageName() + " - Capacità: " + storage.getStorageCapacity() + "GB");
+                System.out.println("  Memoria: " + storage.getStorageName() + " - Capacità: " + storage.getStorageCapacity() + "GB");
+            }
+        }
 
+        // Sistema Raffreddamento
+        if (laptop.getCoolingSystem() != null) {
+            CoolingSystem coolingSystem = laptop.getCoolingSystem();
+            System.out.println("Sistema Raffreddamento:");
+            System.out.println("  Nome: " + coolingSystem.getCoolingSystemName() + " - Tipo: " + coolingSystem.getCoolingSystemType());
+        }
+
+        // Garanzia
+        if (laptop.getWarranty() != null) {
+            Warranty warranty = laptop.getWarranty();
+            System.out.println("Garanzia:");
+            System.out.println("  Nome: " + warranty.getWarrantyName() + " - Durata: " + warranty.getWarrantyPeriod() + " anni");
+        }
+
+        // Periferiche
+        System.out.println("Periferiche:");
+        for (Peripheral peripheral : laptop.getPeripherals()) {
+            if (peripheral instanceof ExternalMonitor) {
+                ExternalMonitor monitor = (ExternalMonitor) peripheral;
+                System.out.println("Monitor Esterno: " + monitor.getExMonitorName() + " - Risoluzione: " + monitor.getExternalDisplayResolution());
+            } else if (peripheral instanceof ExternalSpeaker) {
+                ExternalSpeaker speaker = (ExternalSpeaker) peripheral;
+                System.out.println("Speaker Esterno: " + speaker.getExSpeakerName() + " - Tipo: " + speaker.getExternalAudioSystemType());
+            } else if (peripheral instanceof Keyboard) {
+                Keyboard keyboard = (Keyboard) peripheral;
+                System.out.println("Tastiera: " + keyboard.getKeyboardName() + " - Layout: " + keyboard.getKeyboardLayout());
+            } else if (peripheral instanceof Mouse) {
+                Mouse mouse = (Mouse) peripheral;
+                System.out.println("Mouse: " + mouse.getMouseName() + " - Tipo: " + mouse.getMouseType());
+            } else if (peripheral instanceof Webcam) {
+                Webcam webcam = (Webcam) peripheral;
+                System.out.println("Webcam: " + webcam.getWebcamName() + " - Risoluzione: " + webcam.getWebcamResolution());
+            }
+        }
+
+        // Porte
+        if (!laptop.getPorts().isEmpty()) {
+            System.out.println("Porte:");
+            for (Port port : laptop.getPorts()) {
+                System.out.println("  Porta: " + port.getPortName());
+            }
+        }
+
+        // Sicurezza
+        if (!laptop.getSecurities().isEmpty()) {
+            System.out.println("Sicurezza:");
+            for (Security security : laptop.getSecurities()) {
+                if (security instanceof Antivirus) {
+                    Antivirus antivirus = (Antivirus) security;
+                    System.out.println("  Antivirus: " + antivirus.getAntivirusName());
+                } else if (security instanceof ProtectionFeature) {
+                    ProtectionFeature protection = (ProtectionFeature) security;
+                    System.out.println("  Protezione: " + protection.getTypeProtectionFeature());
+                }
             }
         }
     }
-    }
+
+
+
+
+
+
+
+}
+
