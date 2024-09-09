@@ -553,9 +553,7 @@ public class OntologyLoader {
                         "?mouse rdf:type laptop:Mouse . " +
                         "?mouse laptop:isPeripheralOf ?laptop . " +  // Collegamento diretto con il laptop
                         "?mouse laptop:hasMouseType ?mouseType . " +  // Tipo del mouse
-                        "?mouse laptop:hasConnectionType ?connectionType . " +  // Tipo di connessione
-                        "FILTER (?laptop = <http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#" + laptop.getLaptopName() + ">) " +  // Collega il laptop attuale
-                        "}";
+                        "?mouse laptop:hasConnectionType ?connectionType . }"; // Tipo di connessione
 
         Query query = QueryFactory.create(sparqlQuery);
         QueryExecution qe = QueryExecutionFactory.create(query, ontologyModel);
@@ -572,7 +570,7 @@ public class OntologyLoader {
                 String connectionType = solution.getLiteral("connectionType").getString();
 
                 // Crea un oggetto Mouse e aggiungilo alla lista
-                Mouse mouse = new Mouse(laptop, mouseName, mouseType, connectionType);
+                Mouse mouse = new Mouse(laptop, connectionType, mouseName,mouseType );
                 mouseList.add(mouse);
             }
         } catch (Exception e) {
@@ -583,11 +581,6 @@ public class OntologyLoader {
 
         return mouseList;
     }
-
-
-
-
-
     // Metodo per ottenere tutte le webcam
     public List<Webcam> getWebcamComponents(Laptop laptop) {
         List<Webcam> webcamList = new ArrayList<>();

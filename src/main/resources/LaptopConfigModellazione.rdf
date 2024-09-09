@@ -135,6 +135,8 @@
     <owl:ObjectProperty rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#isPeripheralOf">
         <rdfs:domain rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Peripheral"/>
         <rdfs:range rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#Laptop"/>
+        <rdfs:comment>The object property isPeripheralOf refers to devices that are peripherals of a laptop, such as a mouse, keyboard, or external monitor. It indicates the inverse relationship of the property hasPeripheral, which describes the peripherals associated with the laptop.</rdfs:comment>
+        <rdfs:label>Is Peripheral Of</rdfs:label>
     </owl:ObjectProperty>
     
 
@@ -288,6 +290,28 @@
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
         <rdfs:comment xml:lang="en">This data property defines the speed of the Ethernet connection, typically measured in megabits per second (Mbps) or gigabits per second (Gbps).</rdfs:comment>
         <rdfs:label xml:lang="en">Has Ethernet Speed</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#hasExternalAudioSystemType -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#hasExternalAudioSystemType">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#ExternalSpeaker"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>Type of audio of the external speaker</rdfs:comment>
+        <rdfs:label>Has External Audio System Type</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#hasExternalDisplayResolution -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#hasExternalDisplayResolution">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#ExternalMonitor"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>Descrive the resolution of the external monitor</rdfs:comment>
+        <rdfs:label>Has External Display Resolution</rdfs:label>
     </owl:DatatypeProperty>
     
 
@@ -768,6 +792,7 @@
         <rdf:type rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#ExternalMonitor"/>
         <LaptopConfigModellazione:isPeripheralOf rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#AcerPredatorHelios500"/>
         <LaptopConfigModellazione:hasConnectionType>USB</LaptopConfigModellazione:hasConnectionType>
+        <LaptopConfigModellazione:hasExternalDisplayResolution>1920x1080</LaptopConfigModellazione:hasExternalDisplayResolution>
     </owl:NamedIndividual>
     
 
@@ -778,6 +803,7 @@
         <rdf:type rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#ExternalMonitor"/>
         <LaptopConfigModellazione:isPeripheralOf rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#HPEnvy"/>
         <LaptopConfigModellazione:hasConnectionType>USB</LaptopConfigModellazione:hasConnectionType>
+        <LaptopConfigModellazione:hasExternalDisplayResolution>2560x1440</LaptopConfigModellazione:hasExternalDisplayResolution>
     </owl:NamedIndividual>
     
 
@@ -816,6 +842,7 @@
         <LaptopConfigModellazione:isPeripheralOf rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#HPEnvy"/>
         <LaptopConfigModellazione:isPeripheralOf rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#MacBookPro"/>
         <LaptopConfigModellazione:hasConnectionType>USB</LaptopConfigModellazione:hasConnectionType>
+        <LaptopConfigModellazione:hasExternalAudioSystemType>audio stereo</LaptopConfigModellazione:hasExternalAudioSystemType>
     </owl:NamedIndividual>
     
 
@@ -866,6 +893,7 @@
         <rdf:type rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#ExternalMonitor"/>
         <LaptopConfigModellazione:isPeripheralOf rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#MacBookPro"/>
         <LaptopConfigModellazione:hasConnectionType>USB</LaptopConfigModellazione:hasConnectionType>
+        <LaptopConfigModellazione:hasExternalDisplayResolution>3840x2160</LaptopConfigModellazione:hasExternalDisplayResolution>
     </owl:NamedIndividual>
     
 
@@ -1093,7 +1121,9 @@
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#LogitechZ623">
         <rdf:type rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#ExternalSpeaker"/>
+        <LaptopConfigModellazione:isPeripheralOf rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#HPEnvy"/>
         <LaptopConfigModellazione:hasConnectionType>Wireless</LaptopConfigModellazione:hasConnectionType>
+        <LaptopConfigModellazione:hasExternalAudioSystemType>audio 2.1</LaptopConfigModellazione:hasExternalAudioSystemType>
     </owl:NamedIndividual>
     
 
@@ -1289,6 +1319,7 @@
         <rdf:type rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#ExternalSpeaker"/>
         <LaptopConfigModellazione:isPeripheralOf rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#AcerPredatorHelios500"/>
         <LaptopConfigModellazione:hasConnectionType>Bluetooth</LaptopConfigModellazione:hasConnectionType>
+        <LaptopConfigModellazione:hasExternalAudioSystemType>audio surround 5.1</LaptopConfigModellazione:hasExternalAudioSystemType>
     </owl:NamedIndividual>
     
 

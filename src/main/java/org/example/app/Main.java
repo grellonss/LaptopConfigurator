@@ -418,7 +418,7 @@ public class Main {
         System.out.println("Hai aggiunto la batteria " + selectedBattery.getBatteryName() + " al tuo laptop.");
     }
 
-    private static void configureColour(Laptop laptop, OntologyLoader ontologyLoader, Scanner scanner) {
+        private static void configureColour(Laptop laptop, OntologyLoader ontologyLoader, Scanner scanner) {
         List<Colour> colourOptions = ontologyLoader.getColourComponents(laptop);
         if (colourOptions.isEmpty()) {
             System.out.println("Nessun colore disponibile.");
@@ -447,7 +447,7 @@ public class Main {
         System.out.println("Hai scelto il colore " + selectedColour.getColourName() + " per il tuo laptop.");
     }
 
-    private static void configureCoolingSystem(Laptop laptop, OntologyLoader ontologyLoader, Scanner scanner) {
+        private static void configureCoolingSystem(Laptop laptop, OntologyLoader ontologyLoader, Scanner scanner) {
         List<CoolingSystem> coolingSystems = ontologyLoader.getCoolingSystemComponents(laptop);
         if (coolingSystems.isEmpty()) {
             System.out.println("Nessun sistema di raffreddamento disponibile.");
@@ -476,7 +476,7 @@ public class Main {
         System.out.println("Hai aggiunto il sistema di raffreddamento " + selectedCoolingSystem.getCoolingSystemName() + " al tuo laptop.");
     }
 
-    private static void configureWarranty(Laptop laptop, OntologyLoader ontologyLoader, Scanner scanner) {
+        private static void configureWarranty(Laptop laptop, OntologyLoader ontologyLoader, Scanner scanner) {
         List<Warranty> warrantyOptions = ontologyLoader.getWarrantyComponents(laptop);
         if (warrantyOptions.isEmpty()) {
             System.out.println("Nessuna garanzia disponibile.");
@@ -505,7 +505,7 @@ public class Main {
         System.out.println("Hai scelto la garanzia " + selectedWarranty.getWarrantyName() + " per il tuo laptop.");
     }
 
-    private static void configureAudioSystem(Laptop laptop, OntologyLoader ontologyLoader, Scanner scanner) {
+        private static void configureAudioSystem(Laptop laptop, OntologyLoader ontologyLoader, Scanner scanner) {
         List<AudioSystem> audioSystemComponents = ontologyLoader.getAudioSystemComponents(laptop);
         if (audioSystemComponents.isEmpty()) {
             System.out.println("Nessun sistema audio trovato.");
@@ -535,7 +535,7 @@ public class Main {
     }
 
     // Metodo per configurare i monitor esterni
-    private static void configureExternalMonitor(Laptop laptop, OntologyLoader ontologyLoader, Scanner scanner) {
+        private static void configureExternalMonitor(Laptop laptop, OntologyLoader ontologyLoader, Scanner scanner) {
         List<ExternalMonitor> monitorComponents = ontologyLoader.getExternalMonitorComponents(laptop);
         if (monitorComponents.isEmpty()) {
             System.out.println("Nessun monitor esterno trovato.");
@@ -545,7 +545,7 @@ public class Main {
         System.out.println("Seleziona un monitor esterno dalla lista:");
         for (int i = 0; i < monitorComponents.size(); i++) {
             ExternalMonitor monitor = monitorComponents.get(i);
-            System.out.println((i + 1) + ". " + monitor.getExMonitorName() + " - Risoluzione: " + monitor.getExternalDisplayResolution());
+            System.out.println((i + 1) + ". " + monitor.getExMonitorName() + " - Risoluzione: " + monitor.getExternalDisplayResolution()+ " - Connessione: " + monitor.getConnectionType());
         }
 
         int choice = scanner.nextInt();
@@ -562,7 +562,7 @@ public class Main {
     }
 
     // Metodo per configurare gli altoparlanti esterni
-    private static void configureExternalSpeaker(Laptop laptop, OntologyLoader ontologyLoader, Scanner scanner) {
+        private static void configureExternalSpeaker(Laptop laptop, OntologyLoader ontologyLoader, Scanner scanner) {
         List<ExternalSpeaker> speakerComponents = ontologyLoader.getExternalSpeakerComponents(laptop);
         if (speakerComponents.isEmpty()) {
             System.out.println("Nessun altoparlante esterno trovato.");
@@ -572,7 +572,7 @@ public class Main {
         System.out.println("Seleziona un altoparlante esterno dalla lista:");
         for (int i = 0; i < speakerComponents.size(); i++) {
             ExternalSpeaker speaker = speakerComponents.get(i);
-            System.out.println((i + 1) + ". " + speaker.getExSpeakerName() + " - Tipo: " + speaker.getExternalAudioSystemType());
+            System.out.println((i + 1) + ". " + speaker.getExSpeakerName() + " - Tipo: " + speaker.getExternalAudioSystemType()+ " - Connessione: " + speaker.getConnectionType());
         }
 
         int choice = scanner.nextInt();
@@ -589,7 +589,7 @@ public class Main {
     }
 
     // Metodo per configurare le tastiere
-    private static void configureKeyboard(Laptop laptop, OntologyLoader ontologyLoader, Scanner scanner) {
+        private static void configureKeyboard(Laptop laptop, OntologyLoader ontologyLoader, Scanner scanner) {
         List<Keyboard> keyboardComponents = ontologyLoader.getKeyboardComponents(laptop);
         if (keyboardComponents.isEmpty()) {
             System.out.println("Nessuna tastiera trovata.");
@@ -599,7 +599,7 @@ public class Main {
         System.out.println("Seleziona una tastiera dalla lista:");
         for (int i = 0; i < keyboardComponents.size(); i++) {
             Keyboard keyboard = keyboardComponents.get(i);
-            System.out.println((i + 1) + ". " + keyboard.getKeyboardName() + " - Layout: " + keyboard.getKeyboardLayout());
+            System.out.println((i + 1) + ". " + keyboard.getKeyboardName() + " - Layout: " + keyboard.getKeyboardLayout()+ " - Connessione: " + keyboard.getConnectionType());
         }
 
         int choice = scanner.nextInt();
@@ -616,7 +616,7 @@ public class Main {
     }
 
     // Metodo per configurare i mouse
-    private static void configureMouse(Laptop laptop, OntologyLoader ontologyLoader, Scanner scanner) {
+        private static void configureMouse(Laptop laptop, OntologyLoader ontologyLoader, Scanner scanner) {
         List<Mouse> mouseComponents = ontologyLoader.getMouseComponents(laptop);
         if (mouseComponents.isEmpty()) {
             System.out.println("Nessun mouse trovato.");
@@ -626,7 +626,7 @@ public class Main {
         System.out.println("Seleziona un mouse dalla lista:");
         for (int i = 0; i < mouseComponents.size(); i++) {
             Mouse mouse = mouseComponents.get(i);
-            System.out.println((i + 1) + ". " + mouse.getMouseName() + " - Tipo: " + mouse.getMouseType());
+            System.out.println((i + 1) + ". " + mouse.getMouseName() + " - Tipo: " + mouse.getMouseType()+ " - Connessione: " + mouse.getConnectionType());
         }
 
         int choice = scanner.nextInt();
@@ -643,7 +643,7 @@ public class Main {
     }
 
     // Metodo per configurare le webcam
-    private static void configureWebcam(Laptop laptop, OntologyLoader ontologyLoader, Scanner scanner) {
+        private static void configureWebcam(Laptop laptop, OntologyLoader ontologyLoader, Scanner scanner) {
         List<Webcam> webcamComponents = ontologyLoader.getWebcamComponents(laptop);
         if (webcamComponents.isEmpty()) {
             System.out.println("Nessuna webcam trovata.");
@@ -653,7 +653,7 @@ public class Main {
         System.out.println("Seleziona una webcam dalla lista:");
         for (int i = 0; i < webcamComponents.size(); i++) {
             Webcam webcam = webcamComponents.get(i);
-            System.out.println((i + 1) + ". " + webcam.getWebcamName() + " - Risoluzione: " + webcam.getWebcamResolution());
+            System.out.println((i + 1) + ". " + webcam.getWebcamName() + " - Risoluzione: " + webcam.getWebcamResolution()+ " - Connessione: " + webcam.getConnectionType());
         }
 
         int choice = scanner.nextInt();
