@@ -2,215 +2,253 @@ package org.example.app;
 
 import org.apache.jena.ontology.OntModel;
 import org.example.configurator.*;
+import org.example.ontology.LaptopComponentQueryService;
 import org.example.ontology.OntologyLoader;
+import org.example.ontology.SPARQLQueryExecutor;
 
 import java.util.*;
 
-public class Main {
+    public class Main {
+        public static void main(String[] args) {
+            // Step 1: Carica l'ontologia
+            String ontologyFilePath = "LaptopConfigModellazione.rdf";
+            OntologyLoader ontologyLoader = new OntologyLoader(ontologyFilePath);
+            OntModel model = ontologyLoader.getOntologyModel();
 
-    public static void main(String[] args) {
-        // Step 1: Carica l'ontologia
-        String ontologyFilePath = "LaptopConfigModellazione.rdf";
-        OntologyLoader ontologyLoader = new OntologyLoader(ontologyFilePath);
-        OntModel model = ontologyLoader.getOntologyModel();
+            // Verifica che l'ontologia sia stata caricata correttamente
+            if (model != null) {
+                SPARQLQueryExecutor queryExecutor = new SPARQLQueryExecutor(model);
+                LaptopComponentQueryService queryService = new LaptopComponentQueryService(queryExecutor);
 
-        // Verifica che l'ontologia sia stata caricata correttamente
-        if (model != null) {
-            // Step 2: Richiedi il nome del laptop all'utente
-            Scanner scanner = new Scanner(System.in);
-            System.out.print("Inserisci il nome del laptop: ");
-            String laptopName = scanner.nextLine();
-            Laptop laptop = new Laptop(laptopName);
+                Scanner scanner = new Scanner(System.in);
+                Laptop laptop = createLaptop(scanner);
 
-            // Step 3: Offri all'utente la possibilità di configurare il laptop
-            while (true) {
-                System.out.println("Cosa vuoi configurare? Seleziona un'opzione digitando il numero:");
-                System.out.println("1. Sistema Audio");
-                System.out.println("2. Batteria");
-                System.out.println("3. Colore");
-                System.out.println("4. Componenti");
-                System.out.println("5. Sistema Raffreddamento");
-                System.out.println("6. Periferiche");
-                System.out.println("7. Porte");
-                System.out.println("8. Sicurezza");
-                System.out.println("9. Garanzia");
-                System.out.println("0. Fine configurazione");
+                // Step 3: Gestisci la configurazione del laptop
+                configureLaptop(laptop, queryService, scanner);
 
-                int choice = scanner.nextInt();
-                scanner.nextLine(); // Consuma newline dopo l'input numerico
-
-                switch (choice) {
-                    case 1:
-                        configureAudioSystem(laptop, ontologyLoader, scanner);
-                        break;
-                    case 2:
-                        configureBattery(laptop, ontologyLoader, scanner);
-                        break;
-                    case 3:
-                        configureColour(laptop, ontologyLoader, scanner);
-                        break;
-                    case 4:
-                        boolean componentMenuActive = true;
-                        while (componentMenuActive) {
-                            System.out.println("Quale componente vuoi selezionare?");
-                            System.out.println("1. CPU");
-                            System.out.println("2. Schermo");
-                            System.out.println("3. Scheda Grafica");
-                            System.out.println("4. Sistema Operativo");
-                            System.out.println("5. RAM");
-                            System.out.println("6. Memoria");
-                            System.out.println("0. Pagina Precedente");
-
-                            int choice1 = scanner.nextInt();
-                            scanner.nextLine();
-
-                            switch (choice1) {
-                                case 1:
-                                    configureCPU(laptop, ontologyLoader, scanner);
-                                    break;
-                                case 2:
-                                    configureDisplay(laptop, ontologyLoader, scanner);
-                                    break;
-                                case 3:
-                                    configureGraphicsCard(laptop, ontologyLoader, scanner);
-                                    break;
-                                case 4:
-                                    configureOperatingSystem(laptop, ontologyLoader, scanner);
-                                    break;
-                                case 5:
-                                    configureRAM(laptop, ontologyLoader, scanner);
-                                    break;
-                                case 6:
-                                    configureStorage(laptop, ontologyLoader, scanner);
-                                    break;
-                                case 0:
-                                    componentMenuActive = false;
-                                    break;
-                                default:
-                                    System.out.println("Scelta non valida. Riprova.");
-                                    break;
-                            }
-                        }
-                        break;
-                    case 5:
-                        configureCoolingSystem(laptop, ontologyLoader, scanner);
-                        break;
-                    case 6:
-                        boolean componentMenuActive1 = true;
-                        while (componentMenuActive1) {
-                            System.out.println("Quale periferica vuoi selezionare?");
-                            System.out.println("1. Monitorn Esterno");
-                            System.out.println("2. Speaker Esterno");
-                            System.out.println("3. Tastiera");
-                            System.out.println("4. Mouse");
-                            System.out.println("5. Videocamera");
-                            System.out.println("0. Pagina Precedente");
-
-                            int choice2 = scanner.nextInt();
-                            scanner.nextLine();
-
-                            switch (choice2) {
-                                case 1:
-                                    configureExternalMonitor(laptop, ontologyLoader, scanner);
-                                    break;
-                                case 2:
-                                    configureExternalSpeaker(laptop, ontologyLoader, scanner);
-                                    break;
-                                case 3:
-                                    configureKeyboard(laptop, ontologyLoader, scanner);
-                                    break;
-                                case 4:
-                                    configureMouse(laptop, ontologyLoader, scanner);
-                                    break;
-                                case 5:
-                                    configureWebcam(laptop, ontologyLoader, scanner);
-                                    break;
-                                case 0:
-                                    componentMenuActive1 = false;
-                                    break;
-                                default:
-                                    System.out.println("Scelta non valida. Riprova.");
-                                    break;
-                            }
-                        }
-                        break;
-                    case 7:
-                        boolean componentMenuActive2 = true;
-                        while (componentMenuActive2) {
-                            System.out.println("Che tipo di porta vuoi selezionare?");
-                            System.out.println("1. Ethernet");
-                            System.out.println("2. HDMI");
-                            System.out.println("3. USB");
-                            System.out.println("0. Pagina Precedente");
-
-                            int choice3 = scanner.nextInt();
-                            scanner.nextLine();
-
-                            switch (choice3) {
-                                case 1:
-                                    configureEthernet(laptop,ontologyLoader,scanner);
-                                    break;
-                                case 2:
-                                    configureHDMI(laptop,ontologyLoader,scanner);
-                                    break;
-                                case 3:
-                                    configureUSB(laptop,ontologyLoader,scanner);
-                                    break;
-                                case 0:
-                                    componentMenuActive2 = false;
-                                    break;
-                                default:
-                                    System.out.println("Scelta non valida. Riprova.");
-                                    break;
-                            }
-                        }
-                        break;
-                    case 8:
-                        boolean componentMenuActive3 = true;
-                        while (componentMenuActive3) {
-                            System.out.println("Quale tipologia di sicurezza vuoi implementare??");
-                            System.out.println("1. Antivirus");
-                            System.out.println("2. Plug-in di protezione");
-                            System.out.println("0. Pagina Precedente");
-
-                            int choice4 = scanner.nextInt();
-                            scanner.nextLine();
-
-                            switch (choice4) {
-                                case 1:
-                                    configureAntivirus(laptop,ontologyLoader,scanner);
-                                    break;
-                                case 2:
-                                    configureProtectionFeature(laptop,ontologyLoader,scanner);
-                                    break;
-                                case 0:
-                                    componentMenuActive3 = false;
-                                    break;
-                                default:
-                                    System.out.println("Scelta non valida. Riprova.");
-                                    break;
-                            }
-                        }
-                        break;
-                    case 9:
-                        configureWarranty(laptop, ontologyLoader, scanner);
-                        break;
-                    case 0:
-                        System.out.println("Configurazione completata.");
-                        displayFinalConfiguration(laptop);
-                        return; // Esce dal ciclo e termina il programma
-                    default:
-                        System.out.println("Scelta non valida. Riprova.");
-                        }
-                }
-            } else{
+                // Mostra la configurazione finale
+                displayFinalConfiguration(laptop);
+            } else {
                 System.out.println("Errore nel caricamento dell'ontologia.");
             }
         }
 
-    // Metodo per configurare la RAM
-    private static void configureRAM (Laptop laptop, OntologyLoader ontologyLoader, Scanner scanner){
-        List<RAM> ramComponents = ontologyLoader.getRAMComponents(laptop);
+        private static Laptop createLaptop(Scanner scanner) {
+            System.out.print("Inserisci il nome del laptop: ");
+            String laptopName = scanner.nextLine();
+            return new Laptop(laptopName);
+        }
+
+        private static void configureLaptop(Laptop laptop, LaptopComponentQueryService queryService, Scanner scanner) {
+            boolean configMenuActive = true;
+            while (configMenuActive) {
+                int choice = displayMainMenu(scanner);
+                switch (choice) {
+                    case 1:
+                        configureAudioSystem(laptop, queryService, scanner);
+                        break;
+                    case 2:
+                        configureBattery(laptop, queryService, scanner);
+                        break;
+                    case 3:
+                        configureColour(laptop, queryService, scanner);
+                        break;
+                    case 4:
+                        configureComponentsMenu(laptop, queryService, scanner);
+                        break;
+                    case 5:
+                        configureCoolingSystem(laptop, queryService, scanner);
+                        break;
+                    case 6:
+                        configurePeripheralsMenu(laptop, queryService, scanner);
+                        break;
+                    case 7:
+                        configurePortsMenu(laptop, queryService, scanner);
+                        break;
+                    case 8:
+                        configureSecurityMenu(laptop, queryService, scanner);
+                        break;
+                    case 9:
+                        configureWarranty(laptop, queryService, scanner);
+                        break;
+                    case 0:
+                        configMenuActive = false;
+                        break;
+                    default:
+                        System.out.println("Scelta non valida. Riprova.");
+                }
+            }
+        }
+
+        // Main menu
+        private static int displayMainMenu(Scanner scanner) {
+            System.out.println("Cosa vuoi configurare? Seleziona un'opzione digitando il numero:");
+            System.out.println("1. Sistema Audio");
+            System.out.println("2. Batteria");
+            System.out.println("3. Colore");
+            System.out.println("4. Componenti");
+            System.out.println("5. Sistema Raffreddamento");
+            System.out.println("6. Periferiche");
+            System.out.println("7. Porte");
+            System.out.println("8. Sicurezza");
+            System.out.println("9. Garanzia");
+            System.out.println("0. Fine configurazione");
+
+            return scanner.nextInt();
+        }
+
+        // Configurazione componenti
+        private static void configureComponentsMenu(Laptop laptop, LaptopComponentQueryService queryService, Scanner scanner) {
+            boolean componentMenuActive = true;
+            while (componentMenuActive) {
+                int choice = displayComponentMenu(scanner);
+                switch (choice) {
+                    case 1:
+                        configureCPU(laptop, queryService, scanner);
+                        break;
+                    case 2:
+                        configureDisplay(laptop, queryService, scanner);
+                        break;
+                    case 3:
+                        configureGraphicsCard(laptop, queryService, scanner);
+                        break;
+                    case 4:
+                        configureOperatingSystem(laptop, queryService, scanner);
+                        break;
+                    case 5:
+                        configureRAM(laptop, queryService, scanner);
+                        break;
+                    case 6:
+                        configureStorage(laptop, queryService, scanner);
+                        break;
+                    case 0:
+                        componentMenuActive = false;
+                        break;
+                    default:
+                        System.out.println("Scelta non valida. Riprova.");
+                }
+            }
+        }
+
+        private static int displayComponentMenu(Scanner scanner) {
+            System.out.println("Quale componente vuoi selezionare?");
+            System.out.println("1. CPU");
+            System.out.println("2. Schermo");
+            System.out.println("3. Scheda Grafica");
+            System.out.println("4. Sistema Operativo");
+            System.out.println("5. RAM");
+            System.out.println("6. Memoria");
+            System.out.println("0. Pagina Precedente");
+            return scanner.nextInt();
+        }
+
+        // Configurazione delle periferiche
+        private static void configurePeripheralsMenu(Laptop laptop, LaptopComponentQueryService queryService, Scanner scanner) {
+            boolean componentMenuActive = true;
+            while (componentMenuActive) {
+                int choice = displayPeripheralMenu(scanner);
+                switch (choice) {
+                    case 1:
+                        configureExternalMonitor(laptop, queryService, scanner);
+                        break;
+                    case 2:
+                        configureExternalSpeaker(laptop, queryService, scanner);
+                        break;
+                    case 3:
+                        configureKeyboard(laptop, queryService, scanner);
+                        break;
+                    case 4:
+                        configureMouse(laptop, queryService, scanner);
+                        break;
+                    case 5:
+                        configureWebcam(laptop, queryService, scanner);
+                        break;
+                    case 0:
+                        componentMenuActive = false;
+                        break;
+                    default:
+                        System.out.println("Scelta non valida. Riprova.");
+                }
+            }
+        }
+
+        private static int displayPeripheralMenu(Scanner scanner) {
+            System.out.println("Quale periferica vuoi selezionare?");
+            System.out.println("1. Monitor Esterno");
+            System.out.println("2. Speaker Esterno");
+            System.out.println("3. Tastiera");
+            System.out.println("4. Mouse");
+            System.out.println("5. Videocamera");
+            System.out.println("0. Pagina Precedente");
+            return scanner.nextInt();
+        }
+
+        // Configurazione delle porte
+        private static void configurePortsMenu(Laptop laptop, LaptopComponentQueryService queryService, Scanner scanner) {
+            boolean componentMenuActive = true;
+            while (componentMenuActive) {
+                int choice = displayPortMenu(scanner);
+                switch (choice) {
+                    case 1:
+                        configureEthernet(laptop, queryService, scanner);
+                        break;
+                    case 2:
+                        configureHDMI(laptop, queryService, scanner);
+                        break;
+                    case 3:
+                        configureUSB(laptop, queryService, scanner);
+                        break;
+                    case 0:
+                        componentMenuActive = false;
+                        break;
+                    default:
+                        System.out.println("Scelta non valida. Riprova.");
+                }
+            }
+        }
+
+        private static int displayPortMenu(Scanner scanner) {
+            System.out.println("Che tipo di porta vuoi selezionare?");
+            System.out.println("1. Ethernet");
+            System.out.println("2. HDMI");
+            System.out.println("3. USB");
+            System.out.println("0. Pagina Precedente");
+            return scanner.nextInt();
+        }
+
+        // Configurazione delle opzioni di sicurezza
+        private static void configureSecurityMenu(Laptop laptop, LaptopComponentQueryService queryService, Scanner scanner) {
+            boolean componentMenuActive = true;
+            while (componentMenuActive) {
+                int choice = displaySecurityMenu(scanner);
+                switch (choice) {
+                    case 1:
+                        configureAntivirus(laptop, queryService, scanner);
+                        break;
+                    case 2:
+                        configureProtectionFeature(laptop, queryService, scanner);
+                        break;
+                    case 0:
+                        componentMenuActive = false;
+                        break;
+                    default:
+                        System.out.println("Scelta non valida. Riprova.");
+                }
+            }
+        }
+
+        private static int displaySecurityMenu(Scanner scanner) {
+            System.out.println("Quale tipologia di sicurezza vuoi implementare?");
+            System.out.println("1. Antivirus");
+            System.out.println("2. Funzione di protezione");
+            System.out.println("0. Pagina Precedente");
+            return scanner.nextInt();
+        }
+
+
+        // Metodo per configurare la RAM
+    private static void configureRAM (Laptop laptop, LaptopComponentQueryService queryService, Scanner scanner){
+        List<RAM> ramComponents = queryService.getRAMComponents(laptop);
         if (ramComponents.isEmpty()) {
             System.out.println("Nessun componente RAM trovato.");
             return;
@@ -239,8 +277,8 @@ public class Main {
     }
 
     // Metodo per configurare la CPU
-    private static void configureCPU(Laptop laptop, OntologyLoader ontologyLoader, Scanner scanner) {
-    List<CPU> cpuComponents = ontologyLoader.getCPUComponents(laptop); // Devi implementare il metodo getCPUComponents()
+    private static void configureCPU(Laptop laptop, LaptopComponentQueryService queryService, Scanner scanner) {
+    List<CPU> cpuComponents = queryService.getCPUComponents(laptop); // Devi implementare il metodo getCPUComponents()
     if (cpuComponents.isEmpty()) {
         System.out.println("Nessuna CPU trovata.");
         return;
@@ -269,8 +307,8 @@ public class Main {
 }
 
     // Metodo per configurare il Display
-    private static void configureDisplay(Laptop laptop, OntologyLoader ontologyLoader, Scanner scanner) {
-        List<Display> displayComponents = ontologyLoader.getDisplayComponents(laptop);
+    private static void configureDisplay(Laptop laptop, LaptopComponentQueryService queryService, Scanner scanner) {
+        List<Display> displayComponents = queryService.getDisplayComponents(laptop);
         if (displayComponents.isEmpty()) {
             System.out.println("Nessun display trovato.");
             return;
@@ -300,8 +338,8 @@ public class Main {
     }
 
     // Metodo per configurare la Graphics Card
-    private static void configureGraphicsCard(Laptop laptop, OntologyLoader ontologyLoader, Scanner scanner) {
-        List<GraphicsCard> graphicsCards = ontologyLoader.getGraphicsCardComponents(laptop);
+    private static void configureGraphicsCard(Laptop laptop, LaptopComponentQueryService queryService, Scanner scanner) {
+        List<GraphicsCard> graphicsCards = queryService.getGraphicsCardComponents(laptop);
         if (graphicsCards.isEmpty()) {
             System.out.println("Nessuna scheda grafica trovata.");
             return;
@@ -331,8 +369,8 @@ public class Main {
     }
 
     // Metodo per configurare il sistema operativo (OperatingSystem)
-    private static void configureOperatingSystem(Laptop laptop, OntologyLoader ontologyLoader, Scanner scanner) {
-        List<OperatingSystem> operatingSystemComponents = ontologyLoader.getOperatingSystemComponents(laptop);
+    private static void configureOperatingSystem(Laptop laptop, LaptopComponentQueryService queryService, Scanner scanner) {
+        List<OperatingSystem> operatingSystemComponents = queryService.getOperatingSystemComponents(laptop);
 
         if (operatingSystemComponents.isEmpty()) {
             System.out.println("Nessun sistema operativo trovato.");
@@ -362,8 +400,8 @@ public class Main {
     }
 
     // Metodo per configurare lo storage (Storage)
-    private static void configureStorage(Laptop laptop, OntologyLoader ontologyLoader, Scanner scanner) {
-        List<Storage> storageComponents = ontologyLoader.getStorageComponents(laptop);
+    private static void configureStorage(Laptop laptop, LaptopComponentQueryService queryService, Scanner scanner) {
+        List<Storage> storageComponents = queryService.getStorageComponents(laptop);
 
         if (storageComponents.isEmpty()) {
             System.out.println("Nessun componente di storage trovato.");
@@ -392,8 +430,8 @@ public class Main {
         System.out.println("Hai aggiunto " + selectedStorage.getStorageName() + " al tuo laptop.");
     }
 
-    private static void configureBattery(Laptop laptop, OntologyLoader ontologyLoader, Scanner scanner) {
-    List<Battery> batteryComponents = ontologyLoader.getBatteryComponents(laptop);
+    private static void configureBattery(Laptop laptop, LaptopComponentQueryService queryService, Scanner scanner) {
+    List<Battery> batteryComponents = queryService.getBatteryComponents(laptop);
     if (batteryComponents.isEmpty()) {
         System.out.println("Nessuna batteria trovata.");
         return;
@@ -421,8 +459,8 @@ public class Main {
     System.out.println("Hai aggiunto la batteria " + selectedBattery.getBatteryName() + " al tuo laptop.");
 }
 
-    private static void configureColour(Laptop laptop, OntologyLoader ontologyLoader, Scanner scanner) {
-    List<Colour> colourOptions = ontologyLoader.getColourComponents(laptop);
+    private static void configureColour(Laptop laptop, LaptopComponentQueryService queryService, Scanner scanner) {
+    List<Colour> colourOptions = queryService.getColourComponents(laptop);
     if (colourOptions.isEmpty()) {
         System.out.println("Nessun colore disponibile.");
         return;
@@ -450,8 +488,8 @@ public class Main {
     System.out.println("Hai scelto il colore " + selectedColour.getColourName() + " per il tuo laptop.");
 }
 
-    private static void configureCoolingSystem(Laptop laptop, OntologyLoader ontologyLoader, Scanner scanner) {
-    List<CoolingSystem> coolingSystems = ontologyLoader.getCoolingSystemComponents(laptop);
+    private static void configureCoolingSystem(Laptop laptop, LaptopComponentQueryService queryService, Scanner scanner) {
+    List<CoolingSystem> coolingSystems = queryService.getCoolingSystemComponents(laptop);
     if (coolingSystems.isEmpty()) {
         System.out.println("Nessun sistema di raffreddamento disponibile.");
         return;
@@ -479,8 +517,8 @@ public class Main {
     System.out.println("Hai aggiunto il sistema di raffreddamento " + selectedCoolingSystem.getCoolingSystemName() + " al tuo laptop.");
 }
 
-    private static void configureWarranty(Laptop laptop, OntologyLoader ontologyLoader, Scanner scanner) {
-    List<Warranty> warrantyOptions = ontologyLoader.getWarrantyComponents(laptop);
+    private static void configureWarranty(Laptop laptop, LaptopComponentQueryService queryService, Scanner scanner) {
+    List<Warranty> warrantyOptions = queryService.getWarrantyComponents(laptop);
     if (warrantyOptions.isEmpty()) {
         System.out.println("Nessuna garanzia disponibile.");
         return;
@@ -508,8 +546,8 @@ public class Main {
     System.out.println("Hai scelto la garanzia " + selectedWarranty.getWarrantyName() + " per il tuo laptop.");
 }
 
-    private static void configureAudioSystem(Laptop laptop, OntologyLoader ontologyLoader, Scanner scanner) {
-    List<AudioSystem> audioSystemComponents = ontologyLoader.getAudioSystemComponents(laptop);
+    private static void configureAudioSystem(Laptop laptop, LaptopComponentQueryService queryService, Scanner scanner) {
+    List<AudioSystem> audioSystemComponents = queryService.getAudioSystemComponents(laptop);
     if (audioSystemComponents.isEmpty()) {
         System.out.println("Nessun sistema audio trovato.");
         return;
@@ -538,8 +576,8 @@ public class Main {
 }
 
 // Metodo per configurare i monitor esterni
-    private static void configureExternalMonitor(Laptop laptop, OntologyLoader ontologyLoader, Scanner scanner) {
-    List<ExternalMonitor> monitorComponents = ontologyLoader.getExternalMonitorComponents(laptop);
+    private static void configureExternalMonitor(Laptop laptop, LaptopComponentQueryService queryService, Scanner scanner) {
+    List<ExternalMonitor> monitorComponents = queryService.getExternalMonitorComponents(laptop);
     if (monitorComponents.isEmpty()) {
         System.out.println("Nessun monitor esterno trovato.");
         return;
@@ -565,8 +603,8 @@ public class Main {
 }
 
 // Metodo per configurare gli altoparlanti esterni
-    private static void configureExternalSpeaker(Laptop laptop, OntologyLoader ontologyLoader, Scanner scanner) {
-    List<ExternalSpeaker> speakerComponents = ontologyLoader.getExternalSpeakerComponents(laptop);
+    private static void configureExternalSpeaker(Laptop laptop, LaptopComponentQueryService queryService, Scanner scanner) {
+    List<ExternalSpeaker> speakerComponents = queryService.getExternalSpeakerComponents(laptop);
     if (speakerComponents.isEmpty()) {
         System.out.println("Nessun altoparlante esterno trovato.");
         return;
@@ -592,8 +630,8 @@ public class Main {
 }
 
 // Metodo per configurare le tastiere
-    private static void configureKeyboard(Laptop laptop, OntologyLoader ontologyLoader, Scanner scanner) {
-    List<Keyboard> keyboardComponents = ontologyLoader.getKeyboardComponents(laptop);
+    private static void configureKeyboard(Laptop laptop, LaptopComponentQueryService queryService, Scanner scanner) {
+    List<Keyboard> keyboardComponents = queryService.getKeyboardComponents(laptop);
     if (keyboardComponents.isEmpty()) {
         System.out.println("Nessuna tastiera trovata.");
         return;
@@ -619,8 +657,8 @@ public class Main {
 }
 
 // Metodo per configurare i mouse
-    private static void configureMouse(Laptop laptop, OntologyLoader ontologyLoader, Scanner scanner) {
-    List<Mouse> mouseComponents = ontologyLoader.getMouseComponents(laptop);
+    private static void configureMouse(Laptop laptop, LaptopComponentQueryService queryService, Scanner scanner) {
+    List<Mouse> mouseComponents = queryService.getMouseComponents(laptop);
     if (mouseComponents.isEmpty()) {
         System.out.println("Nessun mouse trovato.");
         return;
@@ -646,8 +684,8 @@ public class Main {
 }
 
 // Metodo per configurare le webcam
-    private static void configureWebcam(Laptop laptop, OntologyLoader ontologyLoader, Scanner scanner) {
-    List<Webcam> webcamComponents = ontologyLoader.getWebcamComponents(laptop);
+    private static void configureWebcam(Laptop laptop, LaptopComponentQueryService queryService, Scanner scanner) {
+    List<Webcam> webcamComponents = queryService.getWebcamComponents(laptop);
     if (webcamComponents.isEmpty()) {
         System.out.println("Nessuna webcam trovata.");
         return;
@@ -672,9 +710,9 @@ public class Main {
     System.out.println("Hai aggiunto " + selectedWebcam.getWebcamName() + " al tuo laptop.");
 }
 
-    private static void configureEthernet(Laptop laptop, OntologyLoader ontologyLoader, Scanner scanner) {
+    private static void configureEthernet(Laptop laptop, LaptopComponentQueryService queryService, Scanner scanner) {
     // Ottieni le porte Ethernet disponibili dall'ontologia
-    List<Ethernet> ethernetComponents = ontologyLoader.getEthernetComponents(laptop);
+    List<Ethernet> ethernetComponents = queryService.getEthernetComponents(laptop);
     // Ottieni il numero di oggetti di tipo Port già aggiunti al laptop
     long existingPortsCount = laptop.getPorts().stream()
             .filter(port -> port instanceof Port)  // Filtra solo gli oggetti di tipo Port
@@ -710,9 +748,9 @@ public class Main {
     System.out.println("Hai aggiunto la porta Ethernet " + selectedEthernet.getPortName() + " con velocità " + selectedEthernet.getEthernetSpeed() + " al tuo laptop.");
 }
 
-    private static void configureUSB(Laptop laptop, OntologyLoader ontologyLoader, Scanner scanner) {
+    private static void configureUSB(Laptop laptop, LaptopComponentQueryService queryService, Scanner scanner) {
     // Ottieni le porte USB disponibili dall'ontologia
-    List<USB> usbComponents = ontologyLoader.getUSBComponents(laptop);
+    List<USB> usbComponents = queryService.getUSBComponents(laptop);
     // Ottieni il numero di oggetti di tipo Port già aggiunti al laptop
     long existingPortsCount = laptop.getPorts().stream()
             .filter(port -> port instanceof Port)  // Filtra solo gli oggetti di tipo Port
@@ -748,9 +786,9 @@ public class Main {
     System.out.println("Hai aggiunto la porta USB " + selectedUSB.getPortName() + " con versione " + selectedUSB.getUSBVersion() + " al tuo laptop.");
 }
 
-    private static void configureHDMI(Laptop laptop, OntologyLoader ontologyLoader, Scanner scanner) {
+    private static void configureHDMI(Laptop laptop, LaptopComponentQueryService queryService, Scanner scanner) {
     // Ottieni le porte HDMI disponibili dall'ontologia
-    List<HDMI> hdmiComponents = ontologyLoader.getHDMIComponents(laptop);
+    List<HDMI> hdmiComponents = queryService.getHDMIComponents(laptop);
     // Ottieni il numero di oggetti di tipo Port già aggiunti al laptop
     long existingPortsCount = laptop.getPorts().stream()
             .filter(port -> port instanceof Port)  // Filtra solo gli oggetti di tipo Port
@@ -786,8 +824,8 @@ public class Main {
     System.out.println("Hai aggiunto la porta HDMI " + selectedHDMI.getPortName() + " con versione " + selectedHDMI.getHDMIVersion() + " al tuo laptop.");
 }
 
-    private static void configureAntivirus(Laptop laptop, OntologyLoader ontologyLoader, Scanner scanner) {
-        List<Antivirus> antivirusComponents = ontologyLoader.getAntivirusComponents(laptop);
+    private static void configureAntivirus(Laptop laptop, LaptopComponentQueryService queryService, Scanner scanner) {
+        List<Antivirus> antivirusComponents = queryService.getAntivirusComponents(laptop);
         if (antivirusComponents.isEmpty()) {
             System.out.println("Nessun antivirus trovato.");
             return;
@@ -814,8 +852,8 @@ public class Main {
         System.out.println("Hai aggiunto l'antivirus " + selectedAntivirus.getAntivirusName() + " al tuo laptop.");
     }
 
-    private static void configureProtectionFeature(Laptop laptop, OntologyLoader ontologyLoader, Scanner scanner) {
-        List<ProtectionFeature> protectionFeatureComponents = ontologyLoader.getProtectionFeatureComponents(laptop);
+    private static void configureProtectionFeature(Laptop laptop, LaptopComponentQueryService queryService, Scanner scanner) {
+        List<ProtectionFeature> protectionFeatureComponents = queryService.getProtectionFeatureComponents(laptop);
         if (protectionFeatureComponents.isEmpty()) {
             System.out.println("Nessuna funzione di protezione trovata.");
             return;
@@ -854,7 +892,7 @@ public class Main {
         // Sistema Audio
         if (laptop.getAudioSystem() != null) {
             AudioSystem audioSystem = laptop.getAudioSystem();
-            System.out.println("\n[Sistema Audio]");
+            System.out.println("[Sistema Audio]");
             System.out.printf("  Nome: %s%n  Tipo: %s%n", audioSystem.getAudioSystemName(), audioSystem.getAudioSystemType());
             System.out.println(separator);
         }
@@ -862,7 +900,7 @@ public class Main {
         // Batteria
         if (laptop.getBattery() != null) {
             Battery battery = laptop.getBattery();
-            System.out.println("\n[Batteria]");
+            System.out.println("[Batteria]");
             System.out.printf("  Nome: %s%n  Capacità: %.2f mAh%n", battery.getBatteryName(), battery.getBatteryCapacity());
             System.out.println(separator);
         }
@@ -870,14 +908,14 @@ public class Main {
         // Colore
         if (laptop.getColour() != null) {
             Colour colour = laptop.getColour();
-            System.out.println("\n[Colore]");
+            System.out.println("[Colore]");
             System.out.printf("  Nome: %s%n", colour.getColourName());
             System.out.println(separator);
         }
 
         // Componenti
         if (!laptop.getComponents().isEmpty()) {
-            System.out.println("\n[Componenti]");
+            System.out.println("[Componenti]");
             for (Component component : laptop.getComponents()) {
                 if (component instanceof RAM) {
                     RAM ram = (RAM) component;
@@ -905,7 +943,7 @@ public class Main {
         // Sistema Raffreddamento
         if (laptop.getCoolingSystem() != null) {
             CoolingSystem coolingSystem = laptop.getCoolingSystem();
-            System.out.println("\n[Sistema di Raffreddamento]");
+            System.out.println("[Sistema di Raffreddamento]");
             System.out.printf("  Nome: %s  -  Tipo: %s%n", coolingSystem.getCoolingSystemName(), coolingSystem.getCoolingSystemType());
             System.out.println(separator);
         }
@@ -913,14 +951,14 @@ public class Main {
         // Garanzia
         if (laptop.getWarranty() != null) {
             Warranty warranty = laptop.getWarranty();
-            System.out.println("\n[Garanzia]");
+            System.out.println("[Garanzia]");
             System.out.printf("  Nome: %s  -  Durata: %d anni%n", warranty.getWarrantyName(), warranty.getWarrantyPeriod());
             System.out.println(separator);
         }
 
         // Periferiche
         if (!laptop.getPeripherals().isEmpty()) {
-            System.out.println("\n[Periferiche]");
+            System.out.println("[Periferiche]");
             for (Peripheral peripheral : laptop.getPeripherals()) {
                 if (peripheral instanceof ExternalMonitor) {
                     ExternalMonitor monitor = (ExternalMonitor) peripheral;
@@ -944,7 +982,7 @@ public class Main {
 
         // Porte
         if (!laptop.getPorts().isEmpty()) {
-            System.out.println("\n[Porte]");
+            System.out.println("[Porte]");
             for (Port port : laptop.getPorts()) {
                 if (port instanceof Ethernet) {
                     Ethernet ethernet = (Ethernet) port;
@@ -964,7 +1002,7 @@ public class Main {
 
         // Sicurezza
         if (!laptop.getSecurities().isEmpty()) {
-            System.out.println("\n[Sicurezza]");
+            System.out.println("[Sicurezza]");
             for (Security security : laptop.getSecurities()) {
                 if (security instanceof Antivirus) {
                     Antivirus antivirus = (Antivirus) security;
@@ -980,13 +1018,6 @@ public class Main {
         System.out.println("Configurazione completata.");
         System.out.println(separator);
     }
-
-
-
-
-
-
-
 
 }
 
