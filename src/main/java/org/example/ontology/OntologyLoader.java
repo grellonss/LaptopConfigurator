@@ -35,8 +35,6 @@ public class OntologyLoader {
             }
             // Caricamento del file RDF/OWL
             ontologyModel.read(in, null);
-
-            System.out.println("Ontologia caricata correttamente.");
         } catch (FileNotFoundException e) {
             System.err.println("File RDF/OWL non trovato: " + e.getMessage());
         }catch (Exception e) {
@@ -614,6 +612,170 @@ public class OntologyLoader {
 
         return webcamList;
     }
+
+    public List<Ethernet> getEthernetComponents(Laptop laptop) {
+        List<Ethernet> ethernetList = new ArrayList<>();
+
+        String sparqlQuery =
+                "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> " +
+                        "PREFIX laptop: <http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#> " +
+                        "SELECT ?ethernet ?portName ?speed WHERE { " +
+                        "?ethernet rdf:type laptop:Ethernet . " +
+                        "?ethernet laptop:hasEthernetSpeed ?speed . " +
+                        "?ethernet laptop:hasPortName ?portName . }";
+
+        Query query = QueryFactory.create(sparqlQuery);
+        QueryExecution qe = QueryExecutionFactory.create(query, ontologyModel);
+
+        try {
+            ResultSet results = qe.execSelect();
+            while (results.hasNext()) {
+                QuerySolution solution = results.nextSolution();
+                Resource ethernetResource = solution.getResource("ethernet");
+                String localName = ethernetResource.getLocalName();  // Otteniamo il local name
+                Integer portName = solution.getLiteral("portName").getInt();
+                String speed = solution.getLiteral("speed").getString();
+
+                Ethernet ethernet = new Ethernet(laptop, portName, localName, speed);
+                ethernetList.add(ethernet);
+            }
+        } finally {
+            qe.close();
+        }
+
+        return ethernetList;
+    }
+    public List<USB> getUSBComponents(Laptop laptop) {
+        List<USB> usbList = new ArrayList<>();
+
+        String sparqlQuery =
+                "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> " +
+                        "PREFIX laptop: <http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#> " +
+                        "SELECT ?usb ?portName ?type WHERE { " +
+                        "?usb rdf:type laptop:USB . " +
+                        "?usb laptop:hasUSBType ?type . " +
+                        "?usb laptop:hasPortName ?portName . }";
+
+        Query query = QueryFactory.create(sparqlQuery);
+        QueryExecution qe = QueryExecutionFactory.create(query, ontologyModel);
+
+        try {
+            ResultSet results = qe.execSelect();
+            while (results.hasNext()) {
+                QuerySolution solution = results.nextSolution();
+                Resource usbResource = solution.getResource("usb");
+                String localName = usbResource.getLocalName();  // Otteniamo il local name
+                Integer portName = solution.getLiteral("portName").getInt();
+                String type = solution.getLiteral("type").getString();
+
+                USB usb = new USB(laptop, portName, localName, type);
+                usbList.add(usb);
+            }
+        } finally {
+            qe.close();
+        }
+
+        return usbList;
+    }
+
+    public List<HDMI> getHDMIComponents(Laptop laptop) {
+        List<HDMI> hdmiList = new ArrayList<>();
+
+        String sparqlQuery =
+                "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> " +
+                        "PREFIX laptop: <http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#> " +
+                        "SELECT ?hdmi ?portName ?version WHERE { " +
+                        "?hdmi rdf:type laptop:HDMI . " +
+                        "?hdmi laptop:hasHDMIVersion ?version . " +
+                        "?hdmi laptop:hasPortName ?portName . }";
+
+        Query query = QueryFactory.create(sparqlQuery);
+        QueryExecution qe = QueryExecutionFactory.create(query, ontologyModel);
+
+        try {
+            ResultSet results = qe.execSelect();
+            while (results.hasNext()) {
+                QuerySolution solution = results.nextSolution();
+                Resource hdmiResource = solution.getResource("hdmi");
+                String localName = hdmiResource.getLocalName();  // Otteniamo il local name
+                Integer portName = solution.getLiteral("portName").getInt();
+                String version = solution.getLiteral("version").getString();
+
+                HDMI hdmi = new HDMI(laptop, portName, localName, version);
+                hdmiList.add(hdmi);
+            }
+        } finally {
+            qe.close();
+        }
+
+        return hdmiList;
+    }
+
+    public List<Antivirus> getAntivirusComponents(Laptop laptop) {
+        List<Antivirus> antivirusList = new ArrayList<>();
+
+        String sparqlQuery =
+                "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> " +
+                        "PREFIX laptop: <http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#> " +
+                        "SELECT ?antivirus ?version WHERE { " +
+                        "?antivirus rdf:type laptop:Antivirus . " +
+                        "?antivirus laptop:hasAntivirusVersion ?version . }";
+
+        Query query = QueryFactory.create(sparqlQuery);
+        QueryExecution qe = QueryExecutionFactory.create(query, ontologyModel);
+
+        try {
+            ResultSet results = qe.execSelect();
+            while (results.hasNext()) {
+                QuerySolution solution = results.nextSolution();
+                Resource antivirusResource = solution.getResource("antivirus");
+                String localName = antivirusResource.getLocalName();  // Otteniamo il local name
+                String version = solution.getLiteral("version").getString();
+
+                Antivirus antivirus = new Antivirus(laptop, localName, version);
+                antivirusList.add(antivirus);
+            }
+        } finally {
+            qe.close();
+        }
+
+        return antivirusList;
+    }
+    public List<ProtectionFeature> getProtectionFeatureComponents(Laptop laptop) {
+        List<ProtectionFeature> protectionFeatureList = new ArrayList<>();
+
+        String sparqlQuery =
+                "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> " +
+                        "PREFIX laptop: <http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#> " +
+                        "SELECT ?protectionFeature ?type WHERE { " +
+                        "?protectionFeature rdf:type laptop:ProtectionFeature . " +
+                        "?protectionFeature laptop:hasProtectionFeatureType ?type . }";
+
+        Query query = QueryFactory.create(sparqlQuery);
+        QueryExecution qe = QueryExecutionFactory.create(query, ontologyModel);
+
+        try {
+            ResultSet results = qe.execSelect();
+            while (results.hasNext()) {
+                QuerySolution solution = results.nextSolution();
+                Resource protectionFeatureResource = solution.getResource("protectionFeature");
+                String localName = protectionFeatureResource.getLocalName();  // Otteniamo il local name
+                String type = solution.getLiteral("type").getString();
+
+                ProtectionFeature protectionFeature = new ProtectionFeature(laptop, localName, type);
+                protectionFeatureList.add(protectionFeature);
+            }
+        } finally {
+            qe.close();
+        }
+
+        return protectionFeatureList;
+    }
+
+
+
+
+
 
 
 

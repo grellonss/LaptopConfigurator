@@ -203,20 +203,40 @@ public class Laptop {
         warranty = null;
     }
 
-    public void addOrReplaceComponent(Component newComponent) {
-        // Controlla se esiste già un componente dello stesso tipo
-        for (int i = 0; i < this.components.size(); i++) {
-            Component existingComponent = this.components.get(i);
-            if (existingComponent.getClass() == newComponent.getClass()) {
-                // Sostituisci il componente esistente con quello nuovo
-                this.components.set(i, newComponent);
-                System.out.println("Componente " + newComponent.getClass().getSimpleName() + " sostituito.");
+    public <T> void addOrReplace(List<T> list, T newItem) {
+        // Controlla se esiste già un oggetto dello stesso tipo
+        for (int i = 0; i < list.size(); i++) {
+            T existingItem = list.get(i);
+            if (existingItem.getClass() == newItem.getClass()) {
+                // Sostituisci l'elemento esistente con quello nuovo
+                list.set(i, newItem);
+                System.out.println("Elemento " + newItem.getClass().getSimpleName() + " sostituito.");
                 return;
             }
         }
-        // Se non esiste già un componente di questo tipo, aggiungilo
-        this.components.add(newComponent);
-        System.out.println("Componente " + newComponent.getClass().getSimpleName() + " aggiunto.");
+        // Se non esiste già un elemento di questo tipo, aggiungilo
+        list.add(newItem);
+        System.out.println("Elemento " + newItem.getClass().getSimpleName() + " aggiunto.");
     }
+    // Aggiungere o sostituire componenti
+    public void addOrReplaceComponent(Component newComponent) {
+        addOrReplace(this.components, newComponent);
+    }
+
+    // Aggiungere o sostituire periferiche
+    public void addOrReplacePeripheral(Peripheral newPeripheral) {
+        addOrReplace(this.peripherals, newPeripheral);
+    }
+
+    // Aggiungere o sostituire porte
+    public void addOrReplacePort(Port newPort) {
+        addOrReplace(this.ports, newPort);
+    }
+
+    // Aggiungere o sostituire elementi di sicurezza
+    public void addOrReplaceSecurity(Security newSecurity) {
+        addOrReplace(this.securities, newSecurity);
+    }
+
 
 }
