@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id 'application'
 }
 
 group = 'org.example'
@@ -30,4 +31,13 @@ dependencies {
 
 test {
     useJUnitPlatform()
+}
+
+// Specifica la classe principale per l'esecuzione
+application {
+    mainClass = 'org.example.app.Main'  // Sostituisci con il percorso completo della tua classe Main
+}
+// Per abilitare l'interattività con il comando gradle run
+tasks.named('run', JavaExec) {
+    standardInput = System.in
 }

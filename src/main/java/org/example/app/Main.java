@@ -901,7 +901,7 @@ import java.util.*;
         if (laptop.getBattery() != null) {
             Battery battery = laptop.getBattery();
             System.out.println("[Batteria]");
-            System.out.printf("  Nome: %s%n  Capacità: %.2f mAh%n", battery.getBatteryName(), battery.getBatteryCapacity());
+            System.out.printf("  Nome: %s%n  Capacita': %.2f mAh%n", battery.getBatteryName(), battery.getBatteryCapacity());
             System.out.println(separator);
         }
 
@@ -986,13 +986,13 @@ import java.util.*;
             for (Port port : laptop.getPorts()) {
                 if (port instanceof Ethernet) {
                     Ethernet ethernet = (Ethernet) port;
-                    System.out.printf("  Ethernet - Porta n. %s  -  Nome: %s  -  Velocità: %s%n", ethernet.getPortName(), ethernet.getEthernetName(), ethernet.getEthernetSpeed());
+                    System.out.printf("  Ethernet - Porta n.%s  -  Nome: %s  -  Velocità: %s%n", ethernet.getPortName(), ethernet.getEthernetName(), ethernet.getEthernetSpeed());
                 } else if (port instanceof USB) {
                     USB usb = (USB) port;
-                    System.out.printf("  USB - Porta n. %s  -  Nome: %s  -  Versione: %s%n", usb.getPortName(), usb.getUSBName(), usb.getUSBVersion());
+                    System.out.printf("  USB - Porta n.%s  -  Nome: %s  -  Versione: %s%n", usb.getPortName(), usb.getUSBName(), usb.getUSBVersion());
                 } else if (port instanceof HDMI) {
                     HDMI hdmi = (HDMI) port;
-                    System.out.printf("  HDMI - Porta n. %s  -  Nome: %s  -  Versione: %s%n", hdmi.getPortName(), hdmi.getHDMIName(), hdmi.getHDMIVersion());
+                    System.out.printf("  HDMI - Porta n.%s  -  Nome: %s  -  Versione: %s%n", hdmi.getPortName(), hdmi.getHDMIName(), hdmi.getHDMIVersion());
                 } else {
                     System.out.printf("  Porta sconosciuta: %s%n", port.getPortName());
                 }
