@@ -24,6 +24,12 @@ dependencies {
     // Logging semplice
     implementation 'org.slf4j:slf4j-simple:2.0.0'
 
+    // Dipendenze JavaFX per Windows
+    implementation "org.openjfx:javafx-controls:20.0.2:win"
+    implementation "org.openjfx:javafx-fxml:20.0.2:win"
+    implementation "org.openjfx:javafx-base:20.0.2:win"
+    implementation "org.openjfx:javafx-graphics:20.0.2:win"
+
     // Dipendenze per il test
     testImplementation platform('org.junit:junit-bom:5.9.1')
     testImplementation 'org.junit.jupiter:junit-jupiter'
@@ -35,8 +41,13 @@ test {
 
 // Specifica la classe principale per l'esecuzione
 application {
-    mainClass = 'org.example.app.Main'  // Sostituisci con il percorso completo della tua classe Main
+    mainClass = 'org.example.app.LaptopConfiguratorApp'
+    applicationDefaultJvmArgs = [
+            "--module-path", 'C:\\Program Files\\JavaFX\\javafx-sdk-22.0.2\\lib',
+            "--add-modules", "javafx.controls,javafx.fxml"
+    ]
 }
+
 // Per abilitare l'interattività con il comando gradle run
 tasks.named('run', JavaExec) {
     standardInput = System.in
