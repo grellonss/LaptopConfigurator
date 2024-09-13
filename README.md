@@ -34,7 +34,7 @@ The LaptopConfiguratorApp is designed to facilitate the configuration and select
 ## Installation
 1. **Clone the Repository:**
    ```bash
-   git clone https://github.com/grellonss/laptop-configurator.git
+   git clone https://github.com/grellonss/LaptopConfigurator.git
    ```
 2. **Navigate to the repository:**
    ```bash
