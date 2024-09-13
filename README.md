@@ -38,7 +38,7 @@ The LaptopConfiguratorApp is designed to facilitate the configuration and select
    ```
 2. **Navigate to the repository:**
    ```bash
-   cd laptop-configurator
+   cd LaptopConfigurator
    ```
 3. **Build the project**
    ```bash
