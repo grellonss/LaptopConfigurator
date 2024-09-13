@@ -19,17 +19,28 @@ import org.example.ontology.SPARQLQueryExecutor;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
+/**
+ * LaptopConfiguratorApp is the main class that launches the laptop configuration interface.
+ * It allows users to select and configure different components of a laptop using a graphical interface.
+ * The application uses an ontology to load component data and configure the laptop.
+ */
 public class LaptopConfiguratorApp extends Application {
 
     private Laptop laptop;
     private LaptopComponentQueryService queryService;
 
+    /**
+     * Starts the JavaFX application, initializes the GUI components, and loads the ontology.
+     *
+     * @param primaryStage the primary stage for this application
+     */
     @Override
     public void start(Stage primaryStage) {
+        Locale.setDefault(Locale.ENGLISH);
         primaryStage.setTitle("Laptop Configurator");
 
-        // Step 1: Carica l'ontologia
         String ontologyFilePath = "LaptopConfigModellazione.rdf";
         OntologyLoader ontologyLoader = new OntologyLoader(ontologyFilePath);
         OntModel model = ontologyLoader.getOntologyModel();
@@ -40,56 +51,50 @@ public class LaptopConfiguratorApp extends Application {
 
             laptop = new Laptop("MyLaptop");
 
-            // Crea l'interfaccia utente
             VBox layout = new VBox(10);
             layout.setPadding(new Insets(20, 20, 20, 20));
-            layout.setStyle("-fx-background-color: #f0f0f0;"); // Colore di sfondo
+            layout.setStyle("-fx-background-color: #f0f0f0;"); // Background color
 
-            Label welcomeLabel = new Label("Benvenuto nel configuratore di laptop!");
+            Label welcomeLabel = new Label("Welcome to the laptop configurator!");
             welcomeLabel.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
 
 
-            // ComboBox per selezionare il componente da configurare
             ComboBox<String> componentSelector = new ComboBox<>();
-            componentSelector.getItems().addAll("Sistema Audio", "Batteria", "Colore", "Componenti", "Sistema di Raffreddamento", "Periferiche", "Porte", "Sicurezza", "Garanzia");
-            componentSelector.setPromptText("Scegli un componente da configurare");
-            componentSelector.setStyle("-fx-font-size: 14px; -fx-padding: 8 10 8 10;"); // Stile per la ComboBox
+            componentSelector.getItems().addAll("Audio System", "Battery", "Color", "Components", "Cooling System", "Peripherals", "Ports", "Security", "Warranty");
+            componentSelector.setPromptText("Choose a component to configure");
+            componentSelector.setStyle("-fx-font-size: 14px; -fx-padding: 8 10 8 10;");
 
-            // Bottone "Configura"
-            Button configureButton = new Button("Configura");
+            Button configureButton = new Button("Configure");
             configureButton.setStyle(
-                    "-fx-background-color: #4CAF50;" +  // Colore verde
-                            "-fx-text-fill: white;" +           // Testo bianco
-                            "-fx-font-size: 14px;" +            // Dimensione del font
-                            "-fx-font-weight: bold;" +          // Grassetto
-                            "-fx-border-radius: 5px;" +         // Bordo arrotondato
-                            "-fx-background-radius: 5px;" +     // Sfondo arrotondato
-                            "-fx-padding: 10 20 10 20;"         // Padding interno
+                    "-fx-background-color: #4CAF50;" +
+                            "-fx-text-fill: white;" +
+                            "-fx-font-size: 14px;" +
+                            "-fx-font-weight: bold;" +
+                            "-fx-border-radius: 5px;" +
+                            "-fx-background-radius: 5px;" +
+                            "-fx-padding: 10 20 10 20;"
             );
 
-            // Bottone "Mostra Configurazione Finale"
-            Button finalizeButton = new Button("Mostra Configurazione Finale");
+            // Button "Show Final Configuration"
+            Button finalizeButton = new Button("Show Final Configuration");
             finalizeButton.setStyle(
-                    "-fx-background-color: #2196F3;" +  // Colore blu
-                            "-fx-text-fill: white;" +           // Testo bianco
-                            "-fx-font-size: 14px;" +            // Dimensione del font
-                            "-fx-font-weight: bold;" +          // Grassetto
-                            "-fx-border-radius: 5px;" +         // Bordo arrotondato
-                            "-fx-background-radius: 5px;" +     // Sfondo arrotondato
-                            "-fx-padding: 10 20 10 20;"         // Padding interno
+                    "-fx-background-color: #2196F3;" +
+                            "-fx-text-fill: white;" +
+                            "-fx-font-size: 14px;" +
+                            "-fx-font-weight: bold;" +
+                            "-fx-border-radius: 5px;" +
+                            "-fx-background-radius: 5px;" +
+                            "-fx-padding: 10 20 10 20;"
             );
 
-            // Stile hover per i bottoni
             String buttonHoverStyle = "-fx-background-color: #555555; -fx-text-fill: white;";
 
-            // Aggiunge l'effetto hover sui bottoni
             configureButton.setOnMouseEntered(e -> configureButton.setStyle("-fx-background-color: #45a049; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; -fx-border-radius: 5px; -fx-background-radius: 5px; -fx-padding: 10 20 10 20;"));
             configureButton.setOnMouseExited(e -> configureButton.setStyle("-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; -fx-border-radius: 5px; -fx-background-radius: 5px; -fx-padding: 10 20 10 20;"));
 
             finalizeButton.setOnMouseEntered(e -> finalizeButton.setStyle("-fx-background-color: #1976D2; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; -fx-border-radius: 5px; -fx-background-radius: 5px; -fx-padding: 10 20 10 20;"));
             finalizeButton.setOnMouseExited(e -> finalizeButton.setStyle("-fx-background-color: #2196F3; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; -fx-border-radius: 5px; -fx-background-radius: 5px; -fx-padding: 10 20 10 20;"));
 
-            // Aggiunge i comportamenti dei bottoni
             configureButton.setOnAction(e -> configureComponent(componentSelector.getValue()));
             finalizeButton.setOnAction(e -> displayFinalConfiguration());
 
@@ -101,120 +106,136 @@ public class LaptopConfiguratorApp extends Application {
             primaryStage.show();
 
         } else {
-            showError("Errore nel caricamento dell'ontologia.");
+            showError("Error loading the ontology.");
         }
     }
 
-    // Metodo per configurare il componente selezionato
+    /**
+     * Configures the selected laptop component based on user selection.
+     *
+     * @param selectedComponent the component chosen by the user from the ComboBox
+     */
     private void configureComponent(String selectedComponent) {
         if (selectedComponent == null) {
-            showError("Per favore seleziona un componente.");
+            showError("Please select a component.");
             return;
         }
 
         switch (selectedComponent) {
-            case "Sistema Audio":
+            case "Audio System":
                 configureAudioSystem();
                 break;
-            case "Batteria":
+            case "Battery":
                 configureBattery();
                 break;
-            case "Colore":
+            case "Color":
                 configureColour();
                 break;
-            case "Componenti":
+            case "Components":
                 configureComponents();
                 break;
-            case "Sistema di Raffreddamento":
+            case "Cooling System":
                 configureCoolingSystem();
                 break;
-            case "Periferiche":
+            case "Peripherals":
                 configurePeripherals();
                 break;
-            case "Porte":
+            case "Ports":
                 configurePorts();
                 break;
-            case "Sicurezza":
+            case "Security":
                 configureSecurity();
                 break;
-            case "Garanzia":
+            case "Warranty":
                 configureWarranty();
                 break;
             default:
-                showError("Opzione non valida.");
+                showError("Invalid option.");
         }
     }
 
+    /**
+     * Configures the audio system component.
+     */
     private void configureAudioSystem() {
         List<AudioSystem> audioSystems = queryService.getAudioSystemComponents(laptop);
         if (audioSystems.isEmpty()) {
-            showError("Nessun sistema audio trovato.");
+            showError("No audio system found.");
             return;
         }
 
         ChoiceDialog<AudioSystem> audioDialog = new ChoiceDialog<>(audioSystems.get(0), audioSystems);
-        audioDialog.setTitle("Configurazione Sistema Audio");
-        audioDialog.setHeaderText("Seleziona un sistema audio");
-        audioDialog.setContentText("Sistema Audio:");
+        audioDialog.setTitle("Audio System Configuration");
+        audioDialog.setHeaderText("Select an audio system");
+        audioDialog.setContentText("Audio System:");
 
         audioDialog.showAndWait().ifPresent(selectedAudioSystem -> {
             laptop.setAudioSystem(selectedAudioSystem);
-            showSuccess("Hai aggiunto il sistema audio: " + selectedAudioSystem.getAudioSystemName());
+            showSuccess("You have added the audio system: " + selectedAudioSystem.getAudioSystemName());
         });
     }
 
+    /**
+     * Configures the battery component.
+     */
     private void configureBattery() {
         List<Battery> batteries = queryService.getBatteryComponents(laptop);
         if (batteries.isEmpty()) {
-            showError("Nessuna batteria trovata.");
+            showError("No battery found.");
             return;
         }
 
         ChoiceDialog<Battery> batteryDialog = new ChoiceDialog<>(batteries.get(0), batteries);
-        batteryDialog.setTitle("Configurazione Batteria");
-        batteryDialog.setHeaderText("Seleziona un sistema di batteria");
-        batteryDialog.setContentText("Sistema Batteria:");
+        batteryDialog.setTitle("Battery Configuration");
+        batteryDialog.setHeaderText("Select a battery system");
+        batteryDialog.setContentText("Battery System:");
 
         batteryDialog.showAndWait().ifPresent(selectedbattery -> {
             laptop.setBattery(selectedbattery);
-            showSuccess("Hai aggiunto il sistema di batteria: " + selectedbattery.getBatteryName());
+            showSuccess("You have added the battery system: " + selectedbattery.getBatteryName());
         });
     }
 
+    /**
+     * Configures the color component.
+     */
     private void configureColour() {
         List<Colour> colours = queryService.getColourComponents(laptop);
         if (colours.isEmpty()) {
-            showError("Nessun colore trovato.");
+            showError("No color found.");
             return;
         }
 
         ChoiceDialog<Colour> colourDialog = new ChoiceDialog<>(colours.get(0), colours);
-        colourDialog.setTitle("Configurazione Colore");
-        colourDialog.setHeaderText("Seleziona un sistema di colore");
-        colourDialog.setContentText("Sistema Colore:");
+        colourDialog.setTitle("Color Configuration");
+        colourDialog.setHeaderText("Select a color system");
+        colourDialog.setContentText("Color System:");
 
         colourDialog.showAndWait().ifPresent(selectedcolour -> {
             laptop.setColour(selectedcolour);
-            showSuccess("Hai aggiunto il sistema di colore: " + selectedcolour.getColourName());
+            showSuccess("You have added the color system: " + selectedcolour.getColourName());
         });
     }
 
+    /**
+     * Configures multiple hardware components such as CPU, RAM, Display, and more.
+     */
     private void configureComponents() {
-        // Crea un menu per selezionare il tipo di componente da configurare
+        // Create a menu to select the type of component to configure
         List<String> componentOptions = new ArrayList<>();
         componentOptions.add("CPU");
         componentOptions.add("RAM");
         componentOptions.add("Display");
         componentOptions.add("Graphics Card");
-        componentOptions.add("Sistema Operativo");
+        componentOptions.add("Operating System");
         componentOptions.add("Storage");
 
         ChoiceDialog<String> componentDialog = new ChoiceDialog<>(componentOptions.get(0), componentOptions);
-        componentDialog.setTitle("Configurazione Componenti");
-        componentDialog.setHeaderText("Seleziona il componente che vuoi configurare:");
-        componentDialog.setContentText("Componente:");
+        componentDialog.setTitle("Component Configuration");
+        componentDialog.setHeaderText("Select the component you want to configure:");
+        componentDialog.setContentText("Component:");
 
-        // Mostra il dialogo e agisci in base alla scelta
+        // Show the dialog and act based on the choice
         componentDialog.showAndWait().ifPresent(selectedComponent -> {
             switch (selectedComponent) {
                 case "CPU":
@@ -229,168 +250,192 @@ public class LaptopConfiguratorApp extends Application {
                 case "Graphics Card":
                     configureGraphicsCard();
                     break;
-                case "Sistema Operativo":
+                case "Operating System":
                     configureOperatingSystem();
                     break;
                 case "Storage":
                     configureStorage();
                     break;
                 default:
-                    showError("Componente non valido.");
+                    showError("Invalid component.");
             }
         });
     }
 
-        private void configureCPU() {
-            List<CPU> cpuComponents = queryService.getCPUComponents(laptop);
-            if (cpuComponents.isEmpty()) {
-                showError("Nessuna CPU trovata.");
-                return;
-            }
-
-            ChoiceDialog<CPU> cpuDialog = new ChoiceDialog<>(cpuComponents.get(0), cpuComponents);
-            cpuDialog.setTitle("Configurazione CPU");
-            cpuDialog.setHeaderText("Seleziona una CPU:");
-            cpuDialog.setContentText("CPU:");
-
-            cpuDialog.showAndWait().ifPresent(selectedCPU -> {
-                laptop.addOrReplaceComponent(selectedCPU);
-                showSuccess("Hai aggiunto la CPU: " + selectedCPU.getCPUName());
-            });
+    /**
+     * Configures the CPU component.
+     */
+    private void configureCPU() {
+        List<CPU> cpuComponents = queryService.getCPUComponents(laptop);
+        if (cpuComponents.isEmpty()) {
+            showError("No CPU found.");
+            return;
         }
 
-        private void configureRAM() {
-            List<RAM> ramComponents = queryService.getRAMComponents(laptop);
-            if (ramComponents.isEmpty()) {
-                showError("Nessuna RAM trovata.");
-                return;
-            }
+        ChoiceDialog<CPU> cpuDialog = new ChoiceDialog<>(cpuComponents.get(0), cpuComponents);
+        cpuDialog.setTitle("CPU Configuration");
+        cpuDialog.setHeaderText("Select a CPU:");
+        cpuDialog.setContentText("CPU:");
 
-            ChoiceDialog<RAM> ramDialog = new ChoiceDialog<>(ramComponents.get(0), ramComponents);
-            ramDialog.setTitle("Configurazione RAM");
-            ramDialog.setHeaderText("Seleziona una RAM:");
-            ramDialog.setContentText("RAM:");
+        cpuDialog.showAndWait().ifPresent(selectedCPU -> {
+            laptop.addOrReplaceComponent(selectedCPU);
+            showSuccess("You have added the CPU: " + selectedCPU.getCPUName());
+        });
+    }
 
-            ramDialog.showAndWait().ifPresent(selectedRAM -> {
-                laptop.addOrReplaceComponent(selectedRAM);
-                showSuccess("Hai aggiunto la RAM: " + selectedRAM.getRamName() + " con capacita' " + selectedRAM.getRamSize());
-            });
+    /**
+     * Configures the RAM component.
+     */
+    private void configureRAM() {
+        List<RAM> ramComponents = queryService.getRAMComponents(laptop);
+        if (ramComponents.isEmpty()) {
+            showError("No RAM found.");
+            return;
         }
 
-        private void configureDisplay() {
-            List<Display> displayComponents = queryService.getDisplayComponents(laptop);
-            if (displayComponents.isEmpty()) {
-                showError("Nessun display trovato.");
-                return;
-            }
+        ChoiceDialog<RAM> ramDialog = new ChoiceDialog<>(ramComponents.get(0), ramComponents);
+        ramDialog.setTitle("RAM Configuration");
+        ramDialog.setHeaderText("Select a RAM:");
+        ramDialog.setContentText("RAM:");
 
-            ChoiceDialog<Display> displayDialog = new ChoiceDialog<>(displayComponents.get(0), displayComponents);
-            displayDialog.setTitle("Configurazione Display");
-            displayDialog.setHeaderText("Seleziona un Display:");
-            displayDialog.setContentText("Display:");
+        ramDialog.showAndWait().ifPresent(selectedRAM -> {
+            laptop.addOrReplaceComponent(selectedRAM);
+            showSuccess("You have added the RAM: " + selectedRAM.getRamName() + " with capacity " + selectedRAM.getRamSize());
+        });
+    }
 
-            displayDialog.showAndWait().ifPresent(selectedDisplay -> {
-                laptop.addOrReplaceComponent(selectedDisplay);
-                showSuccess("Hai aggiunto il display: " + selectedDisplay.getDisplayName() + " con risoluzione " + selectedDisplay.getDisplayResolution());
-            });
+    /**
+     * Configures the display component.
+     */
+    private void configureDisplay() {
+        List<Display> displayComponents = queryService.getDisplayComponents(laptop);
+        if (displayComponents.isEmpty()) {
+            showError("No display found.");
+            return;
         }
 
-        private void configureGraphicsCard() {
-            List<GraphicsCard> graphicsCardComponents = queryService.getGraphicsCardComponents(laptop);
-            if (graphicsCardComponents.isEmpty()) {
-                showError("Nessuna scheda grafica trovata.");
-                return;
-            }
+        ChoiceDialog<Display> displayDialog = new ChoiceDialog<>(displayComponents.get(0), displayComponents);
+        displayDialog.setTitle("Display Configuration");
+        displayDialog.setHeaderText("Select a Display:");
+        displayDialog.setContentText("Display:");
 
-            ChoiceDialog<GraphicsCard> graphicsCardDialog = new ChoiceDialog<>(graphicsCardComponents.get(0), graphicsCardComponents);
-            graphicsCardDialog.setTitle("Configurazione Scheda Grafica");
-            graphicsCardDialog.setHeaderText("Seleziona una scheda grafica:");
-            graphicsCardDialog.setContentText("Scheda Grafica:");
+        displayDialog.showAndWait().ifPresent(selectedDisplay -> {
+            laptop.addOrReplaceComponent(selectedDisplay);
+            showSuccess("You have added the display: " + selectedDisplay.getDisplayName() + " with resolution " + selectedDisplay.getDisplayResolution());
+        });
+    }
 
-            graphicsCardDialog.showAndWait().ifPresent(selectedGraphicsCard -> {
-                laptop.addOrReplaceComponent(selectedGraphicsCard);
-                showSuccess("Hai aggiunto la scheda grafica: " + selectedGraphicsCard.getGraphicCardName() + " con " + selectedGraphicsCard.getGraphicsMemory() + " di memoria.");
-            });
+    /**
+     * Configures the graphics card component.
+     */
+    private void configureGraphicsCard() {
+        List<GraphicsCard> graphicsCardComponents = queryService.getGraphicsCardComponents(laptop);
+        if (graphicsCardComponents.isEmpty()) {
+            showError("No graphics card found.");
+            return;
         }
 
-        private void configureOperatingSystem() {
-            List<OperatingSystem> osComponents = queryService.getOperatingSystemComponents(laptop);
-            if (osComponents.isEmpty()) {
-                showError("Nessun sistema operativo trovato.");
-                return;
-            }
+        ChoiceDialog<GraphicsCard> graphicsCardDialog = new ChoiceDialog<>(graphicsCardComponents.get(0), graphicsCardComponents);
+        graphicsCardDialog.setTitle("Graphics Card Configuration");
+        graphicsCardDialog.setHeaderText("Select a graphics card:");
+        graphicsCardDialog.setContentText("Graphics Card:");
 
-            ChoiceDialog<OperatingSystem> osDialog = new ChoiceDialog<>(osComponents.get(0), osComponents);
-            osDialog.setTitle("Configurazione Sistema Operativo");
-            osDialog.setHeaderText("Seleziona un Sistema Operativo:");
-            osDialog.setContentText("Sistema Operativo:");
+        graphicsCardDialog.showAndWait().ifPresent(selectedGraphicsCard -> {
+            laptop.addOrReplaceComponent(selectedGraphicsCard);
+            showSuccess("You have added the graphics card: " + selectedGraphicsCard.getGraphicCardName() + " with " + selectedGraphicsCard.getGraphicsMemory() + " memory.");
+        });
+    }
 
-            osDialog.showAndWait().ifPresent(selectedOS -> {
-                laptop.addOrReplaceComponent(selectedOS);
-                showSuccess("Hai aggiunto il sistema operativo: " + selectedOS.getOSName() + " versione " + selectedOS.getOperatingSystemVersion());
-            });
+    /**
+     * Configures the operating system component.
+     */
+    private void configureOperatingSystem() {
+        List<OperatingSystem> osComponents = queryService.getOperatingSystemComponents(laptop);
+        if (osComponents.isEmpty()) {
+            showError("No operating system found.");
+            return;
         }
 
-        private void configureStorage() {
-            List<Storage> storageComponents = queryService.getStorageComponents(laptop);
-            if (storageComponents.isEmpty()) {
-                showError("Nessun componente di storage trovato.");
-                return;
-            }
+        ChoiceDialog<OperatingSystem> osDialog = new ChoiceDialog<>(osComponents.get(0), osComponents);
+        osDialog.setTitle("Operating System Configuration");
+        osDialog.setHeaderText("Select an Operating System:");
+        osDialog.setContentText("Operating System:");
 
-            ChoiceDialog<Storage> storageDialog = new ChoiceDialog<>(storageComponents.get(0), storageComponents);
-            storageDialog.setTitle("Configurazione Storage");
-            storageDialog.setHeaderText("Seleziona uno storage:");
-            storageDialog.setContentText("Storage:");
+        osDialog.showAndWait().ifPresent(selectedOS -> {
+            laptop.addOrReplaceComponent(selectedOS);
+            showSuccess("You have added the operating system: " + selectedOS.getOsName() + " version " + selectedOS.getOperatingSystemVersion());
+        });
+    }
 
-            storageDialog.showAndWait().ifPresent(selectedStorage -> {
-                laptop.addOrReplaceComponent(selectedStorage);
-                showSuccess("Hai aggiunto lo storage: " + selectedStorage.getStorageName() + " con capacità " + selectedStorage.getStorageCapacity() + "GB.");
-            });
+    /**
+     * Configures the storage component.
+     */
+    private void configureStorage() {
+        List<Storage> storageComponents = queryService.getStorageComponents(laptop);
+        if (storageComponents.isEmpty()) {
+            showError("No storage component found.");
+            return;
         }
 
+        ChoiceDialog<Storage> storageDialog = new ChoiceDialog<>(storageComponents.get(0), storageComponents);
+        storageDialog.setTitle("Storage Configuration");
+        storageDialog.setHeaderText("Select a storage:");
+        storageDialog.setContentText("Storage:");
+
+        storageDialog.showAndWait().ifPresent(selectedStorage -> {
+            laptop.addOrReplaceComponent(selectedStorage);
+            showSuccess("You have added the storage: " + selectedStorage.getStorageName() + " with capacity " + selectedStorage.getStorageCapacity() + "GB.");
+        });
+    }
+
+    /**
+     * Configures the cooling system component.
+     */
     private void configureCoolingSystem() {
         List<CoolingSystem> coolingSystems = queryService.getCoolingSystemComponents(laptop);
         if (coolingSystems.isEmpty()) {
-            showError("Nessun sistema di raffreddamento trovato.");
+            showError("No cooling system found.");
             return;
         }
 
         ChoiceDialog<CoolingSystem> coolingDialog = new ChoiceDialog<>(coolingSystems.get(0), coolingSystems);
-        coolingDialog.setTitle("Configurazione Sistema di Raffreddamento");
-        coolingDialog.setHeaderText("Seleziona un sistema di raffreddamento");
-        coolingDialog.setContentText("Sistema di Raffreddamento:");
+        coolingDialog.setTitle("Cooling System Configuration");
+        coolingDialog.setHeaderText("Select a cooling system");
+        coolingDialog.setContentText("Cooling System:");
 
         coolingDialog.showAndWait().ifPresent(selectedCoolingSystem -> {
             laptop.setCoolingSystem(selectedCoolingSystem);
-            showSuccess("Hai aggiunto il sistema di raffreddamento: " + selectedCoolingSystem.getCoolingSystemName());
+            showSuccess("You have added the cooling system: " + selectedCoolingSystem.getCoolingSystemName());
         });
     }
 
+    /**
+     * Configures peripherals like monitors, speakers, keyboards, and more.
+     */
     private void configurePeripherals() {
-        // Crea un menu per selezionare la periferica da configurare
+        // Create a menu to select the peripheral to configure
         List<String> peripheralOptions = new ArrayList<>();
-        peripheralOptions.add("Monitor Esterno");
-        peripheralOptions.add("Speaker Esterno");
-        peripheralOptions.add("Tastiera");
+        peripheralOptions.add("External Monitor");
+        peripheralOptions.add("External Speaker");
+        peripheralOptions.add("Keyboard");
         peripheralOptions.add("Mouse");
         peripheralOptions.add("Webcam");
 
         ChoiceDialog<String> peripheralDialog = new ChoiceDialog<>(peripheralOptions.get(0), peripheralOptions);
-        peripheralDialog.setTitle("Configurazione Periferiche");
-        peripheralDialog.setHeaderText("Seleziona la periferica che vuoi configurare:");
-        peripheralDialog.setContentText("Periferica:");
+        peripheralDialog.setTitle("Peripheral Configuration");
+        peripheralDialog.setHeaderText("Select the peripheral you want to configure:");
+        peripheralDialog.setContentText("Peripheral:");
 
-        // Mostra il dialogo e agisci in base alla scelta
+        // Show the dialog and act based on the choice
         peripheralDialog.showAndWait().ifPresent(selectedPeripheral -> {
             switch (selectedPeripheral) {
-                case "Monitor Esterno":
+                case "External Monitor":
                     configureExternalMonitor();
                     break;
-                case "Speaker Esterno":
+                case "External Speaker":
                     configureExternalSpeaker();
                     break;
-                case "Tastiera":
+                case "Keyboard":
                     configureKeyboard();
                     break;
                 case "Mouse":
@@ -400,114 +445,132 @@ public class LaptopConfiguratorApp extends Application {
                     configureWebcam();
                     break;
                 default:
-                    showError("Periferica non valida.");
+                    showError("Invalid peripheral.");
             }
         });
     }
 
-        private void configureExternalMonitor() {
-            List<ExternalMonitor> monitorComponents = queryService.getExternalMonitorComponents(laptop);
-            if (monitorComponents.isEmpty()) {
-                showError("Nessun monitor esterno trovato.");
-                return;
-            }
-
-            ChoiceDialog<ExternalMonitor> monitorDialog = new ChoiceDialog<>(monitorComponents.get(0), monitorComponents);
-            monitorDialog.setTitle("Configurazione Monitor Esterno");
-            monitorDialog.setHeaderText("Seleziona un monitor esterno:");
-            monitorDialog.setContentText("Monitor:");
-
-            monitorDialog.showAndWait().ifPresent(selectedMonitor -> {
-                laptop.addOrReplacePeripheral(selectedMonitor);
-                showSuccess("Hai aggiunto il monitor esterno: " + selectedMonitor.getExMonitorName() + " con risoluzione " + selectedMonitor.getExternalDisplayResolution());
-            });
+    /**
+     * Configures the external monitor peripheral.
+     */
+    private void configureExternalMonitor() {
+        List<ExternalMonitor> monitorComponents = queryService.getExternalMonitorComponents(laptop);
+        if (monitorComponents.isEmpty()) {
+            showError("No external monitor found.");
+            return;
         }
 
-        private void configureExternalSpeaker() {
-            List<ExternalSpeaker> speakerComponents = queryService.getExternalSpeakerComponents(laptop);
-            if (speakerComponents.isEmpty()) {
-                showError("Nessun speaker esterno trovato.");
-                return;
-            }
+        ChoiceDialog<ExternalMonitor> monitorDialog = new ChoiceDialog<>(monitorComponents.get(0), monitorComponents);
+        monitorDialog.setTitle("External Monitor Configuration");
+        monitorDialog.setHeaderText("Select an external monitor:");
+        monitorDialog.setContentText("Monitor:");
 
-            ChoiceDialog<ExternalSpeaker> speakerDialog = new ChoiceDialog<>(speakerComponents.get(0), speakerComponents);
-            speakerDialog.setTitle("Configurazione Speaker Esterno");
-            speakerDialog.setHeaderText("Seleziona uno speaker esterno:");
-            speakerDialog.setContentText("Speaker:");
+        monitorDialog.showAndWait().ifPresent(selectedMonitor -> {
+            laptop.addOrReplacePeripheral(selectedMonitor);
+            showSuccess("You have added the external monitor: " + selectedMonitor.getExMonitorName() + " with resolution " + selectedMonitor.getExternalDisplayResolution());
+        });
+    }
 
-            speakerDialog.showAndWait().ifPresent(selectedSpeaker -> {
-                laptop.addOrReplacePeripheral(selectedSpeaker);
-                showSuccess("Hai aggiunto lo speaker esterno: " + selectedSpeaker.getExSpeakerName() + " di tipo " + selectedSpeaker.getExternalAudioSystemType());
-            });
+    /**
+     * Configures the external speaker peripheral.
+     */
+    private void configureExternalSpeaker() {
+        List<ExternalSpeaker> speakerComponents = queryService.getExternalSpeakerComponents(laptop);
+        if (speakerComponents.isEmpty()) {
+            showError("No external speaker found.");
+            return;
         }
 
-        private void configureKeyboard() {
-            List<Keyboard> keyboardComponents = queryService.getKeyboardComponents(laptop);
-            if (keyboardComponents.isEmpty()) {
-                showError("Nessuna tastiera trovata.");
-                return;
-            }
+        ChoiceDialog<ExternalSpeaker> speakerDialog = new ChoiceDialog<>(speakerComponents.get(0), speakerComponents);
+        speakerDialog.setTitle("External Speaker Configuration");
+        speakerDialog.setHeaderText("Select an external speaker:");
+        speakerDialog.setContentText("Speaker:");
 
-            ChoiceDialog<Keyboard> keyboardDialog = new ChoiceDialog<>(keyboardComponents.get(0), keyboardComponents);
-            keyboardDialog.setTitle("Configurazione Tastiera");
-            keyboardDialog.setHeaderText("Seleziona una tastiera:");
-            keyboardDialog.setContentText("Tastiera:");
+        speakerDialog.showAndWait().ifPresent(selectedSpeaker -> {
+            laptop.addOrReplacePeripheral(selectedSpeaker);
+            showSuccess("You have added the external speaker: " + selectedSpeaker.getExSpeakerName() + " of type " + selectedSpeaker.getExternalAudioSystemType());
+        });
+    }
 
-            keyboardDialog.showAndWait().ifPresent(selectedKeyboard -> {
-                laptop.addOrReplacePeripheral(selectedKeyboard);
-                showSuccess("Hai aggiunto la tastiera: " + selectedKeyboard.getKeyboardName() + " con layout " + selectedKeyboard.getKeyboardLayout());
-            });
+    /**
+     * Configures the keyboard peripheral.
+     */
+    private void configureKeyboard() {
+        List<Keyboard> keyboardComponents = queryService.getKeyboardComponents(laptop);
+        if (keyboardComponents.isEmpty()) {
+            showError("No keyboard found.");
+            return;
         }
 
-        private void configureMouse() {
-            List<Mouse> mouseComponents = queryService.getMouseComponents(laptop);
-            if (mouseComponents.isEmpty()) {
-                showError("Nessun mouse trovato.");
-                return;
-            }
+        ChoiceDialog<Keyboard> keyboardDialog = new ChoiceDialog<>(keyboardComponents.get(0), keyboardComponents);
+        keyboardDialog.setTitle("Keyboard Configuration");
+        keyboardDialog.setHeaderText("Select a keyboard:");
+        keyboardDialog.setContentText("Keyboard:");
 
-            ChoiceDialog<Mouse> mouseDialog = new ChoiceDialog<>(mouseComponents.get(0), mouseComponents);
-            mouseDialog.setTitle("Configurazione Mouse");
-            mouseDialog.setHeaderText("Seleziona un mouse:");
-            mouseDialog.setContentText("Mouse:");
+        keyboardDialog.showAndWait().ifPresent(selectedKeyboard -> {
+            laptop.addOrReplacePeripheral(selectedKeyboard);
+            showSuccess("You have added the keyboard: " + selectedKeyboard.getKeyboardName() + " with layout " + selectedKeyboard.getKeyboardLayout());
+        });
+    }
 
-            mouseDialog.showAndWait().ifPresent(selectedMouse -> {
-                laptop.addOrReplacePeripheral(selectedMouse);
-                showSuccess("Hai aggiunto il mouse: " + selectedMouse.getMouseName() + " di tipo " + selectedMouse.getMouseType());
-            });
+    /**
+     * Configures the mouse peripheral.
+     */
+    private void configureMouse() {
+        List<Mouse> mouseComponents = queryService.getMouseComponents(laptop);
+        if (mouseComponents.isEmpty()) {
+            showError("No mouse found.");
+            return;
         }
 
-        private void configureWebcam() {
-            List<Webcam> webcamComponents = queryService.getWebcamComponents(laptop);
-            if (webcamComponents.isEmpty()) {
-                showError("Nessuna webcam trovata.");
-                return;
-            }
+        ChoiceDialog<Mouse> mouseDialog = new ChoiceDialog<>(mouseComponents.get(0), mouseComponents);
+        mouseDialog.setTitle("Mouse Configuration");
+        mouseDialog.setHeaderText("Select a mouse:");
+        mouseDialog.setContentText("Mouse:");
 
-            ChoiceDialog<Webcam> webcamDialog = new ChoiceDialog<>(webcamComponents.get(0), webcamComponents);
-            webcamDialog.setTitle("Configurazione Webcam");
-            webcamDialog.setHeaderText("Seleziona una webcam:");
-            webcamDialog.setContentText("Webcam:");
+        mouseDialog.showAndWait().ifPresent(selectedMouse -> {
+            laptop.addOrReplacePeripheral(selectedMouse);
+            showSuccess("You have added the mouse: " + selectedMouse.getMouseName() + " of type " + selectedMouse.getMouseType());
+        });
+    }
 
-            webcamDialog.showAndWait().ifPresent(selectedWebcam -> {
-                laptop.addOrReplacePeripheral(selectedWebcam);
-                showSuccess("Hai aggiunto la webcam: " + selectedWebcam.getWebcamName() + " con risoluzione " + selectedWebcam.getWebcamResolution());
-            });
+    /**
+     * Configures the webcam peripheral.
+     */
+    private void configureWebcam() {
+        List<Webcam> webcamComponents = queryService.getWebcamComponents(laptop);
+        if (webcamComponents.isEmpty()) {
+            showError("No webcam found.");
+            return;
         }
 
+        ChoiceDialog<Webcam> webcamDialog = new ChoiceDialog<>(webcamComponents.get(0), webcamComponents);
+        webcamDialog.setTitle("Webcam Configuration");
+        webcamDialog.setHeaderText("Select a webcam:");
+        webcamDialog.setContentText("Webcam:");
+
+        webcamDialog.showAndWait().ifPresent(selectedWebcam -> {
+            laptop.addOrReplacePeripheral(selectedWebcam);
+            showSuccess("You have added the webcam: " + selectedWebcam.getWebcamName() + " with resolution " + selectedWebcam.getWebcamResolution());
+        });
+    }
+
+    /**
+     * Configures ports like Ethernet, USB, and HDMI.
+     */
     private void configurePorts() {
-        // Crea un menu per selezionare la porta da configurare
+        // Create a menu to select the port to configure
         List<String> portOptions = new ArrayList<>();
         portOptions.add("Ethernet");
         portOptions.add("USB");
         portOptions.add("HDMI");
 
         ChoiceDialog<String> portDialog = new ChoiceDialog<>(portOptions.get(0), portOptions);
-        portDialog.setTitle("Configurazione Porte");
-        portDialog.setHeaderText("Seleziona il tipo di porta che vuoi configurare:");
-        portDialog.setContentText("Porta:");
+        portDialog.setTitle("Port Configuration");
+        portDialog.setHeaderText("Select the type of port you want to configure:");
+        portDialog.setContentText("Port:");
 
-        // Mostra il dialogo e agisci in base alla scelta
+        // Show the dialog and act based on the choice
         portDialog.showAndWait().ifPresent(selectedPort -> {
             switch (selectedPort) {
                 case "Ethernet":
@@ -520,226 +583,250 @@ public class LaptopConfiguratorApp extends Application {
                     configureHDMI();
                     break;
                 default:
-                    showError("Tipo di porta non valida.");
+                    showError("Invalid port type.");
             }
         });
     }
 
-        private void configureEthernet() {
-            List<Ethernet> ethernetComponents = queryService.getEthernetComponents(laptop);
-            if (ethernetComponents.isEmpty()) {
-                showError("Nessuna porta Ethernet trovata.");
-                return;
-            }
-
-            ChoiceDialog<Ethernet> ethernetDialog = new ChoiceDialog<>(ethernetComponents.get(0), ethernetComponents);
-            ethernetDialog.setTitle("Configurazione Porta Ethernet");
-            ethernetDialog.setHeaderText("Seleziona una porta Ethernet:");
-            ethernetDialog.setContentText("Ethernet:");
-
-            ethernetDialog.showAndWait().ifPresent(selectedEthernet -> {
-                laptop.addOrReplacePort(selectedEthernet);
-                showSuccess("Hai aggiunto la porta Ethernet: " + selectedEthernet.getEthernetName() + " con velocità " + selectedEthernet.getEthernetSpeed());
-            });
+    /**
+     * Configures the Ethernet port.
+     */
+    private void configureEthernet() {
+        List<Ethernet> ethernetComponents = queryService.getEthernetComponents(laptop);
+        if (ethernetComponents.isEmpty()) {
+            showError("No Ethernet port found.");
+            return;
         }
 
-        private void configureUSB() {
-            List<USB> usbComponents = queryService.getUSBComponents(laptop);
-            if (usbComponents.isEmpty()) {
-                showError("Nessuna porta USB trovata.");
-                return;
-            }
+        ChoiceDialog<Ethernet> ethernetDialog = new ChoiceDialog<>(ethernetComponents.get(0), ethernetComponents);
+        ethernetDialog.setTitle("Ethernet Port Configuration");
+        ethernetDialog.setHeaderText("Select an Ethernet port:");
+        ethernetDialog.setContentText("Ethernet:");
 
-            ChoiceDialog<USB> usbDialog = new ChoiceDialog<>(usbComponents.get(0), usbComponents);
-            usbDialog.setTitle("Configurazione Porta USB");
-            usbDialog.setHeaderText("Seleziona una porta USB:");
-            usbDialog.setContentText("USB:");
+        ethernetDialog.showAndWait().ifPresent(selectedEthernet -> {
+            laptop.addOrReplacePort(selectedEthernet);
+            showSuccess("You have added the Ethernet port: " + selectedEthernet.getEthernetName() + " with speed " + selectedEthernet.getEthernetSpeed());
+        });
+    }
 
-            usbDialog.showAndWait().ifPresent(selectedUSB -> {
-                laptop.addOrReplacePort(selectedUSB);
-                showSuccess("Hai aggiunto la porta USB: " + selectedUSB.getUSBName() + " con versione " + selectedUSB.getUSBVersion());
-            });
+    /**
+     * Configures the USB port.
+     */
+    private void configureUSB() {
+        List<USB> usbComponents = queryService.getUSBComponents(laptop);
+        if (usbComponents.isEmpty()) {
+            showError("No USB port found.");
+            return;
         }
 
-        private void configureHDMI() {
-            List<HDMI> hdmiComponents = queryService.getHDMIComponents(laptop);
-            if (hdmiComponents.isEmpty()) {
-                showError("Nessuna porta HDMI trovata.");
-                return;
-            }
+        ChoiceDialog<USB> usbDialog = new ChoiceDialog<>(usbComponents.get(0), usbComponents);
+        usbDialog.setTitle("USB Port Configuration");
+        usbDialog.setHeaderText("Select a USB port:");
+        usbDialog.setContentText("USB:");
 
-            ChoiceDialog<HDMI> hdmiDialog = new ChoiceDialog<>(hdmiComponents.get(0), hdmiComponents);
-            hdmiDialog.setTitle("Configurazione Porta HDMI");
-            hdmiDialog.setHeaderText("Seleziona una porta HDMI:");
-            hdmiDialog.setContentText("HDMI:");
+        usbDialog.showAndWait().ifPresent(selectedUSB -> {
+            laptop.addOrReplacePort(selectedUSB);
+            showSuccess("You have added the USB port: " + selectedUSB.getUsbName() + " with version " + selectedUSB.getUsbVersion());
+        });
+    }
 
-            hdmiDialog.showAndWait().ifPresent(selectedHDMI -> {
-                laptop.addOrReplacePort(selectedHDMI);
-                showSuccess("Hai aggiunto la porta HDMI: " + selectedHDMI.getHDMIName() + " con versione " + selectedHDMI.getHDMIVersion());
-            });
+    /**
+     * Configures the HDMI port.
+     */
+    private void configureHDMI() {
+        List<HDMI> hdmiComponents = queryService.getHDMIComponents(laptop);
+        if (hdmiComponents.isEmpty()) {
+            showError("No HDMI port found.");
+            return;
         }
 
+        ChoiceDialog<HDMI> hdmiDialog = new ChoiceDialog<>(hdmiComponents.get(0), hdmiComponents);
+        hdmiDialog.setTitle("HDMI Port Configuration");
+        hdmiDialog.setHeaderText("Select an HDMI port:");
+        hdmiDialog.setContentText("HDMI:");
+
+        hdmiDialog.showAndWait().ifPresent(selectedHDMI -> {
+            laptop.addOrReplacePort(selectedHDMI);
+            showSuccess("You have added the HDMI port: " + selectedHDMI.getHDMIName() + " with version " + selectedHDMI.getHDMIVersion());
+        });
+    }
+
+    /**
+     * Configures the security components such as antivirus and protection features.
+     */
     private void configureSecurity() {
-        // Crea un menu per selezionare la tipologia di sicurezza da configurare
+        // Create a menu to select the type of security to configure
         List<String> securityOptions = new ArrayList<>();
         securityOptions.add("Antivirus");
-        securityOptions.add("Funzione di Protezione");
+        securityOptions.add("Protection Feature");
 
         ChoiceDialog<String> securityDialog = new ChoiceDialog<>(securityOptions.get(0), securityOptions);
-        securityDialog.setTitle("Configurazione Sicurezza");
-        securityDialog.setHeaderText("Seleziona il tipo di sicurezza che vuoi configurare:");
-        securityDialog.setContentText("Sicurezza:");
+        securityDialog.setTitle("Security Configuration");
+        securityDialog.setHeaderText("Select the type of security you want to configure:");
+        securityDialog.setContentText("Security:");
 
-        // Mostra il dialogo e agisci in base alla scelta
+        // Show the dialog and act based on the choice
         securityDialog.showAndWait().ifPresent(selectedSecurity -> {
             switch (selectedSecurity) {
                 case "Antivirus":
                     configureAntivirus();
                     break;
-                case "Funzione di Protezione":
+                case "Protection Feature":
                     configureProtectionFeature();
                     break;
                 default:
-                    showError("Tipo di sicurezza non valida.");
+                    showError("Invalid security type.");
             }
         });
     }
 
-        private void configureAntivirus() {
-            List<Antivirus> antivirusComponents = queryService.getAntivirusComponents(laptop);
-            if (antivirusComponents.isEmpty()) {
-                showError("Nessun antivirus trovato.");
-                return;
-            }
-
-            ChoiceDialog<Antivirus> antivirusDialog = new ChoiceDialog<>(antivirusComponents.get(0), antivirusComponents);
-            antivirusDialog.setTitle("Configurazione Antivirus");
-            antivirusDialog.setHeaderText("Seleziona un antivirus:");
-            antivirusDialog.setContentText("Antivirus:");
-
-            antivirusDialog.showAndWait().ifPresent(selectedAntivirus -> {
-                laptop.addOrReplaceSecurity(selectedAntivirus);
-                showSuccess("Hai aggiunto l'antivirus: " + selectedAntivirus.getAntivirusName() + " con versione " + selectedAntivirus.getAntivirusVersion());
-            });
+    /**
+     * Configures the antivirus component.
+     */
+    private void configureAntivirus() {
+        List<Antivirus> antivirusComponents = queryService.getAntivirusComponents(laptop);
+        if (antivirusComponents.isEmpty()) {
+            showError("No antivirus found.");
+            return;
         }
 
-        private void configureProtectionFeature() {
-            List<ProtectionFeature> protectionFeatureComponents = queryService.getProtectionFeatureComponents(laptop);
-            if (protectionFeatureComponents.isEmpty()) {
-                showError("Nessuna funzione di protezione trovata.");
-                return;
-            }
+        ChoiceDialog<Antivirus> antivirusDialog = new ChoiceDialog<>(antivirusComponents.get(0), antivirusComponents);
+        antivirusDialog.setTitle("Antivirus Configuration");
+        antivirusDialog.setHeaderText("Select an antivirus:");
+        antivirusDialog.setContentText("Antivirus:");
 
-            ChoiceDialog<ProtectionFeature> protectionDialog = new ChoiceDialog<>(protectionFeatureComponents.get(0), protectionFeatureComponents);
-            protectionDialog.setTitle("Configurazione Funzione di Protezione");
-            protectionDialog.setHeaderText("Seleziona una funzione di protezione:");
-            protectionDialog.setContentText("Funzione di Protezione:");
+        antivirusDialog.showAndWait().ifPresent(selectedAntivirus -> {
+            laptop.addOrReplaceSecurity(selectedAntivirus);
+            showSuccess("You have added the antivirus: " + selectedAntivirus.getAntivirusName() + " with version " + selectedAntivirus.getAntivirusVersion());
+        });
+    }
 
-            protectionDialog.showAndWait().ifPresent(selectedProtectionFeature -> {
-                laptop.addOrReplaceSecurity(selectedProtectionFeature);
-                showSuccess("Hai aggiunto la funzione di protezione: " + selectedProtectionFeature.getProtectionFeatureName() + " di tipo " + selectedProtectionFeature.getTypeProtectionFeature());
-            });
+    /**
+     * Configures the protection feature component.
+     */
+    private void configureProtectionFeature() {
+        List<ProtectionFeature> protectionFeatureComponents = queryService.getProtectionFeatureComponents(laptop);
+        if (protectionFeatureComponents.isEmpty()) {
+            showError("No protection feature found.");
+            return;
         }
 
+        ChoiceDialog<ProtectionFeature> protectionDialog = new ChoiceDialog<>(protectionFeatureComponents.get(0), protectionFeatureComponents);
+        protectionDialog.setTitle("Protection Feature Configuration");
+        protectionDialog.setHeaderText("Select a protection feature:");
+        protectionDialog.setContentText("Protection Feature:");
+
+        protectionDialog.showAndWait().ifPresent(selectedProtectionFeature -> {
+            laptop.addOrReplaceSecurity(selectedProtectionFeature);
+            showSuccess("You have added the protection feature: " + selectedProtectionFeature.getProtectionFeatureName() + " of type " + selectedProtectionFeature.getTypeProtectionFeature());
+        });
+    }
+
+    /**
+     * Configures the warranty component.
+     */
     private void configureWarranty() {
         List<Warranty> warranties = queryService.getWarrantyComponents(laptop);
         if (warranties.isEmpty()) {
-            showError("Nessuna garanzia trovata.");
+            showError("No warranty found.");
             return;
         }
 
         ChoiceDialog<Warranty> warrantyDialog = new ChoiceDialog<>(warranties.get(0), warranties);
-        warrantyDialog.setTitle("Configurazione Garanzia");
-        warrantyDialog.setHeaderText("Seleziona una garanzia");
-        warrantyDialog.setContentText("Garanzia:");
+        warrantyDialog.setTitle("Warranty Configuration");
+        warrantyDialog.setHeaderText("Select a warranty");
+        warrantyDialog.setContentText("Warranty:");
 
         warrantyDialog.showAndWait().ifPresent(selectedWarranty -> {
             laptop.setWarranty(selectedWarranty);
-            showSuccess("Hai aggiunto la garanzia: " + selectedWarranty.getWarrantyName());
+            showSuccess("You have added the warranty: " + selectedWarranty.getWarrantyName());
         });
     }
 
+    /**
+     * Displays the final configuration of the laptop, showing all selected components.
+     */
     private void displayFinalConfiguration() {
-        VBox root = new VBox(10); // Layout verticale per le informazioni
+        VBox root = new VBox(10); // Vertical layout for information
         root.setAlignment(Pos.TOP_LEFT);
 
-        String iconPath = "/icons/"; // Assicurati che le icone siano qui
+        String iconPath = "/icons/"; // Ensure the icons are here
 
-        // Titolo Laptop
-        Label laptopNameLabel = new Label("Nome del Laptop:");
+        // Laptop Title
+        Label laptopNameLabel = new Label("Laptop Name:");
         laptopNameLabel.setStyle("-fx-font-weight: bold;");
         Label laptopName = new Label(laptop.getLaptopName());
 
         root.getChildren().addAll(laptopNameLabel, laptopName);
 
-        // Sistema Audio
+        // Audio System
         if (laptop.getAudioSystem() != null) {
             AudioSystem audioSystem = laptop.getAudioSystem();
             HBox audioBox = new HBox(10);
             ImageView audioIcon = loadIcon(iconPath + "audio.png");
-            Label audioLabel = new Label("Sistema Audio:");
+            Label audioLabel = new Label("Audio System:");
             audioLabel.setStyle("-fx-font-weight: bold;");
-            Label audioDetails = new Label(audioSystem.getAudioSystemName() + " - Tipo: " + audioSystem.getAudioSystemType());
+            Label audioDetails = new Label(audioSystem.getAudioSystemName() + " - Type: " + audioSystem.getAudioSystemType());
 
             audioBox.getChildren().addAll(audioIcon, audioLabel, audioDetails);
             root.getChildren().add(audioBox);
         }
 
-        // Batteria
+        // Battery
         if (laptop.getBattery() != null) {
             Battery battery = laptop.getBattery();
             HBox batteryBox = new HBox(10);
             ImageView batteryIcon = loadIcon(iconPath + "battery.png");
-            Label batteryLabel = new Label("Batteria:");
+            Label batteryLabel = new Label("Battery:");
             batteryLabel.setStyle("-fx-font-weight: bold;");
-            Label batteryDetails = new Label(battery.getBatteryName() + " - Capacita': " + String.format("%.2f mAh", battery.getBatteryCapacity()));
+            Label batteryDetails = new Label(battery.getBatteryName() + " - Capacity: " + String.format("%.2f mAh", battery.getBatteryCapacity()));
 
             batteryBox.getChildren().addAll(batteryIcon, batteryLabel, batteryDetails);
             root.getChildren().add(batteryBox);
         }
 
-        // Colore
+        // Color
         if (laptop.getColour() != null) {
             Colour colour = laptop.getColour();
             HBox colourBox = new HBox(10);
             ImageView colourIcon = loadIcon(iconPath + "colour.png");
-            Label colourLabel = new Label("Colore:");
+            Label colourLabel = new Label("Color:");
             colourLabel.setStyle("-fx-font-weight: bold;");
             Label colourDetails = new Label(colour.getColourName());
 
             colourBox.getChildren().addAll(colourIcon, colourLabel, colourDetails);
             root.getChildren().add(colourBox);
         }
-        // Sistema di Raffreddamento
+        // Cooling System
         if (laptop.getCoolingSystem() != null) {
             CoolingSystem coolingSystem = laptop.getCoolingSystem();
             HBox coolingBox = new HBox(10);
             ImageView coolingIcon = loadIcon(iconPath + "cooling.png");
-            Label coolingLabel = new Label("Sistema di Raffreddamento:");
+            Label coolingLabel = new Label("Cooling System:");
             coolingLabel.setStyle("-fx-font-weight: bold;");
-            Label coolingDetails = new Label(coolingSystem.getCoolingSystemName() + " - Tipo: " + coolingSystem.getCoolingSystemType());
+            Label coolingDetails = new Label(coolingSystem.getCoolingSystemName() + " - Type: " + coolingSystem.getCoolingSystemType());
 
             coolingBox.getChildren().addAll(coolingIcon, coolingLabel, coolingDetails);
             root.getChildren().add(coolingBox);
         }
 
-        // Garanzia
+        // Warranty
         if (laptop.getWarranty() != null) {
             Warranty warranty = laptop.getWarranty();
             HBox warrantyBox = new HBox(10);
             ImageView warrantyIcon = loadIcon(iconPath + "warranty.png");
-            Label warrantyLabel = new Label("Garanzia:");
+            Label warrantyLabel = new Label("Warranty:");
             warrantyLabel.setStyle("-fx-font-weight: bold;");
-            Label warrantyDetails = new Label(warranty.getWarrantyName() + " - Durata: " + warranty.getWarrantyPeriod() + " anni");
+            Label warrantyDetails = new Label(warranty.getWarrantyName() + " - Duration: " + warranty.getWarrantyPeriod() + " years");
 
             warrantyBox.getChildren().addAll(warrantyIcon, warrantyLabel, warrantyDetails);
             root.getChildren().add(warrantyBox);
         }
 
 
-        // Componenti
+        // Components
         if (!laptop.getComponents().isEmpty()) {
-            Label componentTitle = new Label("Componenti:");
+            Label componentTitle = new Label("Components:");
             componentTitle.setStyle("-fx-font-weight: bold;");
             root.getChildren().add(componentTitle);
 
@@ -751,27 +838,27 @@ public class LaptopConfiguratorApp extends Application {
                 if (component instanceof RAM) {
                     componentIcon = loadIcon(iconPath + "ram.png");
                     RAM ram = (RAM) component;
-                    componentDetails = new Label("RAM: " + ram.getRamName() + " - Dimensione: " + ram.getRamSize());
+                    componentDetails = new Label("RAM: " + ram.getRamName() + " - Size: " + ram.getRamSize());
                 } else if (component instanceof CPU) {
                     componentIcon = loadIcon(iconPath + "cpu.png");
                     CPU cpu = (CPU) component;
-                    componentDetails = new Label("CPU: " + cpu.getCPUName() + " - Velocita': " + cpu.getCpuSpeed());
+                    componentDetails = new Label("CPU: " + cpu.getCPUName() + " - Speed: " + cpu.getCpuSpeed());
                 } else if (component instanceof Display) {
                     componentIcon = loadIcon(iconPath + "display.png");
                     Display display = (Display) component;
-                    componentDetails = new Label("Display: " + display.getDisplayName() + " - Risoluzione: " + display.getDisplayResolution());
+                    componentDetails = new Label("Display: " + display.getDisplayName() + " - Resolution: " + display.getDisplayResolution());
                 } else if (component instanceof GraphicsCard) {
                     componentIcon = loadIcon(iconPath + "graphics.png");
                     GraphicsCard graphicsCard = (GraphicsCard) component;
-                    componentDetails = new Label("Scheda Grafica: " + graphicsCard.getGraphicCardName() + " - Memoria: " + graphicsCard.getGraphicsMemory());
+                    componentDetails = new Label("Graphics Card: " + graphicsCard.getGraphicCardName() + " - Memory: " + graphicsCard.getGraphicsMemory());
                 } else if (component instanceof OperatingSystem) {
                     componentIcon = loadIcon(iconPath + "os.png");
                     OperatingSystem os = (OperatingSystem) component;
-                    componentDetails = new Label("Sistema Operativo: " + os.getOSName() + " - Versione: " + os.getOperatingSystemVersion());
+                    componentDetails = new Label("Operating System: " + os.getOsName() + " - Version: " + os.getOperatingSystemVersion());
                 } else if (component instanceof Storage) {
                     componentIcon = loadIcon(iconPath + "storage.png");
                     Storage storage = (Storage) component;
-                    componentDetails = new Label("Memoria: " + storage.getStorageName() + " - Capacita': " + storage.getStorageCapacity());
+                    componentDetails = new Label("Storage: " + storage.getStorageName() + " - Capacity: " + storage.getStorageCapacity());
                 }
 
                 componentBox.getChildren().addAll(componentIcon, componentDetails);
@@ -779,9 +866,9 @@ public class LaptopConfiguratorApp extends Application {
             }
         }
 
-        // Periferiche
+        // Peripherals
         if (!laptop.getPeripherals().isEmpty()) {
-            Label peripheralTitle = new Label("Periferiche:");
+            Label peripheralTitle = new Label("Peripherals:");
             peripheralTitle.setStyle("-fx-font-weight: bold;");
             root.getChildren().add(peripheralTitle);
 
@@ -793,23 +880,23 @@ public class LaptopConfiguratorApp extends Application {
                 if (peripheral instanceof ExternalMonitor) {
                     peripheralIcon = loadIcon(iconPath + "monitor.png");
                     ExternalMonitor monitor = (ExternalMonitor) peripheral;
-                    peripheralDetails = new Label("Monitor Esterno: " + monitor.getExMonitorName() + " - Risoluzione: " + monitor.getExternalDisplayResolution());
+                    peripheralDetails = new Label("External Monitor: " + monitor.getExMonitorName() + " - Resolution: " + monitor.getExternalDisplayResolution());
                 } else if (peripheral instanceof ExternalSpeaker) {
                     peripheralIcon = loadIcon(iconPath + "speaker.png");
                     ExternalSpeaker speaker = (ExternalSpeaker) peripheral;
-                    peripheralDetails = new Label("Speaker Esterno: " + speaker.getExSpeakerName() + " - Tipo: " + speaker.getExternalAudioSystemType());
+                    peripheralDetails = new Label("External Speaker: " + speaker.getExSpeakerName() + " - Type: " + speaker.getExternalAudioSystemType());
                 } else if (peripheral instanceof Keyboard) {
                     peripheralIcon = loadIcon(iconPath + "keyboard.png");
                     Keyboard keyboard = (Keyboard) peripheral;
-                    peripheralDetails = new Label("Tastiera: " + keyboard.getKeyboardName() + " - Layout: " + keyboard.getKeyboardLayout());
+                    peripheralDetails = new Label("Keyboard: " + keyboard.getKeyboardName() + " - Layout: " + keyboard.getKeyboardLayout());
                 } else if (peripheral instanceof Mouse) {
                     peripheralIcon = loadIcon(iconPath + "mouse.png");
                     Mouse mouse = (Mouse) peripheral;
-                    peripheralDetails = new Label("Mouse: " + mouse.getMouseName() + " - Tipo: " + mouse.getMouseType());
+                    peripheralDetails = new Label("Mouse: " + mouse.getMouseName() + " - Type: " + mouse.getMouseType());
                 } else if (peripheral instanceof Webcam) {
                     peripheralIcon = loadIcon(iconPath + "webcam.png");
                     Webcam webcam = (Webcam) peripheral;
-                    peripheralDetails = new Label("Webcam: " + webcam.getWebcamName() + " - Risoluzione: " + webcam.getWebcamResolution());
+                    peripheralDetails = new Label("Webcam: " + webcam.getWebcamName() + " - Resolution: " + webcam.getWebcamResolution());
                 }
 
                 peripheralBox.getChildren().addAll(peripheralIcon, peripheralDetails);
@@ -817,9 +904,9 @@ public class LaptopConfiguratorApp extends Application {
             }
         }
 
-        // Porte
+        // Ports
         if (!laptop.getPorts().isEmpty()) {
-            Label portTitle = new Label("Porte:");
+            Label portTitle = new Label("Ports:");
             portTitle.setStyle("-fx-font-weight: bold;");
             root.getChildren().add(portTitle);
 
@@ -831,15 +918,15 @@ public class LaptopConfiguratorApp extends Application {
                 if (port instanceof Ethernet) {
                     portIcon = loadIcon(iconPath + "ethernet.png");
                     Ethernet ethernet = (Ethernet) port;
-                    portDetails = new Label("Ethernet - Nome: " + ethernet.getEthernetName() + " - Velocita': " + ethernet.getEthernetSpeed());
+                    portDetails = new Label("Ethernet - Name: " + ethernet.getEthernetName() + " - Speed: " + ethernet.getEthernetSpeed());
                 } else if (port instanceof USB) {
                     portIcon = loadIcon(iconPath + "usb.png");
                     USB usb = (USB) port;
-                    portDetails = new Label("USB - Nome: " + usb.getUSBName() + " - Versione: " + usb.getUSBVersion());
+                    portDetails = new Label("USB - Name: " + usb.getUsbName() + " - Version: " + usb.getUsbVersion());
                 } else if (port instanceof HDMI) {
                     portIcon = loadIcon(iconPath + "hdmi.png");
                     HDMI hdmi = (HDMI) port;
-                    portDetails = new Label("HDMI - Nome: " + hdmi.getHDMIName() + " - Versione: " + hdmi.getHDMIVersion());
+                    portDetails = new Label("HDMI - Name: " + hdmi.getHDMIName() + " - Version: " + hdmi.getHDMIVersion());
                 }
 
                 portBox.getChildren().addAll(portIcon, portDetails);
@@ -847,9 +934,9 @@ public class LaptopConfiguratorApp extends Application {
             }
         }
 
-        // Sicurezza
+        // Security
         if (!laptop.getSecurities().isEmpty()) {
-            Label securityTitle = new Label("Sicurezza:");
+            Label securityTitle = new Label("Security:");
             securityTitle.setStyle("-fx-font-weight: bold;");
             root.getChildren().add(securityTitle);
 
@@ -861,11 +948,11 @@ public class LaptopConfiguratorApp extends Application {
                 if (security instanceof Antivirus) {
                     securityIcon = loadIcon(iconPath + "antivirus.png");
                     Antivirus antivirus = (Antivirus) security;
-                    securityDetails = new Label("Antivirus: " + antivirus.getAntivirusName() + " - Versione: " + antivirus.getAntivirusVersion());
+                    securityDetails = new Label("Antivirus: " + antivirus.getAntivirusName() + " - Version: " + antivirus.getAntivirusVersion());
                 } else if (security instanceof ProtectionFeature) {
                     securityIcon = loadIcon(iconPath + "protection.png");
                     ProtectionFeature protection = (ProtectionFeature) security;
-                    securityDetails = new Label("Protezione: " + protection.getProtectionFeatureName() + " - Tipo: " + protection.getTypeProtectionFeature());
+                    securityDetails = new Label("Protection: " + protection.getProtectionFeatureName() + " - Type: " + protection.getTypeProtectionFeature());
                 }
 
                 securityBox.getChildren().addAll(securityIcon, securityDetails);
@@ -873,43 +960,49 @@ public class LaptopConfiguratorApp extends Application {
             }
         }
 
-        // Mostra il contenuto in un dialogo
+        // Show the content in a dialog
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Configurazione Finale");
-        alert.setHeaderText("Ecco la tua configurazione finale:");
+        alert.setTitle("Final Configuration");
+        alert.setHeaderText("Here is your final configuration:");
         alert.getDialogPane().setContent(root);
         alert.showAndWait();
     }
 
-    // Metodo helper per caricare le icone
+    // Helper method to load icons
     private ImageView loadIcon(String path) {
         try {
             Image image = new Image(getClass().getResourceAsStream(path));
             ImageView imageView = new ImageView(image);
-            imageView.setFitWidth(24);  // Imposta la larghezza a 24 pixel
-            imageView.setFitHeight(24); // Imposta l'altezza a 24 pixel
+            imageView.setFitWidth(24);  // Set the width to 24 pixels
+            imageView.setFitHeight(24); // Set the height to 24 pixels
             return imageView;
         } catch (Exception e) {
-            System.out.println("Impossibile caricare l'icona: " + path);
-            return new ImageView(); // Restituisce un'icona vuota in caso di errore
+            System.out.println("Unable to load icon: " + path);
+            return new ImageView(); // Returns an empty icon in case of an error
         }
     }
 
     // Helper methods for showing alerts
     private void showError(String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Errore");
+        alert.setTitle("Error");
         alert.setContentText(message);
         alert.showAndWait();
     }
 
     private void showSuccess(String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Successo");
+        alert.setTitle("Success");
         alert.setContentText(message);
         alert.showAndWait();
     }
 
+    /**
+     * The main method that launches the JavaFX application.
+     * It serves as the entry point for the program.
+     *
+     * @param args command-line arguments (not used in this application)
+     */
     public static void main(String[] args) {
         launch(args);
     }

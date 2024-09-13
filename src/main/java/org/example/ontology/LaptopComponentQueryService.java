@@ -8,16 +8,29 @@ import org.example.configurator.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The LaptopComponentQueryService class provides methods to query different laptop components
+ * (such as RAM, CPU, Display, etc.) from an ontology using SPARQL.
+ */
 public class LaptopComponentQueryService {
 
     private SPARQLQueryExecutor queryExecutor;
 
-    // Costruttore che accetta un esecutore di query SPARQL
+    /**
+     * Constructor that accepts a SPARQL query executor.
+     *
+     * @param queryExecutor The SPARQLQueryExecutor used to execute SPARQL queries.
+     */
     public LaptopComponentQueryService(SPARQLQueryExecutor queryExecutor) {
         this.queryExecutor = queryExecutor;
     }
 
-    // Metodo per ottenere i componenti RAM
+    /**
+     * Retrieves the list of RAM components available for the laptop.
+     *
+     * @param laptop The laptop being configured.
+     * @return A list of RAM components.
+     */
     public List<RAM> getRAMComponents(Laptop laptop) {
         List<RAM> ramList = new ArrayList<>();
 
@@ -39,7 +52,12 @@ public class LaptopComponentQueryService {
         return ramList;
     }
 
-    // Metodo per ottenere i componenti CPU
+    /**
+     * Retrieves the list of CPU components available for the laptop.
+     *
+     * @param laptop The laptop being configured.
+     * @return A list of CPU components.
+     */
     public List<CPU> getCPUComponents(Laptop laptop) {
         List<CPU> cpuList = new ArrayList<>();
 
@@ -61,7 +79,12 @@ public class LaptopComponentQueryService {
         return cpuList;
     }
 
-    // Metodo per ottenere i componenti Display
+    /**
+     * Retrieves the list of Display components available for the laptop.
+     *
+     * @param laptop The laptop being configured.
+     * @return A list of Display components.
+     */
     public List<Display> getDisplayComponents(Laptop laptop) {
         List<Display> displayList = new ArrayList<>();
 
@@ -83,7 +106,12 @@ public class LaptopComponentQueryService {
         return displayList;
     }
 
-    // Metodo per ottenere le Graphics Card
+    /**
+     * Retrieves the list of Graphics Card components available for the laptop.
+     *
+     * @param laptop The laptop being configured.
+     * @return A list of Graphics Card components.
+     */
     public List<GraphicsCard> getGraphicsCardComponents(Laptop laptop) {
         List<GraphicsCard> graphicsCardList = new ArrayList<>();
 
@@ -105,7 +133,12 @@ public class LaptopComponentQueryService {
         return graphicsCardList;
     }
 
-    // Metodo per ottenere i sistemi operativi
+    /**
+     * Retrieves the list of Operating System components available for the laptop.
+     *
+     * @param laptop The laptop being configured.
+     * @return A list of Operating System components.
+     */
     public List<OperatingSystem> getOperatingSystemComponents(Laptop laptop) {
         List<OperatingSystem> operatingSystemList = new ArrayList<>();
 
@@ -127,7 +160,12 @@ public class LaptopComponentQueryService {
         return operatingSystemList;
     }
 
-    // Metodo per ottenere i componenti Storage
+    /**
+     * Retrieves the list of Storage components available for the laptop.
+     *
+     * @param laptop The laptop being configured.
+     * @return A list of Storage components.
+     */
     public List<Storage> getStorageComponents(Laptop laptop) {
         List<Storage> storageList = new ArrayList<>();
 
@@ -149,7 +187,12 @@ public class LaptopComponentQueryService {
         return storageList;
     }
 
-    // Metodo per ottenere i sistemi audio
+    /**
+     * Retrieves the list of Audio System components available for the laptop.
+     *
+     * @param laptop The laptop being configured.
+     * @return A list of Audio System components.
+     */
     public List<AudioSystem> getAudioSystemComponents(Laptop laptop) {
         List<AudioSystem> audioSystemList = new ArrayList<>();
 
@@ -171,7 +214,12 @@ public class LaptopComponentQueryService {
         return audioSystemList;
     }
 
-    // Metodo per ottenere le batterie
+    /**
+     * Retrieves the list of Battery components available for the laptop.
+     *
+     * @param laptop The laptop being configured.
+     * @return A list of Battery components.
+     */
     public List<Battery> getBatteryComponents(Laptop laptop) {
         List<Battery> batteryList = new ArrayList<>();
 
@@ -193,7 +241,12 @@ public class LaptopComponentQueryService {
         return batteryList;
     }
 
-    // Metodo per ottenere i colori
+    /**
+     * Retrieves the list of Colour options available for the laptop.
+     *
+     * @param laptop The laptop being configured.
+     * @return A list of Colour components.
+     */
     public List<Colour> getColourComponents(Laptop laptop) {
         List<Colour> colourList = new ArrayList<>();
 
@@ -213,7 +266,12 @@ public class LaptopComponentQueryService {
         return colourList;
     }
 
-    // Metodo per ottenere i sistemi di raffreddamento
+    /**
+     * Retrieves the list of Cooling System components available for the laptop.
+     *
+     * @param laptop The laptop being configured.
+     * @return A list of Cooling System components.
+     */
     public List<CoolingSystem> getCoolingSystemComponents(Laptop laptop) {
         List<CoolingSystem> coolingSystemList = new ArrayList<>();
 
@@ -235,7 +293,12 @@ public class LaptopComponentQueryService {
         return coolingSystemList;
     }
 
-    // Metodo per ottenere le garanzie
+    /**
+     * Retrieves the list of Warranty options available for the laptop.
+     *
+     * @param laptop The laptop being configured.
+     * @return A list of Warranty components.
+     */
     public List<Warranty> getWarrantyComponents(Laptop laptop) {
         List<Warranty> warrantyList = new ArrayList<>();
 
@@ -257,7 +320,12 @@ public class LaptopComponentQueryService {
         return warrantyList;
     }
 
-    // Metodo per ottenere i monitor esterni
+    /**
+     * Retrieves the list of External Monitor components available for the laptop.
+     *
+     * @param laptop The laptop being configured.
+     * @return A list of External Monitor components.
+     */
     public List<ExternalMonitor> getExternalMonitorComponents(Laptop laptop) {
         List<ExternalMonitor> monitorList = new ArrayList<>();
 
@@ -280,7 +348,12 @@ public class LaptopComponentQueryService {
         return monitorList;
     }
 
-    // Metodo per ottenere gli altoparlanti esterni
+    /**
+     * Retrieves the list of External Speaker components available for the laptop.
+     *
+     * @param laptop The laptop being configured.
+     * @return A list of External Speaker components.
+     */
     public List<ExternalSpeaker> getExternalSpeakerComponents(Laptop laptop) {
         List<ExternalSpeaker> speakerList = new ArrayList<>();
 
@@ -303,7 +376,12 @@ public class LaptopComponentQueryService {
         return speakerList;
     }
 
-    // Metodo per ottenere le tastiere
+    /**
+     * Retrieves the list of Keyboard components available for the laptop.
+     *
+     * @param laptop The laptop being configured.
+     * @return A list of Keyboard components.
+     */
     public List<Keyboard> getKeyboardComponents(Laptop laptop) {
         List<Keyboard> keyboardList = new ArrayList<>();
 
@@ -326,7 +404,12 @@ public class LaptopComponentQueryService {
         return keyboardList;
     }
 
-    // Metodo per ottenere i mouse
+    /**
+     * Retrieves the list of Mouse components available for the laptop.
+     *
+     * @param laptop The laptop being configured.
+     * @return A list of Mouse components.
+     */
     public List<Mouse> getMouseComponents(Laptop laptop) {
         List<Mouse> mouseList = new ArrayList<>();
 
@@ -349,7 +432,12 @@ public class LaptopComponentQueryService {
         return mouseList;
     }
 
-    // Metodo per ottenere le webcam
+    /**
+     * Retrieves the list of Webcam components available for the laptop.
+     *
+     * @param laptop The laptop being configured.
+     * @return A list of Webcam components.
+     */
     public List<Webcam> getWebcamComponents(Laptop laptop) {
         List<Webcam> webcamList = new ArrayList<>();
 
@@ -372,7 +460,12 @@ public class LaptopComponentQueryService {
         return webcamList;
     }
 
-    // Metodo per ottenere le porte Ethernet
+    /**
+     * Retrieves the list of Ethernet port components available for the laptop.
+     *
+     * @param laptop The laptop being configured.
+     * @return A list of Ethernet components.
+     */
     public List<Ethernet> getEthernetComponents(Laptop laptop) {
         List<Ethernet> ethernetList = new ArrayList<>();
 
@@ -395,7 +488,12 @@ public class LaptopComponentQueryService {
         return ethernetList;
     }
 
-    // Metodo per ottenere le porte USB
+    /**
+     * Retrieves the list of USB port components available for the laptop.
+     *
+     * @param laptop The laptop being configured.
+     * @return A list of USB components.
+     */
     public List<USB> getUSBComponents(Laptop laptop) {
         List<USB> usbList = new ArrayList<>();
 
@@ -418,7 +516,12 @@ public class LaptopComponentQueryService {
         return usbList;
     }
 
-    // Metodo per ottenere le porte HDMI
+    /**
+     * Retrieves the list of HDMI port components available for the laptop.
+     *
+     * @param laptop The laptop being configured.
+     * @return A list of HDMI components.
+     */
     public List<HDMI> getHDMIComponents(Laptop laptop) {
         List<HDMI> hdmiList = new ArrayList<>();
 
@@ -441,7 +544,12 @@ public class LaptopComponentQueryService {
         return hdmiList;
     }
 
-    // Metodo per ottenere gli antivirus
+    /**
+     * Retrieves the list of Antivirus components available for the laptop.
+     *
+     * @param laptop The laptop being configured.
+     * @return A list of Antivirus components.
+     */
     public List<Antivirus> getAntivirusComponents(Laptop laptop) {
         List<Antivirus> antivirusList = new ArrayList<>();
 
@@ -462,7 +570,12 @@ public class LaptopComponentQueryService {
         return antivirusList;
     }
 
-    // Metodo per ottenere le caratteristiche di protezione
+    /**
+     * Retrieves the list of Protection Feature components available for the laptop.
+     *
+     * @param laptop The laptop being configured.
+     * @return A list of Protection Feature components.
+     */
     public List<ProtectionFeature> getProtectionFeatureComponents(Laptop laptop) {
         List<ProtectionFeature> protectionFeatureList = new ArrayList<>();
 

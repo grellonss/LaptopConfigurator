@@ -2,50 +2,58 @@ package org.example.ontology;
 
 import org.apache.jena.ontology.OntModel;
 import org.apache.jena.ontology.OntModelSpec;
-import org.apache.jena.query.*;
-import org.apache.jena.rdf.model.Literal;
 import org.apache.jena.rdf.model.ModelFactory;
-import org.apache.jena.rdf.model.Resource;
-import org.example.configurator.*;
 
 import java.io.InputStream;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.List;
 
+/**
+ * This class is responsible for loading an RDF/OWL ontology into a Jena OntModel.
+ */
 public class OntologyLoader {
 
     private OntModel ontologyModel;
 
-    // Costruttore che carica l'ontologia dal file specificato
+    /**
+     * Constructor that loads the ontology from the specified file path.
+     *
+     * @param filePath The file path of the RDF/OWL ontology.
+     */
     public OntologyLoader(String filePath) {
         loadOntology(filePath);
     }
 
-    // Metodo che carica il file RDF/OWL nel modello Jena
+    /**
+     * Loads the RDF/OWL ontology file into the Jena OntModel.
+     *
+     * @param filePath The file path of the ontology to be loaded.
+     */
     private void loadOntology(String filePath) {
         try {
-            // Creazione del modello vuoto
+            // Create an empty ontology model
             ontologyModel = ModelFactory.createOntologyModel(OntModelSpec.OWL_DL_MEM);
 
-            // Caricamento del file RDF/OWL
-            InputStream in =getClass().getClassLoader().getResourceAsStream(filePath);
+            // Load the RDF/OWL file
+            InputStream in = getClass().getClassLoader().getResourceAsStream(filePath);
             if (in == null) {
-                throw new FileNotFoundException("File RDF/OWL non trovato: " + filePath);
+                throw new FileNotFoundException("RDF/OWL file not found: " + filePath);
             }
-            // Caricamento del file RDF/OWL
+            // Read the RDF/OWL file into the ontology model
             ontologyModel.read(in, null);
         } catch (FileNotFoundException e) {
-            System.err.println("File RDF/OWL non trovato: " + e.getMessage());
-        }catch (Exception e) {
-            System.err.println("Errore durante il caricamento dell'ontologia: " + e.getMessage());
+            System.err.println("RDF/OWL file not found: " + e.getMessage());
+        } catch (Exception e) {
+            System.err.println("Error loading the ontology: " + e.getMessage());
         }
     }
 
-    // Restituisce il modello Jena caricato
+    /**
+     * Returns the loaded Jena OntModel containing the ontology.
+     *
+     * @return The loaded ontology model.
+     */
     public OntModel getOntologyModel() {
         return ontologyModel;
     }
 
 }
-

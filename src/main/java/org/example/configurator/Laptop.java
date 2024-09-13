@@ -3,19 +3,26 @@ package org.example.configurator;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Represents a Laptop configuration with various components, peripherals, ports, and security features.
+ */
 public class Laptop {
-    private String laptopName;  // Nome del laptop
+    private String laptopName;  // Name of the laptop
     private AudioSystem audioSystem;
     private Colour colour;
-    private List<Component> components; // Una lista di componenti
-    private List<Peripheral> peripherals; // Una lista di periferiche
-    private List<Port> ports; // Una lista di porte
-    private List<Security> securities; // Una lista di elementi di sicurezza
+    private List<Component> components; // List of components
+    private List<Peripheral> peripherals; // List of peripherals
+    private List<Port> ports; // List of ports
+    private List<Security> securities; // List of security features
     private Warranty warranty;
     private CoolingSystem coolingSystem;
     private Battery battery;
 
-    // Costruttore con il nome del laptop
+    /**
+     * Constructor that initializes a laptop with its name.
+     *
+     * @param laptopName The name of the laptop.
+     */
     public Laptop(String laptopName) {
         this.laptopName = laptopName;
         this.components = new ArrayList<>();
@@ -104,40 +111,83 @@ public class Laptop {
         this.battery = battery;
     }
 
-    // Metodi per aggiungere e rimuovere componenti, periferiche, porte, ecc.
+    /**
+     * Adds a component to the laptop's component list.
+     *
+     * @param component The component to add.
+     */
     public void addComponent(Component component) {
         this.components.add(component);
     }
 
+    /**
+     * Removes a component from the laptop's component list.
+     *
+     * @param component The component to remove.
+     */
     public void removeComponent(Component component) {
         this.components.remove(component);
     }
 
+    /**
+     * Adds a peripheral to the laptop's peripherals list.
+     *
+     * @param peripheral The peripheral to add.
+     */
     public void addPeripheral(Peripheral peripheral) {
         this.peripherals.add(peripheral);
     }
 
+    /**
+     * Removes a peripheral from the laptop's peripherals list.
+     *
+     * @param peripheral The peripheral to remove.
+     */
     public void removePeripheral(Peripheral peripheral) {
         this.peripherals.remove(peripheral);
     }
 
+    /**
+     * Adds a port to the laptop's ports list.
+     *
+     * @param port The port to add.
+     */
     public void addPort(Port port) {
         this.ports.add(port);
     }
 
+    /**
+     * Removes a port from the laptop's ports list.
+     *
+     * @param port The port to remove.
+     */
     public void removePort(Port port) {
         this.ports.remove(port);
     }
 
+    /**
+     * Adds a security feature to the laptop's security list.
+     *
+     * @param security The security feature to add.
+     */
     public void addSecurity(Security security) {
         this.securities.add(security);
     }
 
+    /**
+     * Removes a security feature from the laptop's security list.
+     *
+     * @param security The security feature to remove.
+     */
     public void removeSecurity(Security security) {
         this.securities.remove(security);
     }
 
-    // Metodo per clonare la configurazione del laptop
+    /**
+     * Clones the current laptop configuration, including components, peripherals, ports, and security features.
+     *
+     * @return A new Laptop object with the same configuration.
+     */
     public Laptop cloneConfiguration() {
         Laptop clonedLaptop = new Laptop(this.laptopName + " - Clone");
 
@@ -157,8 +207,8 @@ public class Laptop {
             clonedLaptop.addSecurity(security.clone(clonedLaptop));
         }
 
-        clonedLaptop.setAudioSystem(this.audioSystem); // Considera di aggiungere il clone anche qui
-        clonedLaptop.setColour(this.colour);           // Considera di aggiungere il clone anche qui
+        clonedLaptop.setAudioSystem(this.audioSystem);
+        clonedLaptop.setColour(this.colour);
         clonedLaptop.setCoolingSystem(this.coolingSystem);
         clonedLaptop.setBattery(this.battery);
         clonedLaptop.setWarranty(this.warranty);
@@ -166,7 +216,11 @@ public class Laptop {
         return clonedLaptop;
     }
 
-    // Metodo per visualizzare la configurazione del laptop
+    /**
+     * Displays the laptop configuration as a string, including components and peripherals.
+     *
+     * @return A string representation of the laptop configuration.
+     */
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -182,8 +236,12 @@ public class Laptop {
         return sb.toString();
     }
 
+    /**
+     * Validates the laptop configuration to ensure that essential components are present.
+     *
+     * @return true if the configuration is valid, false otherwise.
+     */
     public boolean isValidConfiguration() {
-        // Logica per validare la configurazione del laptop
         return components.stream().anyMatch(c -> c instanceof CPU) &&
                 components.stream().anyMatch(c -> c instanceof RAM) &&
                 components.stream().anyMatch(c -> c instanceof Storage) &&
@@ -191,6 +249,9 @@ public class Laptop {
                 components.stream().anyMatch(c -> c instanceof OperatingSystem);
     }
 
+    /**
+     * Resets the laptop configuration, removing all components, peripherals, ports, and security features.
+     */
     public void resetConfiguration() {
         components.clear();
         peripherals.clear();
@@ -203,40 +264,59 @@ public class Laptop {
         warranty = null;
     }
 
+    /**
+     * Adds or replaces an item in the specified list based on the item's type.
+     *
+     * @param list    The list in which to add or replace the item.
+     * @param newItem The new item to add or replace.
+     * @param <T>     The type of the item.
+     */
     public <T> void addOrReplace(List<T> list, T newItem) {
-        // Controlla se esiste già un oggetto dello stesso tipo
         for (int i = 0; i < list.size(); i++) {
             T existingItem = list.get(i);
             if (existingItem.getClass() == newItem.getClass()) {
-                // Sostituisci l'elemento esistente con quello nuovo
                 list.set(i, newItem);
-                System.out.println("Elemento " + newItem.getClass().getSimpleName() + " sostituito.");
+                System.out.println("Replaced " + newItem.getClass().getSimpleName() + ".");
                 return;
             }
         }
-        // Se non esiste già un elemento di questo tipo, aggiungilo
         list.add(newItem);
-        System.out.println("Elemento " + newItem.getClass().getSimpleName() + " aggiunto.");
+        System.out.println("Added " + newItem.getClass().getSimpleName() + ".");
     }
-    // Aggiungere o sostituire componenti
+
+    /**
+     * Adds or replaces a component in the laptop's component list.
+     *
+     * @param newComponent The new component to add or replace.
+     */
     public void addOrReplaceComponent(Component newComponent) {
         addOrReplace(this.components, newComponent);
     }
 
-    // Aggiungere o sostituire periferiche
+    /**
+     * Adds or replaces a peripheral in the laptop's peripherals list.
+     *
+     * @param newPeripheral The new peripheral to add or replace.
+     */
     public void addOrReplacePeripheral(Peripheral newPeripheral) {
         addOrReplace(this.peripherals, newPeripheral);
     }
 
-    // Aggiungere o sostituire porte
+    /**
+     * Adds or replaces a port in the laptop's ports list.
+     *
+     * @param newPort The new port to add or replace.
+     */
     public void addOrReplacePort(Port newPort) {
         addOrReplace(this.ports, newPort);
     }
 
-    // Aggiungere o sostituire elementi di sicurezza
+    /**
+     * Adds or replaces a security feature in the laptop's security list.
+     *
+     * @param newSecurity The new security feature to add or replace.
+     */
     public void addOrReplaceSecurity(Security newSecurity) {
         addOrReplace(this.securities, newSecurity);
     }
-
-
 }
