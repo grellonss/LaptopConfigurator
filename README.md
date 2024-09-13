@@ -30,6 +30,7 @@ The LaptopConfiguratorApp is designed to facilitate the configuration and select
 ## Requirements
 - **Java 11 or Higher:** Ensure you have a compatible Java version installed.
 - **Jena Framework:** Used for handling RDF data and SPARQL queries.
+- **JavaFX 22.0.2:** The application uses JavaFX for the graphical interface. Ensure JavaFX 22.0.2 is installed, and the correct path to the JavaFX SDK is set in the `build.gradle` file.
 
 ## Installation
 1. **Clone the Repository:**
