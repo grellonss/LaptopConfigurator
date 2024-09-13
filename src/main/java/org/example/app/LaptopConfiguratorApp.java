@@ -2,8 +2,13 @@ package org.example.app;
 
 import javafx.application.Application;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.apache.jena.ontology.OntModel;
@@ -38,19 +43,56 @@ public class LaptopConfiguratorApp extends Application {
             // Crea l'interfaccia utente
             VBox layout = new VBox(10);
             layout.setPadding(new Insets(20, 20, 20, 20));
+            layout.setStyle("-fx-background-color: #f0f0f0;"); // Colore di sfondo
 
             Label welcomeLabel = new Label("Benvenuto nel configuratore di laptop!");
+            welcomeLabel.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
+
 
             // ComboBox per selezionare il componente da configurare
             ComboBox<String> componentSelector = new ComboBox<>();
             componentSelector.getItems().addAll("Sistema Audio", "Batteria", "Colore", "Componenti", "Sistema di Raffreddamento", "Periferiche", "Porte", "Sicurezza", "Garanzia");
             componentSelector.setPromptText("Scegli un componente da configurare");
+            componentSelector.setStyle("-fx-font-size: 14px; -fx-padding: 8 10 8 10;"); // Stile per la ComboBox
 
+            // Bottone "Configura"
             Button configureButton = new Button("Configura");
-            configureButton.setOnAction(e -> configureComponent(componentSelector.getValue()));
+            configureButton.setStyle(
+                    "-fx-background-color: #4CAF50;" +  // Colore verde
+                            "-fx-text-fill: white;" +           // Testo bianco
+                            "-fx-font-size: 14px;" +            // Dimensione del font
+                            "-fx-font-weight: bold;" +          // Grassetto
+                            "-fx-border-radius: 5px;" +         // Bordo arrotondato
+                            "-fx-background-radius: 5px;" +     // Sfondo arrotondato
+                            "-fx-padding: 10 20 10 20;"         // Padding interno
+            );
 
+            // Bottone "Mostra Configurazione Finale"
             Button finalizeButton = new Button("Mostra Configurazione Finale");
+            finalizeButton.setStyle(
+                    "-fx-background-color: #2196F3;" +  // Colore blu
+                            "-fx-text-fill: white;" +           // Testo bianco
+                            "-fx-font-size: 14px;" +            // Dimensione del font
+                            "-fx-font-weight: bold;" +          // Grassetto
+                            "-fx-border-radius: 5px;" +         // Bordo arrotondato
+                            "-fx-background-radius: 5px;" +     // Sfondo arrotondato
+                            "-fx-padding: 10 20 10 20;"         // Padding interno
+            );
+
+            // Stile hover per i bottoni
+            String buttonHoverStyle = "-fx-background-color: #555555; -fx-text-fill: white;";
+
+            // Aggiunge l'effetto hover sui bottoni
+            configureButton.setOnMouseEntered(e -> configureButton.setStyle("-fx-background-color: #45a049; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; -fx-border-radius: 5px; -fx-background-radius: 5px; -fx-padding: 10 20 10 20;"));
+            configureButton.setOnMouseExited(e -> configureButton.setStyle("-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; -fx-border-radius: 5px; -fx-background-radius: 5px; -fx-padding: 10 20 10 20;"));
+
+            finalizeButton.setOnMouseEntered(e -> finalizeButton.setStyle("-fx-background-color: #1976D2; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; -fx-border-radius: 5px; -fx-background-radius: 5px; -fx-padding: 10 20 10 20;"));
+            finalizeButton.setOnMouseExited(e -> finalizeButton.setStyle("-fx-background-color: #2196F3; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; -fx-border-radius: 5px; -fx-background-radius: 5px; -fx-padding: 10 20 10 20;"));
+
+            // Aggiunge i comportamenti dei bottoni
+            configureButton.setOnAction(e -> configureComponent(componentSelector.getValue()));
             finalizeButton.setOnAction(e -> displayFinalConfiguration());
+
 
             layout.getChildren().addAll(welcomeLabel, componentSelector, configureButton, finalizeButton);
 
@@ -231,7 +273,7 @@ public class LaptopConfiguratorApp extends Application {
 
             ramDialog.showAndWait().ifPresent(selectedRAM -> {
                 laptop.addOrReplaceComponent(selectedRAM);
-                showSuccess("Hai aggiunto la RAM: " + selectedRAM.getRamName() + " con capacità " + selectedRAM.getRamSize() + "GB.");
+                showSuccess("Hai aggiunto la RAM: " + selectedRAM.getRamName() + " con capacita' " + selectedRAM.getRamSize());
             });
         }
 
@@ -617,150 +659,241 @@ public class LaptopConfiguratorApp extends Application {
         });
     }
 
-    // Metodo per visualizzare la configurazione finale
     private void displayFinalConfiguration() {
-        StringBuilder configurationSummary = new StringBuilder();
+        VBox root = new VBox(10); // Layout verticale per le informazioni
+        root.setAlignment(Pos.TOP_LEFT);
 
-        String separator = "----------------------------------------\n";
-        configurationSummary.append(separator);
-        configurationSummary.append("Configurazione finale del laptop: ").append(laptop.getLaptopName()).append("\n");
-        configurationSummary.append(separator);
+        String iconPath = "/icons/"; // Assicurati che le icone siano qui
+
+        // Titolo Laptop
+        Label laptopNameLabel = new Label("Nome del Laptop:");
+        laptopNameLabel.setStyle("-fx-font-weight: bold;");
+        Label laptopName = new Label(laptop.getLaptopName());
+
+        root.getChildren().addAll(laptopNameLabel, laptopName);
 
         // Sistema Audio
         if (laptop.getAudioSystem() != null) {
             AudioSystem audioSystem = laptop.getAudioSystem();
-            configurationSummary.append("[Sistema Audio]\n");
-            configurationSummary.append(String.format("  Nome: %s\n  Tipo: %s\n", audioSystem.getAudioSystemName(), audioSystem.getAudioSystemType()));
-            configurationSummary.append(separator);
+            HBox audioBox = new HBox(10);
+            ImageView audioIcon = loadIcon(iconPath + "audio.png");
+            Label audioLabel = new Label("Sistema Audio:");
+            audioLabel.setStyle("-fx-font-weight: bold;");
+            Label audioDetails = new Label(audioSystem.getAudioSystemName() + " - Tipo: " + audioSystem.getAudioSystemType());
+
+            audioBox.getChildren().addAll(audioIcon, audioLabel, audioDetails);
+            root.getChildren().add(audioBox);
         }
 
         // Batteria
         if (laptop.getBattery() != null) {
             Battery battery = laptop.getBattery();
-            configurationSummary.append("[Batteria]\n");
-            configurationSummary.append(String.format("  Nome: %s\n  Capacità: %.2f mAh\n", battery.getBatteryName(), battery.getBatteryCapacity()));
-            configurationSummary.append(separator);
+            HBox batteryBox = new HBox(10);
+            ImageView batteryIcon = loadIcon(iconPath + "battery.png");
+            Label batteryLabel = new Label("Batteria:");
+            batteryLabel.setStyle("-fx-font-weight: bold;");
+            Label batteryDetails = new Label(battery.getBatteryName() + " - Capacita': " + String.format("%.2f mAh", battery.getBatteryCapacity()));
+
+            batteryBox.getChildren().addAll(batteryIcon, batteryLabel, batteryDetails);
+            root.getChildren().add(batteryBox);
         }
 
         // Colore
         if (laptop.getColour() != null) {
             Colour colour = laptop.getColour();
-            configurationSummary.append("[Colore]\n");
-            configurationSummary.append(String.format("  Nome: %s\n", colour.getColourName()));
-            configurationSummary.append(separator);
-        }
+            HBox colourBox = new HBox(10);
+            ImageView colourIcon = loadIcon(iconPath + "colour.png");
+            Label colourLabel = new Label("Colore:");
+            colourLabel.setStyle("-fx-font-weight: bold;");
+            Label colourDetails = new Label(colour.getColourName());
 
-        // Componenti
-        if (!laptop.getComponents().isEmpty()) {
-            configurationSummary.append("[Componenti]\n");
-            for (Component component : laptop.getComponents()) {
-                if (component instanceof RAM) {
-                    RAM ram = (RAM) component;
-                    configurationSummary.append(String.format("  RAM: %s  -  Dimensione: %sGB\n", ram.getRamName(), ram.getRamSize()));
-                } else if (component instanceof CPU) {
-                    CPU cpu = (CPU) component;
-                    configurationSummary.append(String.format("  CPU: %s  -  Velocità: %s\n", cpu.getCPUName(), cpu.getCpuSpeed()));
-                } else if (component instanceof Display) {
-                    Display display = (Display) component;
-                    configurationSummary.append(String.format("  Display: %s  -  Risoluzione: %s\n", display.getDisplayName(), display.getDisplayResolution()));
-                } else if (component instanceof GraphicsCard) {
-                    GraphicsCard graphicsCard = (GraphicsCard) component;
-                    configurationSummary.append(String.format("  Scheda Grafica: %s  -  Memoria: %s\n", graphicsCard.getGraphicCardName(), graphicsCard.getGraphicsMemory()));
-                } else if (component instanceof OperatingSystem) {
-                    OperatingSystem os = (OperatingSystem) component;
-                    configurationSummary.append(String.format("  Sistema Operativo: %s  -  Versione: %s\n", os.getOSName(), os.getOperatingSystemVersion()));
-                } else if (component instanceof Storage) {
-                    Storage storage = (Storage) component;
-                    configurationSummary.append(String.format("  Memoria: %s  -  Capacità: %sGB\n", storage.getStorageName(), storage.getStorageCapacity()));
-                }
-            }
-            configurationSummary.append(separator);
+            colourBox.getChildren().addAll(colourIcon, colourLabel, colourDetails);
+            root.getChildren().add(colourBox);
         }
-
-        // Sistema Raffreddamento
+        // Sistema di Raffreddamento
         if (laptop.getCoolingSystem() != null) {
             CoolingSystem coolingSystem = laptop.getCoolingSystem();
-            configurationSummary.append("[Sistema di Raffreddamento]\n");
-            configurationSummary.append(String.format("  Nome: %s  -  Tipo: %s\n", coolingSystem.getCoolingSystemName(), coolingSystem.getCoolingSystemType()));
-            configurationSummary.append(separator);
+            HBox coolingBox = new HBox(10);
+            ImageView coolingIcon = loadIcon(iconPath + "cooling.png");
+            Label coolingLabel = new Label("Sistema di Raffreddamento:");
+            coolingLabel.setStyle("-fx-font-weight: bold;");
+            Label coolingDetails = new Label(coolingSystem.getCoolingSystemName() + " - Tipo: " + coolingSystem.getCoolingSystemType());
+
+            coolingBox.getChildren().addAll(coolingIcon, coolingLabel, coolingDetails);
+            root.getChildren().add(coolingBox);
         }
 
         // Garanzia
         if (laptop.getWarranty() != null) {
             Warranty warranty = laptop.getWarranty();
-            configurationSummary.append("[Garanzia]\n");
-            configurationSummary.append(String.format("  Nome: %s  -  Durata: %d anni\n", warranty.getWarrantyName(), warranty.getWarrantyPeriod()));
-            configurationSummary.append(separator);
+            HBox warrantyBox = new HBox(10);
+            ImageView warrantyIcon = loadIcon(iconPath + "warranty.png");
+            Label warrantyLabel = new Label("Garanzia:");
+            warrantyLabel.setStyle("-fx-font-weight: bold;");
+            Label warrantyDetails = new Label(warranty.getWarrantyName() + " - Durata: " + warranty.getWarrantyPeriod() + " anni");
+
+            warrantyBox.getChildren().addAll(warrantyIcon, warrantyLabel, warrantyDetails);
+            root.getChildren().add(warrantyBox);
+        }
+
+
+        // Componenti
+        if (!laptop.getComponents().isEmpty()) {
+            Label componentTitle = new Label("Componenti:");
+            componentTitle.setStyle("-fx-font-weight: bold;");
+            root.getChildren().add(componentTitle);
+
+            for (Component component : laptop.getComponents()) {
+                HBox componentBox = new HBox(10);
+                Label componentDetails = null;
+                ImageView componentIcon = null;
+
+                if (component instanceof RAM) {
+                    componentIcon = loadIcon(iconPath + "ram.png");
+                    RAM ram = (RAM) component;
+                    componentDetails = new Label("RAM: " + ram.getRamName() + " - Dimensione: " + ram.getRamSize());
+                } else if (component instanceof CPU) {
+                    componentIcon = loadIcon(iconPath + "cpu.png");
+                    CPU cpu = (CPU) component;
+                    componentDetails = new Label("CPU: " + cpu.getCPUName() + " - Velocita': " + cpu.getCpuSpeed());
+                } else if (component instanceof Display) {
+                    componentIcon = loadIcon(iconPath + "display.png");
+                    Display display = (Display) component;
+                    componentDetails = new Label("Display: " + display.getDisplayName() + " - Risoluzione: " + display.getDisplayResolution());
+                } else if (component instanceof GraphicsCard) {
+                    componentIcon = loadIcon(iconPath + "graphics.png");
+                    GraphicsCard graphicsCard = (GraphicsCard) component;
+                    componentDetails = new Label("Scheda Grafica: " + graphicsCard.getGraphicCardName() + " - Memoria: " + graphicsCard.getGraphicsMemory());
+                } else if (component instanceof OperatingSystem) {
+                    componentIcon = loadIcon(iconPath + "os.png");
+                    OperatingSystem os = (OperatingSystem) component;
+                    componentDetails = new Label("Sistema Operativo: " + os.getOSName() + " - Versione: " + os.getOperatingSystemVersion());
+                } else if (component instanceof Storage) {
+                    componentIcon = loadIcon(iconPath + "storage.png");
+                    Storage storage = (Storage) component;
+                    componentDetails = new Label("Memoria: " + storage.getStorageName() + " - Capacita': " + storage.getStorageCapacity());
+                }
+
+                componentBox.getChildren().addAll(componentIcon, componentDetails);
+                root.getChildren().add(componentBox);
+            }
         }
 
         // Periferiche
         if (!laptop.getPeripherals().isEmpty()) {
-            configurationSummary.append("[Periferiche]\n");
+            Label peripheralTitle = new Label("Periferiche:");
+            peripheralTitle.setStyle("-fx-font-weight: bold;");
+            root.getChildren().add(peripheralTitle);
+
             for (Peripheral peripheral : laptop.getPeripherals()) {
+                HBox peripheralBox = new HBox(10);
+                Label peripheralDetails = null;
+                ImageView peripheralIcon = null;
+
                 if (peripheral instanceof ExternalMonitor) {
+                    peripheralIcon = loadIcon(iconPath + "monitor.png");
                     ExternalMonitor monitor = (ExternalMonitor) peripheral;
-                    configurationSummary.append(String.format("  Monitor Esterno: %s  -  Risoluzione: %s\n", monitor.getExMonitorName(), monitor.getExternalDisplayResolution()));
+                    peripheralDetails = new Label("Monitor Esterno: " + monitor.getExMonitorName() + " - Risoluzione: " + monitor.getExternalDisplayResolution());
                 } else if (peripheral instanceof ExternalSpeaker) {
+                    peripheralIcon = loadIcon(iconPath + "speaker.png");
                     ExternalSpeaker speaker = (ExternalSpeaker) peripheral;
-                    configurationSummary.append(String.format("  Speaker Esterno: %s  -  Tipo: %s\n", speaker.getExSpeakerName(), speaker.getExternalAudioSystemType()));
+                    peripheralDetails = new Label("Speaker Esterno: " + speaker.getExSpeakerName() + " - Tipo: " + speaker.getExternalAudioSystemType());
                 } else if (peripheral instanceof Keyboard) {
+                    peripheralIcon = loadIcon(iconPath + "keyboard.png");
                     Keyboard keyboard = (Keyboard) peripheral;
-                    configurationSummary.append(String.format("  Tastiera: %s  -  Layout: %s\n", keyboard.getKeyboardName(), keyboard.getKeyboardLayout()));
+                    peripheralDetails = new Label("Tastiera: " + keyboard.getKeyboardName() + " - Layout: " + keyboard.getKeyboardLayout());
                 } else if (peripheral instanceof Mouse) {
+                    peripheralIcon = loadIcon(iconPath + "mouse.png");
                     Mouse mouse = (Mouse) peripheral;
-                    configurationSummary.append(String.format("  Mouse: %s  -  Tipo: %s\n", mouse.getMouseName(), mouse.getMouseType()));
+                    peripheralDetails = new Label("Mouse: " + mouse.getMouseName() + " - Tipo: " + mouse.getMouseType());
                 } else if (peripheral instanceof Webcam) {
+                    peripheralIcon = loadIcon(iconPath + "webcam.png");
                     Webcam webcam = (Webcam) peripheral;
-                    configurationSummary.append(String.format("  Webcam: %s  -  Risoluzione: %s\n", webcam.getWebcamName(), webcam.getWebcamResolution()));
+                    peripheralDetails = new Label("Webcam: " + webcam.getWebcamName() + " - Risoluzione: " + webcam.getWebcamResolution());
                 }
+
+                peripheralBox.getChildren().addAll(peripheralIcon, peripheralDetails);
+                root.getChildren().add(peripheralBox);
             }
-            configurationSummary.append(separator);
         }
 
         // Porte
         if (!laptop.getPorts().isEmpty()) {
-            configurationSummary.append("[Porte]\n");
+            Label portTitle = new Label("Porte:");
+            portTitle.setStyle("-fx-font-weight: bold;");
+            root.getChildren().add(portTitle);
+
             for (Port port : laptop.getPorts()) {
+                HBox portBox = new HBox(10);
+                Label portDetails = null;
+                ImageView portIcon = null;
+
                 if (port instanceof Ethernet) {
+                    portIcon = loadIcon(iconPath + "ethernet.png");
                     Ethernet ethernet = (Ethernet) port;
-                    configurationSummary.append(String.format("  Ethernet - Porta n.%s  -  Nome: %s  -  Velocità: %s\n", ethernet.getPortName(), ethernet.getEthernetName(), ethernet.getEthernetSpeed()));
+                    portDetails = new Label("Ethernet - Nome: " + ethernet.getEthernetName() + " - Velocita': " + ethernet.getEthernetSpeed());
                 } else if (port instanceof USB) {
+                    portIcon = loadIcon(iconPath + "usb.png");
                     USB usb = (USB) port;
-                    configurationSummary.append(String.format("  USB - Porta n.%s  -  Nome: %s  -  Versione: %s\n", usb.getPortName(), usb.getUSBName(), usb.getUSBVersion()));
+                    portDetails = new Label("USB - Nome: " + usb.getUSBName() + " - Versione: " + usb.getUSBVersion());
                 } else if (port instanceof HDMI) {
+                    portIcon = loadIcon(iconPath + "hdmi.png");
                     HDMI hdmi = (HDMI) port;
-                    configurationSummary.append(String.format("  HDMI - Porta n.%s  -  Nome: %s  -  Versione: %s\n", hdmi.getPortName(), hdmi.getHDMIName(), hdmi.getHDMIVersion()));
+                    portDetails = new Label("HDMI - Nome: " + hdmi.getHDMIName() + " - Versione: " + hdmi.getHDMIVersion());
                 }
+
+                portBox.getChildren().addAll(portIcon, portDetails);
+                root.getChildren().add(portBox);
             }
-            configurationSummary.append(separator);
         }
 
         // Sicurezza
         if (!laptop.getSecurities().isEmpty()) {
-            configurationSummary.append("[Sicurezza]\n");
+            Label securityTitle = new Label("Sicurezza:");
+            securityTitle.setStyle("-fx-font-weight: bold;");
+            root.getChildren().add(securityTitle);
+
             for (Security security : laptop.getSecurities()) {
+                HBox securityBox = new HBox(10);
+                Label securityDetails = null;
+                ImageView securityIcon = null;
+
                 if (security instanceof Antivirus) {
+                    securityIcon = loadIcon(iconPath + "antivirus.png");
                     Antivirus antivirus = (Antivirus) security;
-                    configurationSummary.append(String.format("  Antivirus: %s  -  Versione: %s\n", antivirus.getAntivirusName(), antivirus.getAntivirusVersion()));
+                    securityDetails = new Label("Antivirus: " + antivirus.getAntivirusName() + " - Versione: " + antivirus.getAntivirusVersion());
                 } else if (security instanceof ProtectionFeature) {
+                    securityIcon = loadIcon(iconPath + "protection.png");
                     ProtectionFeature protection = (ProtectionFeature) security;
-                    configurationSummary.append(String.format("  Protezione: %s  -  Tipo: %s\n", protection.getProtectionFeatureName(), protection.getTypeProtectionFeature()));
+                    securityDetails = new Label("Protezione: " + protection.getProtectionFeatureName() + " - Tipo: " + protection.getTypeProtectionFeature());
                 }
+
+                securityBox.getChildren().addAll(securityIcon, securityDetails);
+                root.getChildren().add(securityBox);
             }
-            configurationSummary.append(separator);
         }
 
-        configurationSummary.append("Configurazione completata.\n");
-        configurationSummary.append(separator);
-
-        // Mostra la configurazione finale in una finestra di dialogo
+        // Mostra il contenuto in un dialogo
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Configurazione Finale");
         alert.setHeaderText("Ecco la tua configurazione finale:");
-        alert.setContentText(configurationSummary.toString());
+        alert.getDialogPane().setContent(root);
         alert.showAndWait();
     }
 
+    // Metodo helper per caricare le icone
+    private ImageView loadIcon(String path) {
+        try {
+            Image image = new Image(getClass().getResourceAsStream(path));
+            ImageView imageView = new ImageView(image);
+            imageView.setFitWidth(24);  // Imposta la larghezza a 24 pixel
+            imageView.setFitHeight(24); // Imposta l'altezza a 24 pixel
+            return imageView;
+        } catch (Exception e) {
+            System.out.println("Impossibile caricare l'icona: " + path);
+            return new ImageView(); // Restituisce un'icona vuota in caso di errore
+        }
+    }
 
     // Helper methods for showing alerts
     private void showError(String message) {

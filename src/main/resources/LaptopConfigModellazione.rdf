@@ -874,7 +874,7 @@
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#CorsairVengeance16GB">
         <rdf:type rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#RAM"/>
         <LaptopConfigModellazione:isComponentOf rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#MacBookPro"/>
-        <LaptopConfigModellazione:hasRAMSize rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">16</LaptopConfigModellazione:hasRAMSize>
+        <LaptopConfigModellazione:hasRAMSize>16GB</LaptopConfigModellazione:hasRAMSize>
     </owl:NamedIndividual>
     
 
@@ -973,7 +973,7 @@
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#GSkillRipjaws8GB">
         <rdf:type rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#RAM"/>
         <LaptopConfigModellazione:isComponentOf rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#HPEnvy"/>
-        <LaptopConfigModellazione:hasRAMSize rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">8</LaptopConfigModellazione:hasRAMSize>
+        <LaptopConfigModellazione:hasRAMSize>8GB</LaptopConfigModellazione:hasRAMSize>
     </owl:NamedIndividual>
     
 
@@ -1062,7 +1062,7 @@
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#HyperXImpact16GB">
         <rdf:type rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#RAM"/>
         <LaptopConfigModellazione:isComponentOf rdf:resource="http://www.semanticweb.org/fabio/ontologies/2024/7/LaptopConfigModellazione#AcerPredatorHelios500"/>
-        <LaptopConfigModellazione:hasRAMSize rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">16</LaptopConfigModellazione:hasRAMSize>
+        <LaptopConfigModellazione:hasRAMSize>16GB</LaptopConfigModellazione:hasRAMSize>
     </owl:NamedIndividual>
     
 

@@ -37,4 +37,9 @@ public class Battery {
     public void setBatteryName(String batteryName) {
         this.batteryName = batteryName;
     }
+
+    @Override
+    public String toString() {
+        return batteryName + " (" + batteryCapacity + " mAh)";
+    }
 }

@@ -28,4 +28,9 @@ public class Mouse extends Peripheral {
     public void setMouseName(String mouseName) {
         this.mouseName = mouseName;
     }
+
+    @Override
+    public String toString() {
+        return mouseName + " (Tipo: " + mouseType + ")";
+    }
 }

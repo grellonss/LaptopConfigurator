@@ -30,4 +30,9 @@ public class Webcam extends Peripheral {
     public void setWebcamName(String webcamName) {
         this.webcamName = webcamName;
     }
+
+    @Override
+    public String toString() {
+        return webcamName + " (Risoluzione: " + webcamResolution + ")";
+    }
 }

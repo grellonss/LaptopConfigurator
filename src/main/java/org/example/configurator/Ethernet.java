@@ -30,4 +30,9 @@ public class Ethernet extends Port {
     public void setEthernetName(String ethernetName) {
         this.ethernetName = ethernetName;
     }
+
+    @Override
+    public String toString() {
+        return ethernetName + " (Velocità: " + ethernetSpeed + ")";
+    }
 }

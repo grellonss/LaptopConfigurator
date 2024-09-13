@@ -32,5 +32,10 @@ public class CPU extends Component {
     public void setCPUName(String CPUName) {
         this.CPUName = CPUName;
     }
+
+    @Override
+    public String toString() {
+        return CPUName + " (" + cpuSpeed + ")";
+    }
 }
 

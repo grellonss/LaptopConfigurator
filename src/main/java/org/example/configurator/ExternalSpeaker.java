@@ -28,4 +28,9 @@ public class ExternalSpeaker extends Peripheral {
     public void setExSpeakerName(String exSpeakerName) {
         this.exSpeakerName = exSpeakerName;
     }
+
+    @Override
+    public String toString() {
+        return exSpeakerName + " (" + externalAudioSystemType + ")";
+    }
 }

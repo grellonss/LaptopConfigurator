@@ -37,4 +37,9 @@ public class CoolingSystem {
     public void setCoolingSystemName(String coolingSystemName) {
         this.coolingSystemName = coolingSystemName;
     }
+
+    @Override
+    public String toString() {
+        return coolingSystemName + " (Tipo: " + coolingSystemType + ")";
+    }
 }

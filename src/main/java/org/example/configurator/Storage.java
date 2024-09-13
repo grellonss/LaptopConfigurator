@@ -36,4 +36,9 @@ public class Storage extends Component {
     public void setStorageName(String storageName) {
         this.storageName = storageName;
     }
+
+    @Override
+    public String toString() {
+        return storageName + " (" + storageCapacity + ")";
+    }
 }

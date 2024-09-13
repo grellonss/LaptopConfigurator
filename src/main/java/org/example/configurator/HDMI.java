@@ -30,4 +30,9 @@ public class HDMI extends Port {
     public void setHDMIName(String HDMIName) {
         this.HDMIName = HDMIName;
     }
+
+    @Override
+    public String toString() {
+        return HDMIName + " (Versione: " + HDMIVersion + ")";
+    }
 }

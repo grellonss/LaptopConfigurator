@@ -34,4 +34,9 @@ public class OperatingSystem extends Component {
     public void setOSName(String OSName) {
         this.OSName = OSName;
     }
+
+    @Override
+    public String toString() {
+        return OSName + " (Versione: " + operatingSystemVersion + ")";
+    }
 }

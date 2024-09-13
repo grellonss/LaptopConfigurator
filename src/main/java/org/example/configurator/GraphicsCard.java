@@ -31,4 +31,9 @@ public class GraphicsCard extends Component {
     public void setGraphicCardName(String graphicCardName) {
         this.graphicCardName = graphicCardName;
     }
+
+    @Override
+    public String toString() {
+        return graphicCardName + " (" + graphicsMemory + ")";
+    }
 }

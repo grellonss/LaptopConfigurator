@@ -38,4 +38,9 @@ public class AudioSystem {
     public void setAudioSystemOfLaptop(Laptop audioSystemOfLaptop) {
         this.audioSystemOfLaptop = audioSystemOfLaptop;
     }
+
+    @Override
+    public String toString() {
+        return audioSystemName + " (Tipo: " + audioSystemType + ")";
+    }
 }

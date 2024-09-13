@@ -33,4 +33,8 @@ public class RAM extends Component {
         // Clona l'oggetto RAM senza legarlo al laptop
         return new RAM(this.getLaptopOfComponents(),this.ramName,this.ramSize);
     }
+    @Override
+    public String toString() {
+        return ramName + " (" + ramSize + ")";
+    }
 }

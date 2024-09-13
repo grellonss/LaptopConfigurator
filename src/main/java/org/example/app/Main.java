@@ -257,7 +257,7 @@ import java.util.*;
         System.out.println("Seleziona una RAM dalla lista:");
         for (int i = 0; i < ramComponents.size(); i++) {
             RAM ram = ramComponents.get(i);
-            System.out.println((i + 1) + ". " + ram.getRamName() + " - " + ram.getRamSize() + "GB");
+            System.out.println((i + 1) + ". " + ram.getRamName() + " - " + ram.getRamSize());
         }
 
         int ramChoice = scanner.nextInt();
@@ -919,7 +919,7 @@ import java.util.*;
             for (Component component : laptop.getComponents()) {
                 if (component instanceof RAM) {
                     RAM ram = (RAM) component;
-                    System.out.printf("  RAM: %s  -  Size: %sGB%n", ram.getRamName(), ram.getRamSize());
+                    System.out.printf("  RAM: %s  -  Size: %s%n", ram.getRamName(), ram.getRamSize());
                 } else if (component instanceof CPU) {
                     CPU cpu = (CPU) component;
                     System.out.printf("  CPU: %s  -  Speed: %s%n", cpu.getCPUName(), cpu.getCpuSpeed());

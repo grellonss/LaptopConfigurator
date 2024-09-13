@@ -30,4 +30,9 @@ public class Antivirus extends Security {
     public Antivirus clone(Laptop laptop) {
         return new Antivirus(getLaptopOfSecurity(), this.antivirusName, this.antivirusName);
     }
+
+    @Override
+    public String toString() {
+        return antivirusName + " (Versione: " + antivirusVersion + ")";
+    }
 }

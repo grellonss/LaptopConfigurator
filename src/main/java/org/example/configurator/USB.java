@@ -30,4 +30,9 @@ public class USB extends Port {
     public void setUSBName(String USBName) {
         this.USBName = USBName;
     }
+
+    @Override
+    public String toString() {
+        return USBName + " (Versione: " + USBVersion + ")";
+    }
 }

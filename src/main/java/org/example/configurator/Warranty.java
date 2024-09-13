@@ -41,5 +41,10 @@ public class Warranty {
     public void setWarrantyName(String warrantyName) {
         this.warrantyName = warrantyName;
     }
+
+    @Override
+    public String toString() {
+        return warrantyName + " (Durata: " + warrantyPeriod + " anni)";
+    }
 }
 

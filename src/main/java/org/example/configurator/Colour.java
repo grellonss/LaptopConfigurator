@@ -27,5 +27,10 @@ public class Colour {
     public void setColourOfLaptop(Laptop colourOfLaptop) {
         this.colourOfLaptop = colourOfLaptop;
     }
+
+    @Override
+    public String toString() {
+        return colourName;
+    }
 }
 

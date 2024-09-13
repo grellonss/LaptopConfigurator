@@ -29,4 +29,8 @@ public class ProtectionFeature extends Security {
     public ProtectionFeature clone(Laptop laptop) {
         return new ProtectionFeature(getLaptopOfSecurity(), this.protectionFeatureName, this.typeProtectionFeature);
     }
+    @Override
+    public String toString() {
+        return protectionFeatureName + " (Tipo: " + typeProtectionFeature + ")";
+    }
 }

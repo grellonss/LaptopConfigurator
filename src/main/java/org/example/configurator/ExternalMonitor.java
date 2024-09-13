@@ -28,4 +28,9 @@ public class ExternalMonitor extends Peripheral {
     public void setExMonitorName(String exMonitorName) {
         this.exMonitorName = exMonitorName;
     }
+
+    @Override
+    public String toString() {
+        return exMonitorName + " (" + externalDisplayResolution + ")";
+    }
 }

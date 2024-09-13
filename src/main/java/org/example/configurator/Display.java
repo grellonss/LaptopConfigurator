@@ -31,4 +31,9 @@ public class Display extends Component {
     public void setDisplayName(String displayName) {
         this.displayName = displayName;
     }
+
+    @Override
+    public String toString() {
+        return displayName + " (" + displayResolution + ")";
+    }
 }

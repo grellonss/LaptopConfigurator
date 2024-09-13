@@ -29,4 +29,9 @@ public class Keyboard extends Peripheral {
     public void setKeyboardName(String keyboardName) {
         this.keyboardName = keyboardName;
     }
+
+    @Override
+    public String toString() {
+        return keyboardName + " (Layout: " + keyboardLayout + ")";
+    }
 }
